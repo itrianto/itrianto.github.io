@@ -31,23 +31,53 @@
   </header>
 
   <main id="main-content">
-    <section class="hero section-map" id="home" aria-labelledby="hero-title">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow">Portfolio · Geospatial Practice</p>
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="container section__content hero-grid grid grid--2">
+        <div class="hero-copy section__header">
+          <p class="hero-kicker">GIS &amp; Spatial Data Analyst</p>
           <h1 id="hero-title">Irvan<br><em>Trianto</em></h1>
-          <p class="hero-lead">Menerjemahkan lanskap, data, dan keputusan menjadi pengalaman geospasial yang jernih.</p>
-          <div class="hero-actions"><a class="button" href="#projects">Lihat proyek</a><a class="text-link" href="#contact">Mari terhubung <span aria-hidden="true">↗</span></a></div>
+          <p class="hero-lead">Geography graduate with hands-on experience in GIS, hydrographic surveying, environmental mapping, and spatial analysis. Experienced in supporting marine infrastructure, conservation, and renewable energy projects through accurate spatial data, mapping, and field surveying.</p>
+          <div class="hero-actions">
+            <a class="hero-button hero-button--primary" href="#projects">Explore Projects <span aria-hidden="true">→</span></a>
+            <a class="hero-button hero-button--secondary" href="assets/documents/irvan-trianto-cv.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
+          </div>
         </div>
-        <aside class="map-card" aria-label="Bidang keahlian">
-          <p class="map-card__number">01° 06′ S / 106° 49′ E</p>
-          <div class="compass" aria-hidden="true"><span>N</span><i></i></div>
-          <p class="map-card__label">GIS · Hydrography<br>Environment · WebGIS</p>
-        </aside>
+        <figure class="hero-map" aria-label="Ilustrasi peta topografi dekoratif">
+          <div class="hero-map__grid" aria-hidden="true"></div>
+          <div class="hero-map__contours" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <div class="hero-map__route" aria-hidden="true"><span></span><span></span></div>
+          <figcaption><span>GIS · Hydrography</span><span>Environmental Mapping · Spatial Analysis</span></figcaption>
+          <div class="hero-compass" aria-hidden="true"><b>N</b><i></i></div>
+        </figure>
       </div>
+      <a class="scroll-cue" href="#about"><span>Scroll to explore</span><i aria-hidden="true"></i></a>
     </section>
 
-    <section class="section" id="about" aria-labelledby="about-title"><div class="container section-intro"><p class="eyebrow">01 / About</p><h2 id="about-title">Memetakan konteks,<br><em>bukan sekadar koordinat.</em></h2><p>Saya adalah praktisi GIS yang memadukan analisis spasial, komunikasi data, dan desain digital untuk menjawab persoalan ruang secara terukur.</p></div></section>
+    <section class="section about" id="about" aria-labelledby="about-title">
+      <div class="container section__content about__grid grid grid--2">
+        <div class="about__content section__header about-reveal">
+          <p class="eyebrow">01 / About me</p>
+          <h2 id="about-title">Geospatial<br><em>professional.</em></h2>
+          <p class="about__bio">Geospatial professional with hands on experience in spatial data management, digital mapping, and GIS based project support within a government/BUMN infrastructure project (PLN floating solar power plant, 100 MWac). Skilled in processing spatial data in GeoJSON, SHP, KML, and Excel/CSV formats, working with GPS coordinates and projection systems, and managing spatial databases (PostgreSQL/PostGIS, basic). Familiar with Leaflet for WebGIS visualization. Brings distinct domain strength in marine and coastal/fisheries related geospatial data from hydrographic survey and coral reef conservation project experience. Comfortable coordinating between technical and operational teams, with a track record of cross disciplinary collaboration in field and research settings.</p>
+          <div class="about__expertise" aria-labelledby="expertise-title">
+            <p id="expertise-title">Core expertise</p>
+            <ul class="expertise-tags"><li>Geographic Information Systems (GIS)</li><li>Hydrographic Survey</li><li>Spatial Analysis</li><li>Environmental Mapping</li><li>Remote Sensing</li><li>Cartography</li></ul>
+          </div>
+          <div class="about__education" aria-labelledby="education-title">
+            <p id="education-title">Education</p>
+            <p><strong>Bachelor of Geography</strong><span>Universitas Negeri Semarang</span><span>2021–2025 · GPA 3.79/4.00</span></p>
+          </div>
+        </div>
+        <figure class="about__portrait about-reveal" aria-label="Area portrait profesional Irvan Trianto">
+          <div class="portrait-frame">
+            <div class="portrait-placeholder" aria-hidden="true"><span class="portrait-placeholder__head"></span><span class="portrait-placeholder__body"></span></div>
+            <span class="portrait-coordinate portrait-coordinate--top" aria-hidden="true">01° 06′ S</span>
+            <span class="portrait-coordinate portrait-coordinate--bottom" aria-hidden="true">106° 49′ E</span>
+          </div>
+          <figcaption><span>Irvan Trianto</span><span>Geospatial practitioner</span></figcaption>
+        </figure>
+      </div>
+    </section>
     <section class="section section--tint" id="experience" aria-labelledby="experience-title"><div class="container section-intro"><p class="eyebrow">02 / Experience</p><h2 id="experience-title">Jejak profesional.</h2><p>Riwayat peran, kolaborasi, dan tantangan geospasial akan dirangkum di sini.</p></div></section>
     <section class="section" id="projects" aria-labelledby="projects-title"><div class="container section-intro"><p class="eyebrow">03 / Selected Work</p><h2 id="projects-title">Proyek terpilih.</h2><p>Studi kasus pemetaan, analisis, dan visualisasi data spasial.</p></div></section>
     <section class="section section--tint" id="webgis" aria-labelledby="webgis-title"><div class="container section-intro"><p class="eyebrow">04 / Interactive WebGIS</p><h2 id="webgis-title">Eksplorasi ruang<br><em>secara interaktif.</em></h2><p>Peta interaktif berbasis Leaflet akan hadir pada sprint khusus WebGIS.</p><a class="text-link" href="projects/webgis-demo.html">Buka demo saat ini <span aria-hidden="true">↗</span></a></div></section>

@@ -1,3 +1,5 @@
+document.documentElement.classList.add('js');
+
 const header = document.querySelector('.site-header');
 const toggle = document.querySelector('.menu-toggle');
 const menu = document.querySelector('.nav-panel');
@@ -34,4 +36,15 @@ const observer = new IntersectionObserver((entries) => {
 }, { rootMargin: '-40% 0px -55% 0px' });
 
 sections.forEach((section) => section && observer.observe(section));
+
+const aboutElements = document.querySelectorAll('.about-reveal');
+const aboutObserver = new IntersectionObserver((entries, currentObserver) => {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add('is-visible');
+    currentObserver.unobserve(entry.target);
+  });
+}, { threshold: 0.18 });
+
+aboutElements.forEach((element) => aboutObserver.observe(element));
 document.querySelector('#current-year').textContent = new Date().getFullYear();
