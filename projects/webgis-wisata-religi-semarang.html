@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="WebGIS konektivitas objek wisata religi di Kota Semarang berdasarkan publikasi ilmiah Irvan Trianto.">
+  <title>WebGIS Wisata Religi Semarang | Irvan Trianto</title>
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/webgis-wisata-religi.css">
+</head>
+<body class="webgis-page">
+  <a class="skip-link" href="#map">Lewati ke peta</a>
+  <header class="webgis-header"><div class="container"><a class="webgis-brand" href="../index.html#webgis">IT.<span> / Research WebGIS</span></a><a href="../index.html" class="webgis-back">← Portfolio</a></div></header>
+  <main>
+    <section class="webgis-intro"><div class="container"><p class="eyebrow">Published research / Geo-Image Journal</p><h1>Konektivitas objek<br><em>wisata religi Semarang.</em></h1><p>Visualisasi WebGIS dari penelitian “Analisis Indeks Konektivitas Objek Wisata Religi di Kota Semarang untuk Mendukung Kunjungan Wisatawan”.</p><a class="webgis-publication" href="https://doi.org/10.15294/geoimage.v15i1.40537" target="_blank" rel="noopener noreferrer">Baca publikasi lengkap <span aria-hidden="true">↗</span></a></div></section>
+    <section class="webgis-workspace" aria-label="Peta interaktif wisata religi Semarang">
+      <aside class="research-panel" id="research-panel">
+        <button class="panel-toggle" type="button" aria-expanded="true" aria-controls="panel-content">Ringkasan penelitian <span aria-hidden="true">−</span></button>
+        <div id="panel-content" class="panel-content">
+          <p class="panel-lead">22 objek resmi di 11 kecamatan dianalisis sebagai simpul dalam jaringan jalan aktual.</p>
+          <div class="metric-grid"><article><b>α 0,0124</b><span>Sangat linear; jalur alternatif masih minim.</span></article><article><b>β 1,0231</b><span>Jaringan sudah menyatu dan terhubung.</span></article><article><b>γ 0,3422</b><span>Baru ~34,22% potensi jalur terpenuhi.</span></article></div>
+          <div class="panel-block"><h2>Motivasi wisatawan</h2><ul class="motivation"><li><span>Purposeful Spiritual</span><b style="--value:72%">72%</b></li><li><span>Sightseeing Spiritual</span><b style="--value:68%">68%</b></li><li><span>Casual Spiritual</span><b style="--value:65%">65%</b></li><li><span>Serendipitous</span><b style="--value:60%">60%</b></li><li><span>Incidental</span><b style="--value:48%">48%</b></li></ul></div>
+          <div class="panel-block"><h2>Insight kunjungan</h2><p><strong>Tertinggi:</strong> Masjid Agung Jawa Tengah (129.662), Sam Poo Kong (82.946), Masjid Baiturrahman (52.384).</p><p><strong>Terendah:</strong> Pura Agung Giri Natha (471), Makam Sunan Kuning (272), Vihara Mahavira (24).</p></div>
+          <p class="network-note">Rute mengikuti jalan aktual sebagai ilustrasi konektivitas dari 3 simpul utama. Analisis lengkap menggunakan ArcGIS Network Analyst: 607 simpul dan 621 ruas jalan.</p>
+        </div>
+      </aside>
+      <div class="map-shell"><div id="map" role="application" aria-label="Peta objek wisata religi Kota Semarang"></div>
+        <section class="map-controls" aria-label="Filter peta"><label for="place-search">Cari lokasi</label><input id="place-search" type="search" placeholder="Cari nama lokasi…" autocomplete="off"><div class="filter-group"><span>Kategori</span><div id="category-filters"></div></div><div class="filter-group"><label for="district-filter">Kecamatan</label><select id="district-filter"><option value="">Semua kecamatan</option></select></div></section>
+        <section class="map-legend" aria-label="Legenda"><p><span class="legend-dot legend-dot--hub"></span>Hub jaringan</p><p><span class="legend-dot legend-dot--mosque"></span>Masjid</p><p><span class="legend-dot legend-dot--temple"></span>Klenteng/Vihara</p><p><span class="legend-dot legend-dot--church"></span>Gereja</p><p><span class="legend-dot legend-dot--grave"></span>Makam/Ziarah</p><p><span class="legend-line"></span>Ilustrasi rute jalan aktual</p></section>
+      </div>
+    </section>
+  </main>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="../assets/js/webgis-wisata-religi.js"></script>
+</body>
+</html>
