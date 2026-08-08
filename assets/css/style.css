@@ -101,6 +101,14 @@ body:not(.webgis-page) .site-footer { background:var(--color-surface); border-to
 .experience-item__project { color:var(--color-primary); font:.72rem var(--font-mono); letter-spacing:.03em; margin-bottom:var(--space-2); }
 .experience-item__desc { color:var(--color-secondary); font-size:.9rem; line-height:1.7; }
 .experience-item__date { display:inline-block; margin-top:var(--space-3); color:var(--color-muted, #6b7280); font:.65rem var(--font-mono); letter-spacing:.04em; }
+.experience-item__press { margin-top:var(--space-5); padding-top:var(--space-3); border-top:1px solid var(--color-border); }
+.experience-item__press-label { margin-bottom:var(--space-2); color:var(--color-primary); font:.62rem var(--font-mono); letter-spacing:.1em; text-transform:uppercase; }
+.experience-item__press-list { display:grid; gap:var(--space-2); }
+.experience-item__press-list li { display:block; }
+.experience-item__press-list a { color:var(--color-primary); font:.72rem var(--font-mono); line-height:1.55; overflow-wrap:anywhere; text-decoration:underline; text-decoration-color:rgba(15,118,110,.35); text-underline-offset:.18rem; }
+.experience-item__press-list a:hover { color:var(--color-primary-hover); text-decoration-color:currentColor; }
+.experience-item__press-list a span[aria-hidden="true"] { margin-left:.15rem; }
+.experience-item__press-src { margin-top:var(--space-2); color:var(--color-muted, #6b7280); font:.6rem var(--font-mono); letter-spacing:.03em; }
 
 /* Projects grid */
 .projects-grid { display:grid; gap:var(--space-8); margin-top:var(--space-8); }
