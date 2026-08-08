@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="WebGIS konektivitas objek wisata religi Kota Semarang berdasarkan penelitian Irvan Trianto.">
+  <title>WebGIS Wisata Religi Semarang | Irvan Trianto</title>
+  <link rel="icon" href="../../../assets/images/icons/logo.png" type="image/png">
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+  <link rel="stylesheet" href="../../../assets/css/webgis-wisata-religi.css">
+  <script>(function(){try{var t=localStorage.getItem('theme');if((t==='dark')||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+</head>
+<body class="webgis-page">
+  <a class="skip-link" href="#map">Lewati ke peta</a>
+  <header class="webgis-header"><div class="container"><a class="webgis-brand" href="../../../index.html#webgis"><img src="../../../assets/images/icons/logo.png" alt="" aria-hidden="true" style="width:28px;height:28px;display:block;"><span> / Research WebGIS</span></a><button class="theme-toggle" type="button" aria-pressed="false" aria-label="Aktifkan mode gelap"><svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg><svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path></svg></button><a href="../../../index.html" class="webgis-back">&larr; Portfolio</a></div></header>
+  <main>
+    <section class="webgis-intro"><div class="container">
+      <div class="wg-instrument" aria-hidden="true"><span>SHEET 01 / SRG–NET–2025</span><span>DATUM WGS 84</span><span>UTM 49S</span><span>CENTER 110.4083° E · −6.9834° S</span></div>
+      <div class="wg-titleblock">
+        <div class="wg-titleblock__main">
+          <p class="eyebrow">Undergraduate thesis / Semarang, 2025</p>
+          <h1>Konektivitas objek<br><em>wisata religi Semarang.</em></h1>
+          <p>Eksplorasi spasial dari penelitian “Analisis Indeks Konektivitas Objek Wisata Religi di Kota Semarang untuk Mendukung Kunjungan Wisatawan”.</p>
+          <a class="webgis-publication" href="https://doi.org/10.15294/geoimage.v15i1.40537" target="_blank" rel="noopener noreferrer">Buka publikasi DOI <span aria-hidden="true">&nearr;</span></a>
+        </div>
+        <figure class="wg-linework" aria-hidden="true">
+          <svg class="wg-linework__svg" viewBox="0 0 420 300" fill="none">
+            <path class="wg-linework__edge" d="M18 262 C 70 250, 90 225, 138 214 C 168 208, 178 222, 214 232 C 246 240, 300 238, 336 214 C 362 197, 392 192, 408 172"/>
+            <path class="wg-linework__edge" d="M138 214 C 146 176, 130 150, 158 118 C 178 96, 196 78, 236 64 C 272 52, 318 54, 344 78"/>
+            <path class="wg-linework__edge" d="M236 64 C 248 30, 274 12, 302 8"/>
+            <path class="wg-linework__edge" d="M214 232 C 224 206, 238 186, 236 64"/>
+            <path class="wg-linework__edge" d="M336 214 C 330 170, 352 128, 344 78"/>
+            <path class="wg-linework__edge" d="M138 214 C 112 200, 96 168, 80 146"/>
+            <path class="wg-linework__edge" d="M18 262 C 34 240, 40 226, 30 204 C 24 190, 20 174, 26 156"/>
+            <path class="wg-linework__edge wg-linework__route" d="M18 262 C 80 250, 120 240, 138 214 C 170 180, 220 160, 236 64"/>
+            <circle class="wg-linework__node" cx="138" cy="214" r="4"/>
+            <circle class="wg-linework__node" cx="214" cy="232" r="4"/>
+            <circle class="wg-linework__node" cx="236" cy="64" r="4"/>
+            <circle class="wg-linework__node" cx="336" cy="214" r="4"/>
+            <circle class="wg-linework__node" cx="344" cy="78" r="4"/>
+            <circle class="wg-linework__node wg-linework__node--hub" cx="236" cy="64" r="7"/>
+            <circle class="wg-linework__node wg-linework__node--hub" cx="138" cy="214" r="7"/>
+          </svg>
+        </figure>
+      </div>
+    </div></section>
+    <section class="wg-log container" aria-label="Ringkasan statistik penelitian"><div class="wg-log__head"><span>LOG PENGAMATAN — ANALISIS JARINGAN</span><span>SRG–NET–2025</span></div><div class="wg-log__rows"><div class="wg-log__row"><span class="wg-log__no">01</span><span class="wg-log__key">TITIK OBJEK</span><b class="wg-log__val">22</b><span class="wg-log__desc">objek wisata religi</span></div><div class="wg-log__row"><span class="wg-log__no">02</span><span class="wg-log__key">SIMPUL</span><b class="wg-log__val">607</b><span class="wg-log__desc">simpul jaringan</span></div><div class="wg-log__row"><span class="wg-log__no">03</span><span class="wg-log__key">RUAS</span><b class="wg-log__val">621</b><span class="wg-log__desc">ruas jalan</span></div><div class="wg-log__row"><span class="wg-log__no">04</span><span class="wg-log__key">HUB UTAMA</span><b class="wg-log__val">3</b><span class="wg-log__desc">simpul penghubung strategis</span></div><div class="wg-log__row"><span class="wg-log__no">05</span><span class="wg-log__key">ALPHA / BETA / GAMMA</span><b class="wg-log__val">0,0124 / 1,0231 / 0,3422</b><span class="wg-log__desc">indeks konektivitas jaringan</span></div></div></section>
+    <section class="webgis-workspace" aria-label="Peta interaktif wisata religi Semarang">
+      <aside class="gis-panel" id="gis-panel" aria-label="Panel eksplorasi penelitian">
+        <header class="gis-panel__bar">
+          <button class="gis-panel__minimize" type="button" aria-expanded="true" aria-controls="gis-panel__body" title="Minimalkan panel"><span class="gis-panel__bar-title">Explorer / Semarang</span><span class="gis-panel__bar-caret" aria-hidden="true">−</span></button>
+          <button class="gis-panel__popout" type="button" title="Pop out panel" aria-label="Pop out panel">⛶</button>
+        </header>
+        <div class="gis-panel__body" id="gis-panel__body">
+          <section class="gis-section" aria-label="Jelajahi lokasi">
+            <div class="gis-section__head"><p class="gis-section__index">01</p><h2 class="gis-section__title">Jelajahi lokasi</h2><button id="reset-filter" type="button">Reset</button></div>
+            <label class="gis-label" for="place-search">Cari lokasi</label>
+            <input id="place-search" type="search" placeholder="Nama lokasi…" autocomplete="off">
+            <div class="filter-group"><span class="gis-label">Kategori</span><div id="category-filters"></div></div>
+            <div class="filter-group"><label class="gis-label" for="district-filter">Kecamatan</label><select id="district-filter"><option value="">Semua kecamatan</option></select></div>
+            <p id="filter-status" class="filter-status" aria-live="polite"></p>
+          </section>
+          <section class="gis-section" aria-label="Legenda">
+            <button class="legend-toggle" type="button" aria-expanded="true" aria-controls="legend-content"><span class="gis-section__index">02</span><span class="gis-section__title">Legenda</span><span class="gis-section__caret" aria-hidden="true">−</span></button>
+            <div id="legend-content" class="legend-content"><div id="legend-items"></div><p><span class="legend-node"></span>Simpul jaringan</p><p><span class="legend-line legend-line--road"></span>Ruas jalan</p><p><span class="legend-line"></span>Rute analisis</p></div>
+          </section>
+          <section class="gis-section" aria-label="StoryMap penelitian">
+            <button class="panel-toggle" type="button" aria-expanded="true" aria-controls="panel-content"><span class="gis-section__index">03</span><span class="gis-section__title">StoryMap</span><span class="gis-section__caret" aria-hidden="true">−</span></button>
+            <div id="panel-content" class="panel-content">
+              <section class="story-section"><p class="story-number">01 / LATAR BELAKANG</p><h2>Destinasi yang belum merata</h2><p>Semarang memiliki 22 objek wisata religi yang tercatat resmi. Kunjungan masih terkonsentrasi pada beberapa destinasi utama, sehingga konektivitas antar lokasi perlu dikaji.</p></section>
+              <section class="story-section"><p class="story-number">02 / TUJUAN</p><p>Menggambarkan persebaran, menganalisis konektivitas jaringan jalan pada Januari–April 2025, dan menelaah jumlah kunjungan wisatawan.</p></section>
+              <section class="story-section"><p class="story-number">03 / METODOLOGI</p><p>Penelitian deskriptif kuantitatif: observasi, wawancara, studi dokumentasi, plotting koordinat dengan Avenza Map, analisis spasial Network Analyst, serta perhitungan jarak, waktu tempuh, dan indeks konektivitas.</p></section>
+              <section class="story-section"><p class="story-number">04 / JARINGAN</p><p>Layer peta menampilkan 607 simpul dan 621 ruas jaringan jalan. Masjid Agung Jawa Tengah dan Klenteng Sam Poo Kong diidentifikasi sebagai simpul penghubung strategis.</p></section>
+              <section class="story-section"><p class="story-number">05 / INDEKS KONEKTIVITAS</p><div class="metric-grid"><article><b>α 0,0124</b><span>Jaringan sangat linear; alternatif rute masih terbatas.</span></article><article><b>β 1,0231</b><span>Jaringan telah terhubung.</span></article><article><b>γ 0,3422</b><span>Sekitar 34,22% potensi jalur jaringan terpenuhi.</span></article></div></section>
+              <section class="story-section"><p class="story-number">06 / TEMUAN</p><p>Destinasi cenderung mengelompok di pusat kota dan barat laut, khususnya Semarang Tengah, Semarang Utara, dan Gayamsari. Perbaikan jalan sekunder dan alternatif di lokasi dengan akses terbatas direkomendasikan untuk mendukung pemerataan kunjungan.</p></section>
+            </div>
+          </section>
+        </div>
+      </aside>
+      <div class="map-shell">
+        <div class="map-shell__canvas">
+          <div id="map" role="application" aria-label="Peta objek wisata religi dan jaringan konektivitas Kota Semarang"></div>
+          <div id="map-loading" class="map-loading" role="status" aria-live="polite"><span></span>Memuat layer WebGIS…</div>
+          <button class="gis-panel__reopen" id="gis-panel__reopen" type="button" aria-label="Buka panel eksplorasi" title="Buka panel">☰</button>
+        </div>
+        <div class="wg-readout" role="status" aria-live="polite"><span class="wg-readout__cell"><i>LAT</i><b id="readout-lat">—</b></span><span class="wg-readout__cell"><i>LON</i><b id="readout-lon">—</b></span><span class="wg-readout__cell"><i>ZOOM</i><b id="readout-zoom">—</b></span><span class="wg-readout__cell"><i>SCALE</i><b id="readout-scale">—</b></span></div>
+      </div>
+    </section>
+  </main>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="../../../assets/js/webgis-wisata-religi.js"></script>
+</body>
+</html>
