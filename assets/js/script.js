@@ -221,3 +221,118 @@ const imageObserver = new IntersectionObserver((entries, obs) => {
 }, { rootMargin: '200px' });
 
 lazyImages.forEach((img) => imageObserver.observe(img));
+
+/* Maps Archive Carousel & Lightbox */
+const mapsCarousel = document.querySelector('.maps-carousel');
+const mapsPlates = [...document.querySelectorAll('.maps-carousel__plate')];
+const mapsThumbs = [...document.querySelectorAll('.maps-carousel__thumb')];
+const mapsPrev = document.querySelector('.maps-carousel__nav--prev');
+const mapsNext = document.querySelector('.maps-carousel__nav--next');
+
+const mapsLightbox = document.getElementById('maps-lightbox');
+const mapsLbClose = mapsLightbox.querySelector('.maps-lightbox__close');
+const mapsLbPrev = mapsLightbox.querySelector('.maps-lightbox__nav--prev');
+const mapsLbNext = mapsLightbox.querySelector('.maps-lightbox__nav--next');
+const mapsLbImage = mapsLightbox.querySelector('.maps-lightbox__image');
+const mapsLbNumber = mapsLightbox.querySelector('.maps-lightbox__plate-number');
+const mapsLbTitle = mapsLightbox.querySelector('.maps-lightbox__plate-title');
+const mapsLbBackdrop = mapsLightbox.querySelector('.maps-lightbox__backdrop');
+
+let mapsIndex = 0;
+
+function mapsUpdate() {
+  mapsPlates.forEach((plate, i) => {
+    const show = i === mapsIndex;
+    plate.style.display = show ? '' : 'none';
+    if (show) plate.querySelector('img').loading = 'eager';
+  });
+  mapsThumbs.forEach((thumb, i) => {
+    thumb.classList.toggle('maps-carousel__thumb--active', i === mapsIndex);
+    thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  });
+  mapsPrev.disabled = mapsIndex === 0;
+  mapsNext.disabled = mapsIndex === mapsPlates.length - 1;
+}
+
+function mapsGoTo(index) {
+  if (index < 0 || index >= mapsPlates.length) return;
+  mapsIndex = index;
+  mapsUpdate();
+}
+
+function mapsOpenLightbox(index) {
+  mapsIndex = index;
+  mapsUpdate();
+  mapsSyncLightbox();
+  mapsLightbox.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+  mapsLbClose.focus();
+}
+
+function mapsCloseLightbox() {
+  mapsLightbox.classList.remove('is-open');
+  document.body.style.overflow = '';
+}
+
+function mapsSyncLightbox() {
+  const plate = mapsPlates[mapsIndex];
+  const img = plate.querySelector('img');
+  mapsLbImage.src = img.src;
+  mapsLbImage.alt = img.alt;
+  mapsLbImage.loading = 'eager';
+  mapsLbNumber.textContent = plate.querySelector('.maps-carousel__plate-number').textContent;
+  mapsLbTitle.textContent = plate.querySelector('.maps-carousel__plate-title').textContent;
+  mapsLbPrev.disabled = mapsIndex === 0;
+  mapsLbNext.disabled = mapsIndex === mapsPlates.length - 1;
+}
+
+mapsPrev.addEventListener('click', () => mapsGoTo(mapsIndex - 1));
+mapsNext.addEventListener('click', () => mapsGoTo(mapsIndex + 1));
+
+mapsPlates.forEach((plate) => {
+  plate.addEventListener('click', () => mapsOpenLightbox(Number(plate.dataset.index)));
+});
+
+mapsThumbs.forEach((thumb) => {
+  thumb.addEventListener('click', () => mapsGoTo(Number(thumb.dataset.index)));
+});
+
+mapsLbClose.addEventListener('click', mapsCloseLightbox);
+mapsLbBackdrop.addEventListener('click', mapsCloseLightbox);
+
+mapsLbPrev.addEventListener('click', () => {
+  mapsGoTo(mapsIndex - 1);
+  mapsSyncLightbox();
+});
+mapsLbNext.addEventListener('click', () => {
+  mapsGoTo(mapsIndex + 1);
+  mapsSyncLightbox();
+});
+
+mapsLightbox.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') { mapsCloseLightbox(); return; }
+  if (event.key === 'ArrowLeft') { event.preventDefault(); mapsGoTo(mapsIndex - 1); mapsSyncLightbox(); }
+  if (event.key === 'ArrowRight') { event.preventDefault(); mapsGoTo(mapsIndex + 1); mapsSyncLightbox(); }
+});
+
+let mapsTouchStartX = 0;
+const mapsMain = document.querySelector('.maps-carousel__main');
+mapsMain.addEventListener('touchstart', (e) => {
+  mapsTouchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+mapsMain.addEventListener('touchend', (e) => {
+  const diff = mapsTouchStartX - e.changedTouches[0].screenX;
+  if (Math.abs(diff) > 50) { mapsGoTo(diff > 0 ? mapsIndex + 1 : mapsIndex - 1); }
+}, { passive: true });
+
+const mapsLbContent = mapsLightbox.querySelector('.maps-lightbox__content');
+let mapsLbTouchStartX = 0;
+mapsLbContent.addEventListener('touchstart', (e) => {
+  mapsLbTouchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+mapsLbContent.addEventListener('touchend', (e) => {
+  const diff = mapsLbTouchStartX - e.changedTouches[0].screenX;
+  if (Math.abs(diff) > 50) { mapsGoTo(diff > 0 ? mapsIndex + 1 : mapsIndex - 1); mapsSyncLightbox(); }
+}, { passive: true });
+
+mapsUpdate();
