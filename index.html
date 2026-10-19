@@ -6,7 +6,11 @@
   <meta name="description" content="Portofolio GIS Irvan Trianto: pemetaan, hidrografi, lingkungan, dan WebGIS.">
   <title>Irvan Trianto | GIS Portfolio</title>
   <link rel="icon" href="assets/icons/logo.png" type="image/png">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/images/hero/background.jpg">
+  <link rel="stylesheet" href="assets/css/style.css?v=bubble-glass">
   <script>(function(){try{var t=localStorage.getItem('theme');if((t==='dark')||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
 </head>
 <body>
@@ -58,7 +62,7 @@
         <div class="about__content section__header about-reveal">
           <p class="eyebrow">01 / About me</p>
           <h2 id="about-title">Geospatial<br><em>professional.</em></h2>
-          <p class="about__bio">Geospatial professional with hands on experience in spatial data management, digital mapping, and GIS based project support within a government/BUMN infrastructure project (PLN floating solar power plant, 100 MWac). Skilled in processing spatial data in GeoJSON, SHP, KML, and Excel/CSV formats, working with GPS coordinates and projection systems, and managing spatial databases (PostgreSQL/PostGIS, basic). Familiar with Leaflet for WebGIS visualization. Brings distinct domain strength in marine and coastal/fisheries related geospatial data from hydrographic survey and coral reef conservation project experience. Comfortable coordinating between technical and operational teams, with a track record of cross disciplinary collaboration in field and research settings.</p>
+          <p class="about__bio">Geospatial professional with hands on experience in spatial data management, digital mapping, and GIS based project support within a government/BUMN infrastructure project (PLN floating solar power plant, 100 MWac). Skilled in processing spatial data in GeoJSON, SHP, KML, and Excel/CSV formats, working with GPS coordinates and projection systems, and managing spatial databases (PostgreSQL/PostGIS). Familiar with Leaflet for WebGIS visualization. Brings distinct domain strength in marine and coastal/fisheries related geospatial data from hydrographic survey and coral reef conservation project experience. Comfortable coordinating between technical and operational teams, with a track record of cross disciplinary collaboration in field and research settings.</p>
           <div class="about__expertise" aria-labelledby="expertise-title">
             <p id="expertise-title">Core expertise</p>
             <ul class="expertise-tags"><li>Geographic Information Systems (GIS)</li><li>Hydrographic Survey</li><li>Spatial Analysis</li><li>Environmental Mapping</li><li>Remote Sensing</li><li>Cartography</li></ul>
@@ -87,7 +91,7 @@
           <p>Riwayat peran, kolaborasi, dan tantangan geospasial.</p>
         </div>
         <div class="experience-list">
-          <article class="experience-item reveal">
+          <article class="experience-item bubble-card reveal">
             <div class="experience-item__header">
               <h3>Surveyor — Navigation, Positioning &amp; Geospatial Data Processing</h3>
               <span class="experience-item__meta">PT Gema Sarana Teknik</span>
@@ -95,7 +99,7 @@
             <p class="experience-item__desc">Melakukan pengumpulan data geospasial dan hidrografi serta pemetaan digital di berbagai proyek survei selama 12 bulan, termasuk penempatan 50 hari di PLTS Apung Karangkates (100 MWac), proyek infrastruktur PLN. Memproses citra satelit menjadi output spasial tematik seperti peta nautika, sebaran mangrove, dan pemetaan lamun. Mengoperasikan sistem GNSS/GPS dan instrumen survei hidrografi di lingkungan lepas pantai dan pesisir, serta melakukan validasi data spasial lintas sumber (survei lapangan, citra satelit, dan data CAD).</p>
             <span class="experience-item__date">Aug 2025 – Aug 2026</span>
           </article>
-          <article class="experience-item reveal">
+          <article class="experience-item bubble-card reveal">
             <div class="experience-item__header">
               <h3>Project Coordinator — Coral Reef Conservation Team</h3>
               <span class="experience-item__meta">PT Amati Karya Indonesia</span>
@@ -103,7 +107,7 @@
             <p class="experience-item__desc">Mengoordinasikan tim konservasi terumbu karang, memproses citra satelit untuk pemantauan lingkungan dan pemetaan ekosistem pesisir. Menyusun dan memvisualisasikan data spasial menjadi peta tematik untuk mendukung pengambilan keputusan berbasis lapangan, serta mempresentasikan hasil analisis di forum internasional.</p>
             <span class="experience-item__date">Feb 2024 – Jun 2024</span>
           </article>
-          <article class="experience-item reveal">
+          <article class="experience-item bubble-card reveal">
             <div class="experience-item__header">
               <h3>Lab Supervisor</h3>
               <span class="experience-item__meta">Universitas Negeri Semarang</span>
@@ -111,7 +115,7 @@
             <p class="experience-item__desc">Mendampingi praktikum Penginderaan Jauh, membimbing mahasiswa dalam pengolahan citra satelit dan analisis geospasial. Menjaga akurasi 100+ data akademik dengan tingkat kepatuhan 100% melalui kontrol kualitas sistematis, serta mengawasi operasional laboratorium selama satu tahun penuh.</p>
             <span class="experience-item__date">Sep 2024 – Sep 2025</span>
           </article>
-          <article class="experience-item reveal">
+          <article class="experience-item bubble-card reveal">
             <div class="experience-item__header">
               <h3>Field &amp; Community Projects</h3>
               <span class="experience-item__meta">Berbagai proyek lapangan</span>
@@ -139,7 +143,7 @@
           <p>Studi kasus pemetaan, analisis, dan visualisasi data spasial.</p>
         </div>
         <div class="projects-grid">
-          <article class="project-card reveal">
+          <article class="project-card bubble-card reveal">
             <div class="project-card__image-wrapper">
               <img class="project-card__image" src="projects/wisatareligi/gallery/sam-poo-kong.jpg" alt="Klenteng Sam Poo Kong, Semarang" width="800" height="500" loading="lazy">
             </div>
@@ -160,7 +164,7 @@
             </div>
           </article>
 
-          <article class="project-card reveal">
+          <article class="project-card bubble-card reveal">
             <div class="project-card__image-wrapper">
               <img class="project-card__image" src="projects/karangkates/gallery/IMG_0689.JPG" alt="PLTS Apung Karangkates" width="800" height="500" loading="lazy">
             </div>
@@ -176,6 +180,44 @@
               </div>
               <div class="project-card__actions">
                 <button class="button button--outline gallery-trigger" data-gallery="karangkates" aria-haspopup="dialog">View Gallery <span aria-hidden="true">→</span></button>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card bubble-card reveal">
+            <div class="project-card__image-wrapper">
+              <img class="project-card__image" src="assets/projects/znt-bulungan-thumb.webp" alt="Ilustrasi peta delineasi Zona Nilai Tanah (ZNT) Kabupaten Bulungan, Kalimantan Utara" width="800" height="500" loading="lazy">
+            </div>
+            <div class="project-card__content">
+              <div class="project-card__header">
+                <h3>Zonasi Nilai Tanah — Kabupaten Bulungan, Kalimantan Utara</h3>
+                <span class="project-card__year">2026</span>
+              </div>
+              <p class="project-card__subtitle">Land Value Zoning, Bulungan Regency, North Kalimantan</p>
+              <p class="project-card__role">GIS Analyst / Spatial Data Processor</p>
+              <p class="project-card__summary">Menyusun dan memproses data spasial untuk delineasi Zona Nilai Tanah (ZNT) di Kabupaten Bulungan, Kalimantan Utara. Proyek ini mendukung penyediaan peta zona nilai tanah yang terintegrasi dengan data pertanahan dan perpajakan, digunakan sebagai acuan penetapan NJOP serta transaksi tanah.</p>
+              <div class="project-card__tags">
+                <span>GIS</span><span>Spatial Analysis</span><span>ZNT</span><span>Land Value</span><span>ILASPP</span><span>Data Integration</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card bubble-card reveal">
+            <div class="project-card__image-wrapper">
+              <img class="project-card__image" src="projects/batam-vegetation/gallery/batam-vegetation-cover.jpg" alt="Batam Vegetation Monitoring" width="800" height="500" loading="lazy">
+            </div>
+            <div class="project-card__content">
+              <div class="project-card__header">
+                <h3>Batam Vegetation Monitoring</h3>
+                <span class="project-card__year">2020–2025</span>
+              </div>
+              <p class="project-card__role">Remote Sensing Analyst</p>
+              <p class="project-card__summary">Spatio-temporal vegetation analysis using Sentinel-2 imagery, Google Earth Engine, NDVI change detection, and land-cover data.</p>
+              <div class="project-card__tags">
+                <span>Google Earth Engine</span><span>Remote Sensing</span><span>Sentinel-2</span><span>NDVI</span><span>Environmental Monitoring</span>
+              </div>
+              <div class="project-card__actions">
+                <a class="button" href="projects/batam-vegetation.html">View Project <span aria-hidden="true">→</span></a>
               </div>
             </div>
           </article>
@@ -260,7 +302,7 @@
           <p>Temuan, tulisan, dan dokumentasi praktik profesional.</p>
         </div>
         <div class="publications-grid">
-          <article class="publication-card reveal">
+          <article class="publication-card bubble-card reveal">
             <div class="publication-card__meta">
               <span class="publication-card__journal">GeoImage Journal</span>
               <span class="publication-card__volume">Vol.15 No.1</span>
@@ -275,7 +317,7 @@
             </a>
           </article>
 
-          <article class="publication-card reveal">
+          <article class="publication-card bubble-card reveal">
             <div class="publication-card__meta">
               <span class="publication-card__journal">ABDIMAS</span>
               <span class="publication-card__volume">Vol.29 No.1</span>
@@ -290,7 +332,7 @@
             </a>
           </article>
 
-          <article class="publication-card reveal">
+          <article class="publication-card bubble-card reveal">
             <div class="publication-card__meta">
               <span class="publication-card__journal">Proceedings of the FISIP UNNES National Seminar</span>
               <span class="publication-card__year">2024</span>

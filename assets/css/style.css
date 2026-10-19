@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Mono&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Mono&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 :root { --cream:#f5f0e5; --beige:#e4d9c5; --paper:#fbf8f1; --brown:#3d3026; --ink:#221b16; --olive:#657054; --line:rgba(61,48,38,.2); --serif:"Instrument Serif", Georgia, serif; --sans:Manrope, Arial, sans-serif; --mono:"DM Mono", monospace; }
 * { box-sizing:border-box; margin:0; }
@@ -121,6 +121,7 @@ body:not(.webgis-page) .site-footer { background:var(--color-surface); border-to
 .project-card__content { display:flex; flex-direction:column; gap:var(--space-3); }
 .project-card__header { display:flex; align-items:baseline; justify-content:space-between; gap:var(--space-4); }
 .project-card__header h3 { font:700 1.35rem/1.2 var(--font-heading); letter-spacing:-.025em; }
+.project-card__subtitle { color:var(--color-secondary); font-size:.82rem; line-height:1.45; margin-top:calc(-1 * var(--space-2)); }
 .project-card__year { color:var(--color-secondary); font:.68rem var(--font-mono); letter-spacing:.04em; text-transform:uppercase; white-space:nowrap; }
 .project-card__role { color:var(--color-primary); font:.72rem var(--font-mono); letter-spacing:.03em; }
 .project-card__summary { color:var(--color-secondary); font-size:.92rem; line-height:1.7; }
@@ -287,3 +288,403 @@ html[data-theme="dark"] body:not(.webgis-page) .nav-menu a:focus-visible,
 html[data-theme="dark"] body:not(.webgis-page) .nav-menu a[aria-current="page"] { color:var(--color-accent); }
 html[data-theme="dark"] body:not(.webgis-page) .hero-button--primary,
 html[data-theme="dark"] body:not(.webgis-page) .hero-button--primary:hover { color:var(--color-background); }
+
+/* ==========================================================================
+   Bubble Clearglass UI/UX Overhaul
+   ========================================================================== */
+:root {
+  --bg-color: #000000;
+  --text-main: #F8FAFC;
+  --text-muted: #94A3B8;
+  --accent: #38BDF8;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.15);
+}
+
+html {
+  background-color: #000000;
+  overflow-x: clip;
+}
+
+body,
+body:not(.webgis-page),
+html[data-theme="dark"] body:not(.webgis-page),
+html[data-theme="light"] body:not(.webgis-page) {
+  --color-background: var(--bg-color);
+  --color-surface: rgba(15, 23, 42, 0.72);
+  --color-text: var(--text-main);
+  --color-secondary: var(--text-muted);
+  --color-muted: var(--text-muted);
+  --color-primary: var(--accent);
+  --color-primary-hover: #7DD3FC;
+  --color-accent: var(--accent);
+  --color-border: var(--glass-border);
+  --font-heading: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --serif: var(--font-heading);
+  --sans: var(--font-body);
+  background-color: #000000;
+  background-image: none;
+  color: #F8FAFC;
+  position: relative;
+  isolation: isolate;
+  overflow-x: clip;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+}
+
+body::before,
+body:not(.webgis-page)::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; /* Di belakang konten, tapi di atas background hitam */
+  pointer-events: none; /* Agar tidak menghalangi klik mouse */
+
+  /* Pasang pola kontur + pendaran cahaya tipis agar efek blur kaca semakin jelas */
+  background-image:
+    url('../images/patterns/topography.svg'),
+    radial-gradient(circle at 18% 22%, rgba(56, 189, 248, 0.22) 0%, transparent 45%),
+    radial-gradient(circle at 82% 78%, rgba(20, 184, 166, 0.18) 0%, transparent 45%);
+  background-repeat: repeat, no-repeat, no-repeat;
+  background-position: center, center, center;
+  background-size: 600px 600px, 100% 100%, 100% 100%;
+
+  /* Naikkan opacity agar kontur topografi jelas terlihat & ter-blur oleh kaca */
+  opacity: 0.26;
+}
+
+body:not(.webgis-page) .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Tipografi: Space Grotesk untuk h1, h2, h3, dan navigasi; Inter untuk paragraf/body */
+body:not(.webgis-page) h1,
+body:not(.webgis-page) h2,
+body:not(.webgis-page) h3,
+body:not(.webgis-page) .navbar,
+body:not(.webgis-page) .nav-menu a,
+body:not(.webgis-page) .nav-contact,
+body:not(.webgis-page) .brand__name {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+body:not(.webgis-page) h1,
+body:not(.webgis-page) h2,
+body:not(.webgis-page) h3 {
+  color: var(--text-main);
+}
+
+body:not(.webgis-page) p {
+  font-family: "Inter", sans-serif;
+}
+
+/* Header & Navigasi Clearglass */
+body:not(.webgis-page) .site-header,
+html[data-theme="dark"] body:not(.webgis-page) .site-header {
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+body:not(.webgis-page) .site-header.is-scrolled,
+html[data-theme="dark"] body:not(.webgis-page) .site-header.is-scrolled {
+  background: rgba(0, 0, 0, 0.88);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+body:not(.webgis-page) .nav-panel {
+  background: transparent;
+}
+
+@media (max-width: 800px) {
+  body:not(.webgis-page) .nav-panel {
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+  }
+}
+
+body:not(.webgis-page) .menu-toggle span:not(.sr-only) {
+  background: var(--text-main);
+}
+
+/* Seksi Hero dengan Background Image & Gradient Overlay */
+body:not(.webgis-page) .hero,
+html[data-theme="dark"] body:not(.webgis-page) .hero {
+  background-color: #000000;
+  background-image:
+    linear-gradient(to bottom, rgba(11, 18, 32, 0.7) 0%, rgba(11, 18, 32, 0.95) 80%, #000000 100%),
+    url('../images/hero/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+body:not(.webgis-page) .hero::before,
+html[data-theme="dark"] body:not(.webgis-page) .hero::before {
+  opacity: 0.03;
+  background-image:
+    linear-gradient(rgba(56, 189, 248, 0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.5) 1px, transparent 1px);
+}
+
+/* Pastikan seluruh wrapper di bawah Hero transparan penuh dan tidak memotong efek backdrop-filter */
+body:not(.webgis-page) main,
+body:not(.webgis-page) .section:not(.hero),
+body:not(.webgis-page) .section--tint,
+body:not(.webgis-page) .about,
+body:not(.webgis-page) .container,
+body:not(.webgis-page) .section__content,
+body:not(.webgis-page) .projects-grid,
+body:not(.webgis-page) .experience-list,
+body:not(.webgis-page) .publications-grid,
+body:not(.webgis-page) .site-footer,
+html[data-theme="dark"] body:not(.webgis-page) main,
+html[data-theme="dark"] body:not(.webgis-page) .section:not(.hero),
+html[data-theme="dark"] body:not(.webgis-page) .section--tint,
+html[data-theme="dark"] body:not(.webgis-page) .about,
+html[data-theme="dark"] body:not(.webgis-page) .container,
+html[data-theme="dark"] body:not(.webgis-page) .section__content,
+html[data-theme="dark"] body:not(.webgis-page) .projects-grid,
+html[data-theme="dark"] body:not(.webgis-page) .experience-list,
+html[data-theme="dark"] body:not(.webgis-page) .publications-grid,
+html[data-theme="dark"] body:not(.webgis-page) .site-footer {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+body:not(.webgis-page) .section:not(.hero) {
+  overflow: visible;
+}
+
+/* Hero figure & About portrait dalam nuansa Clearglass */
+body:not(.webgis-page) .hero-map,
+body:not(.webgis-page) .portrait-frame {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 32px !important;
+  box-shadow:
+    0 8px 32px 0 rgba(0, 0, 0, 0.4),
+    inset 0 0 20px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+body:not(.webgis-page) .hero-map figcaption {
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(11, 18, 32, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+}
+
+body:not(.webgis-page) .portrait-frame__image {
+  border-radius: 20px;
+}
+
+body:not(.webgis-page) .portrait-coordinate {
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(11, 18, 32, 0.72);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+}
+
+/* Tombol, Link, dan Highlight dengan --accent (#38BDF8) & kontras aksesibel */
+body:not(.webgis-page) .hero-button--primary,
+body:not(.webgis-page) .button:not(.button--outline):not(.button--ghost),
+body:not(.webgis-page) .publication-card__doi {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0B1220;
+  font-weight: 600;
+}
+
+body:not(.webgis-page) .hero-button--primary:hover,
+body:not(.webgis-page) .button:not(.button--outline):not(.button--ghost):hover,
+body:not(.webgis-page) .publication-card__doi:hover {
+  background: #7DD3FC;
+  border-color: #7DD3FC;
+  color: #0B1220;
+}
+
+body:not(.webgis-page) .publication-card__doi-label {
+  color: rgba(11, 18, 32, 0.75);
+}
+
+body:not(.webgis-page) .publication-card__doi-value {
+  color: #0B1220;
+}
+
+body:not(.webgis-page) .hero-button--secondary,
+body:not(.webgis-page) .button--outline {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  color: var(--accent);
+}
+
+body:not(.webgis-page) .hero-button--secondary:hover,
+body:not(.webgis-page) .button--outline:hover {
+  background: rgba(56, 189, 248, 0.12);
+  border-color: var(--accent);
+  color: var(--text-main);
+}
+
+body:not(.webgis-page) :focus-visible {
+  outline: 3px solid rgba(56, 189, 248, 0.55);
+  outline-offset: 3px;
+}
+
+/* Desain Card "Bubble Clearglass" (.bubble-card) */
+.bubble-card,
+.experience-item.bubble-card,
+.project-card.bubble-card,
+.publication-card.bubble-card {
+  position: relative;
+  overflow: hidden;
+  /* Gradasi kilau gelembung kaca yang bening/transparan agar kontur di belakang tetap tembus pandang */
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.11) 0%,
+    rgba(255, 255, 255, 0.02) 50%,
+    rgba(56, 189, 248, 0.06) 100%
+  ) !important;
+
+  /* Blur halus + penguat kecerahan agar garis kontur di balik kaca tetap terang & jelas tembus pandang */
+  backdrop-filter: blur(2.5px) brightness(2.8) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(2.5px) brightness(2.8) saturate(140%) !important;
+
+  /* Rim kaca 3D (lebih terang di sisi atas & kiri seperti gelembung kaca) */
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.45) !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.35) !important;
+
+  /* Shadow luar + pantulan cahaya cembung khas bubble glass di bagian dalam */
+  box-shadow:
+    0 14px 36px 0 rgba(0, 0, 0, 0.65),
+    inset 0 2px 3px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -2px 8px 0 rgba(56, 189, 248, 0.14),
+    inset 0 0 24px 0 rgba(255, 255, 255, 0.06) !important;
+
+  border-radius: 32px !important;
+  padding: 2rem;
+  color: var(--text-main);
+  transition: all 0.3s ease;
+}
+
+/* Kilau lengkung kaca (specular highlight) di bagian atas setiap .bubble-card */
+.bubble-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 5%;
+  right: 5%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.75) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.bubble-card::after {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: -15%;
+  width: 55%;
+  height: 80%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.09) 0%,
+    transparent 70%
+  );
+  transform: rotate(-12deg);
+  pointer-events: none;
+}
+
+.bubble-card:hover,
+.experience-item.bubble-card:hover,
+.project-card.bubble-card:hover,
+.publication-card.bubble-card:hover {
+  transform: translateY(-5px);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(255, 255, 255, 0.04) 50%,
+    rgba(56, 189, 248, 0.1) 100%
+  ) !important;
+  border-color: rgba(56, 189, 248, 0.55) !important;
+  box-shadow:
+    0 18px 42px 0 rgba(0, 0, 0, 0.75),
+    0 0 24px 0 rgba(56, 189, 248, 0.18),
+    inset 0 2px 4px 0 rgba(255, 255, 255, 0.45),
+    inset 0 0 28px 0 rgba(56, 189, 248, 0.1) !important;
+}
+
+/* Fallback untuk browser tanpa dukungan backdrop-filter */
+@supports not ((backdrop-filter: blur(6px)) or (-webkit-backdrop-filter: blur(6px))) {
+  .bubble-card,
+  body:not(.webgis-page) .hero-map,
+  body:not(.webgis-page) .portrait-frame {
+    background: rgba(15, 23, 42, 0.85) !important;
+  }
+}
+
+/* Penyesuaian elemen internal di dalam .bubble-card agar harmonis dan kontras tinggi */
+body:not(.webgis-page) .bubble-card .project-card__image-wrapper {
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+body:not(.webgis-page) .bubble-card .project-card__tags span,
+body:not(.webgis-page) .expertise-tags li,
+body:not(.webgis-page) .bubble-card .publication-card__year {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--text-main);
+}
+
+body:not(.webgis-page) .bubble-card .project-card__summary,
+body:not(.webgis-page) .bubble-card .experience-item__desc,
+body:not(.webgis-page) .bubble-card .publication-card__summary,
+body:not(.webgis-page) .section-intro > p:not(.eyebrow),
+body:not(.webgis-page) .hero-lead,
+body:not(.webgis-page) .about__bio {
+  color: var(--text-muted);
+}
+
+/* Responsivitas Mobile untuk .bubble-card */
+@media (max-width: 800px) {
+  .bubble-card,
+  .experience-item.bubble-card,
+  .project-card.bubble-card,
+  .publication-card.bubble-card {
+    padding: 1.5rem;
+    border-radius: 28px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .bubble-card,
+  .experience-item.bubble-card,
+  .project-card.bubble-card,
+  .publication-card.bubble-card {
+    padding: 1.25rem;
+    border-radius: 24px !important;
+  }
+}
+
