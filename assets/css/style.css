@@ -3896,3 +3896,653 @@ html[data-theme="dark"] body:not(.webgis-page) .wildlife-eagle {
     padding-inline: 1rem !important;
   }
 }
+
+
+/* ==========================================================================
+   MINIMAL SEMANTIC LIST & CONTACT FLEXBOX GROUP STYLING
+   ========================================================================== */
+
+body:not(.webgis-page) .experience-item__list,
+body:not(.webgis-page) .project-card__details {
+  list-style: disc !important;
+  padding-left: 1.25rem !important;
+  margin: 0.45rem 0 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.4rem !important;
+  color: var(--body-slate) !important;
+  font-size: 0.92rem !important;
+  line-height: 1.68 !important;
+}
+
+body:not(.webgis-page) .project-card__details strong {
+  color: var(--heading-charcoal) !important;
+  font-weight: 700 !important;
+}
+
+body:not(.webgis-page) .contact-links.contact-actions {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 0.95rem !important;
+  margin-top: 1.25rem !important;
+}
+
+
+/* ==========================================================================
+   ABOUT ME PROFILE PHOTO — 2 FULL STACKED CARDS (BORDER + COORDS + CAPTION)
+   ========================================================================== */
+
+body:not(.webgis-page) .portrait-deck {
+  position: relative;
+  width: 100%;
+  padding: 0.85rem 1.1rem 0.6rem 0.85rem;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body:not(.webgis-page) .portrait-frame.portrait-bubble-3d.portrait-deck__card {
+  width: 100% !important;
+  margin: 0 !important;
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.5s ease,
+    filter 0.5s ease !important;
+  will-change: transform;
+}
+
+body:not(.webgis-page) .portrait-deck__card .portrait-frame__media {
+  position: relative;
+  overflow: hidden !important;
+  padding: 0.4rem !important;
+}
+
+body:not(.webgis-page) .portrait-deck__card .portrait-coordinate,
+body:not(.webgis-page) .portrait-deck__card .portrait-frame__caption {
+  transition:
+    transform 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.42s ease,
+    box-shadow 0.48s ease !important;
+}
+
+/* Default State: Front full card (aboutme.JPG) in front, Back full card (aboutme2.jpg) peeking out behind */
+body:not(.webgis-page) .portrait-frame.portrait-bubble-3d.portrait-deck__card--front,
+body:not(.webgis-page) .portrait-frame.portrait-bubble-3d.portrait-deck__card--front:hover {
+  position: relative;
+  z-index: 2;
+  transform: translate3d(-4px, 4px, 0) rotate(-1.3deg) scale(1) !important;
+  filter: brightness(1);
+}
+
+body:not(.webgis-page) .portrait-frame.portrait-bubble-3d.portrait-deck__card--back,
+body:not(.webgis-page) .portrait-frame.portrait-bubble-3d.portrait-deck__card--back:hover {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.85rem;
+  right: 1.1rem;
+  width: auto !important;
+  z-index: 1;
+  transform: translate3d(18px, -14px, 0) rotate(5deg) scale(0.96) !important;
+  filter: brightness(0.94);
+}
+
+body:not(.webgis-page) .portrait-deck__card--back .portrait-coordinate,
+body:not(.webgis-page) .portrait-deck__card--back .portrait-frame__caption {
+  opacity: 0.82;
+  transform: scale(0.97);
+}
+
+/* Desktop Hover: Back full card (with border, coordinates & caption) steps forward to front */
+@media (hover: hover) and (pointer: fine) {
+  body:not(.webgis-page) .portrait-deck:hover .portrait-frame.portrait-bubble-3d.portrait-deck__card--back,
+  body:not(.webgis-page) .portrait-deck:hover .portrait-frame.portrait-bubble-3d.portrait-deck__card--back:hover {
+    z-index: 3;
+    transform: translate3d(4px, 4px, 0) rotate(1.2deg) scale(1) !important;
+    filter: brightness(1);
+    box-shadow:
+      16px 16px 32px rgba(44, 62, 80, 0.14),
+      -10px -10px 20px rgba(255, 255, 255, 1),
+      inset 2px 2px 5px rgba(255, 255, 255, 0.88),
+      inset -2px -2px 5px rgba(44, 62, 80, 0.04) !important;
+  }
+
+  html[data-theme="dark"] body:not(.webgis-page) .portrait-deck:hover .portrait-frame.portrait-bubble-3d.portrait-deck__card--back,
+  html[data-theme="dark"] body:not(.webgis-page) .portrait-deck:hover .portrait-frame.portrait-bubble-3d.portrait-deck__card--back:hover {
+    box-shadow:
+      16px 16px 34px rgba(5, 8, 15, 0.82),
+      -8px -8px 18px rgba(56, 80, 120, 0.28),
+      inset 2px 2px 5px rgba(255, 255, 255, 0.12),
+      inset -2px -2px 5px rgba(5, 8, 15, 0.65) !important;
+  }
+
+  body:not(.webgis-page) .portrait-deck:hover .portrait-deck__card--back .portrait-coordinate,
+  body:not(.webgis-page) .portrait-deck:hover .portrait-deck__card--back .portrait-frame__caption {
+    opacity: 1;
+    transform: translateY(-1px) scale(1);
+  }
+
+  body:not(.webgis-page) .portrait-deck:hover .portrait-frame.portrait-bubble-3d.portrait-deck__card--front,
+  body:not(.webgis-page) .portrait-deck:hover .portrait-frame.portrait-bubble-3d.portrait-deck__card--front:hover {
+    z-index: 1;
+    transform: translate3d(-18px, -14px, 0) rotate(-5deg) scale(0.96) !important;
+    filter: brightness(0.93);
+  }
+
+  body:not(.webgis-page) .portrait-deck:hover .portrait-deck__card--front .portrait-coordinate,
+  body:not(.webgis-page) .portrait-deck:hover .portrait-deck__card--front .portrait-frame__caption {
+    opacity: 0.82;
+    transform: scale(0.97);
+  }
+}
+
+/* Mobile Tap / Keyboard Toggle (.is-flipped): Back full card steps forward to front */
+body:not(.webgis-page) .portrait-deck.is-flipped .portrait-frame.portrait-bubble-3d.portrait-deck__card--back,
+body:not(.webgis-page) .portrait-deck.is-flipped .portrait-frame.portrait-bubble-3d.portrait-deck__card--back:hover {
+  z-index: 3;
+  transform: translate3d(4px, 4px, 0) rotate(1.2deg) scale(1) !important;
+  filter: brightness(1);
+  box-shadow:
+    16px 16px 32px rgba(44, 62, 80, 0.14),
+    -10px -10px 20px rgba(255, 255, 255, 1),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.88),
+    inset -2px -2px 5px rgba(44, 62, 80, 0.04) !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .portrait-deck.is-flipped .portrait-frame.portrait-bubble-3d.portrait-deck__card--back,
+html[data-theme="dark"] body:not(.webgis-page) .portrait-deck.is-flipped .portrait-frame.portrait-bubble-3d.portrait-deck__card--back:hover {
+  box-shadow:
+    16px 16px 34px rgba(5, 8, 15, 0.82),
+    -8px -8px 18px rgba(56, 80, 120, 0.28),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.12),
+    inset -2px -2px 5px rgba(5, 8, 15, 0.65) !important;
+}
+
+body:not(.webgis-page) .portrait-deck.is-flipped .portrait-deck__card--back .portrait-coordinate,
+body:not(.webgis-page) .portrait-deck.is-flipped .portrait-deck__card--back .portrait-frame__caption {
+  opacity: 1;
+  transform: translateY(-1px) scale(1);
+}
+
+body:not(.webgis-page) .portrait-deck.is-flipped .portrait-frame.portrait-bubble-3d.portrait-deck__card--front,
+body:not(.webgis-page) .portrait-deck.is-flipped .portrait-frame.portrait-bubble-3d.portrait-deck__card--front:hover {
+  z-index: 1;
+  transform: translate3d(-18px, -14px, 0) rotate(-5deg) scale(0.96) !important;
+  filter: brightness(0.93);
+}
+
+body:not(.webgis-page) .portrait-deck.is-flipped .portrait-deck__card--front .portrait-coordinate,
+body:not(.webgis-page) .portrait-deck.is-flipped .portrait-deck__card--front .portrait-frame__caption {
+  opacity: 0.82;
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:not(.webgis-page) .portrait-frame.portrait-bubble-3d.portrait-deck__card,
+  body:not(.webgis-page) .portrait-deck__card .portrait-coordinate,
+  body:not(.webgis-page) .portrait-deck__card .portrait-frame__caption {
+    transition: none !important;
+  }
+}
+
+
+/* ==========================================================================
+   HIGH-CONTRAST SOLID CLAY PALETTE, BLACK TYPOGRAPHY & UNIFIED CLAY ANIMATION
+   (OPTIMIZED FOR BOTH LIGHT MODE & DARK MODE)
+   ========================================================================== */
+
+:root {
+  /* 1. High-Contrast Black Typography (No Gray Text in Web Content) */
+  --heading-charcoal: #0B0F19;
+  --heading-secondary: #0B0F19;
+  --body-slate: #0B0F19;
+  --body-muted: #0B0F19;
+
+  /* 2. Solid Vivid Clay Colors (High Contrast vs Canvas) */
+  --clay-blue: #60A5FA;
+  --clay-blue-text: #0B0F19;
+
+  --clay-green: #34D399;
+  --clay-green-text: #0B0F19;
+
+  --clay-yellow: #FBBF24;
+  --clay-yellow-text: #0B0F19;
+
+  --clay-pink: #FB7185;
+  --clay-pink-text: #0B0F19;
+
+  /* Stronger 3D Clay Shadows for Solid Pills */
+  --clay-pill-shadow:
+    8px 8px 16px rgba(15, 23, 42, 0.16),
+    -5px -5px 12px rgba(255, 255, 255, 0.95),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.68),
+    inset -3px -3px 6px rgba(15, 23, 42, 0.18);
+
+  --clay-pressed-shadow:
+    inset 4px 4px 8px rgba(15, 23, 42, 0.22),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.75);
+
+  --clay-solid-pressed-shadow:
+    inset 4px 4px 8px rgba(15, 23, 42, 0.26),
+    inset -3px -3px 6px rgba(255, 255, 255, 0.65);
+}
+
+html[data-theme="dark"] {
+  /* Crisp White Typography on #121824 Deep Navy */
+  --heading-charcoal: #FFFFFF;
+  --heading-secondary: #F8FAFC;
+  --body-slate: #F8FAFC;
+  --body-muted: #E2E8F0;
+
+  /* Elevated Dark Clay Card Surface for Better 3D Contrast Against #121824 */
+  --clay-card-bg: #1B2537;
+  --clay-recess-bg: #0D131E;
+
+  /* Keep Solid Vivid Clay Colors in Dark Mode for Maximum Contrast */
+  --clay-blue: #60A5FA;
+  --clay-blue-text: #0B0F19;
+
+  --clay-green: #34D399;
+  --clay-green-text: #0B0F19;
+
+  --clay-yellow: #FBBF24;
+  --clay-yellow-text: #0B0F19;
+
+  --clay-pink: #FB7185;
+  --clay-pink-text: #0B0F19;
+
+  --clay-formula:
+    12px 12px 26px rgba(5, 8, 15, 0.72),
+    -7px -7px 16px rgba(56, 80, 120, 0.26),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.10),
+    inset -2px -2px 5px rgba(5, 8, 15, 0.60);
+
+  --clay-pill-shadow:
+    8px 8px 18px rgba(5, 8, 15, 0.72),
+    -4px -4px 10px rgba(56, 80, 120, 0.25),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.55),
+    inset -3px -3px 6px rgba(15, 23, 42, 0.34);
+
+  /* Pressed Shadow for Dark Surface Buttons (.hero-button--secondary, .theme-toggle, .eyebrow) */
+  --clay-pressed-shadow:
+    inset 4px 4px 9px rgba(5, 8, 15, 0.80),
+    inset -3px -3px 7px rgba(148, 163, 184, 0.14);
+
+  /* Pressed Shadow for Vivid Solid Colored Pills (.expertise-tags li, .project-card__tags span) */
+  --clay-solid-pressed-shadow:
+    0 2px 6px rgba(5, 8, 15, 0.45),
+    inset 4px 4px 8px rgba(15, 23, 42, 0.38),
+    inset -3px -3px 6px rgba(255, 255, 255, 0.48);
+}
+
+/* --------------------------------------------------------------------------
+   1. REMOVE RAISED BORDER FROM "CORE EXPERTISE" CONTAINER (KEEP ONLY POINTS)
+   -------------------------------------------------------------------------- */
+body:not(.webgis-page) .about__expertise,
+body:not(.webgis-page) .about__expertise.about-bubble-3d,
+html[data-theme="dark"] body:not(.webgis-page) .about__expertise,
+html[data-theme="dark"] body:not(.webgis-page) .about__expertise.about-bubble-3d {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  margin-top: 1.75rem !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. SOLID CLAY PILL BEADS & MAPS ARCHIVE BADGES (LIGHT & DARK MODE)
+   -------------------------------------------------------------------------- */
+body:not(.webgis-page) .about__expertise .expertise-tags li::before,
+html[data-theme="dark"] body:not(.webgis-page) .about__expertise .expertise-tags li::before {
+  background: #1D4ED8 !important;
+  box-shadow:
+    1.5px 1.5px 3px rgba(15, 23, 42, 0.30),
+    inset 1.5px 1.5px 2px rgba(255, 255, 255, 0.75) !important;
+}
+
+body:not(.webgis-page) .about__expertise .expertise-tags li:nth-child(4n+2)::before,
+html[data-theme="dark"] body:not(.webgis-page) .about__expertise .expertise-tags li:nth-child(4n+2)::before {
+  background: #047857 !important;
+}
+
+body:not(.webgis-page) .about__expertise .expertise-tags li:nth-child(4n+3)::before,
+html[data-theme="dark"] body:not(.webgis-page) .about__expertise .expertise-tags li:nth-child(4n+3)::before {
+  background: #B45309 !important;
+}
+
+body:not(.webgis-page) .about__expertise .expertise-tags li:nth-child(4n+4)::before,
+html[data-theme="dark"] body:not(.webgis-page) .about__expertise .expertise-tags li:nth-child(4n+4)::before {
+  background: #BE123C !important;
+}
+
+/* Unify Maps Archive Plate Number & Zoom Badges with Solid Clay Palette */
+body:not(.webgis-page) .maps-carousel__plate-number {
+  background: var(--clay-blue) !important;
+  color: #0B0F19 !important;
+  border: none !important;
+  box-shadow: var(--clay-pill-shadow) !important;
+}
+
+body:not(.webgis-page) .maps-carousel__plate:nth-child(4n+2) .maps-carousel__plate-number {
+  background: var(--clay-green) !important;
+}
+
+body:not(.webgis-page) .maps-carousel__plate:nth-child(4n+3) .maps-carousel__plate-number {
+  background: var(--clay-yellow) !important;
+}
+
+body:not(.webgis-page) .maps-carousel__plate:nth-child(4n+4) .maps-carousel__plate-number {
+  background: var(--clay-pink) !important;
+}
+
+body:not(.webgis-page) .maps-card__Zoom {
+  background: var(--clay-blue) !important;
+  color: #0B0F19 !important;
+  border: none !important;
+  box-shadow: var(--clay-pill-shadow) !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. DARK MODE RECESSED WELLS & FLOATING BADGES (NO WHITE GLARE LEAKS)
+   -------------------------------------------------------------------------- */
+@media (min-width: 981px) {
+  html[data-theme="dark"] body:not(.webgis-page) .nav-menu {
+    background: var(--clay-recess-bg) !important;
+    border: none !important;
+    box-shadow:
+      inset 3px 3px 6px rgba(5, 8, 15, 0.72),
+      inset -3px -3px 6px rgba(255, 255, 255, 0.06) !important;
+  }
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .nav-menu a[aria-current="page"] {
+  background: var(--clay-card-bg) !important;
+  color: #FFFFFF !important;
+  box-shadow:
+    6px 6px 12px rgba(5, 8, 15, 0.65),
+    -3px -3px 8px rgba(56, 80, 120, 0.22),
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.12),
+    inset -1.5px -1.5px 3px rgba(5, 8, 15, 0.55) !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .theme-toggle,
+html[data-theme="dark"] body:not(.webgis-page) .menu-toggle {
+  background: var(--clay-card-bg) !important;
+  color: #FFFFFF !important;
+  box-shadow:
+    6px 6px 14px rgba(5, 8, 15, 0.68),
+    -4px -4px 10px rgba(56, 80, 120, 0.24),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.12),
+    inset -2px -2px 4px rgba(5, 8, 15, 0.58) !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .portrait-frame__media,
+html[data-theme="dark"] body:not(.webgis-page) .maps-card__media {
+  background: var(--clay-recess-bg) !important;
+  border: none !important;
+  box-shadow:
+    inset 3px 3px 7px rgba(5, 8, 15, 0.75),
+    inset -3px -3px 7px rgba(255, 255, 255, 0.06) !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .portrait-frame.portrait-bubble-3d .portrait-coordinate {
+  background: var(--clay-card-bg) !important;
+  color: #FFFFFF !important;
+  box-shadow:
+    0 8px 18px rgba(5, 8, 15, 0.75),
+    3px 3px 8px rgba(5, 8, 15, 0.55),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.14),
+    inset -2px -2px 4px rgba(5, 8, 15, 0.65) !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .portrait-frame.portrait-bubble-3d.portrait-deck__card--front,
+html[data-theme="dark"] body:not(.webgis-page) .portrait-frame.portrait-bubble-3d.portrait-deck__card--back {
+  box-shadow: var(--clay-formula) !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. ALL GRAY FONTS IN WEB CONTENT CHANGED TO BLACK (LIGHT) / WHITE (DARK)
+   -------------------------------------------------------------------------- */
+body:not(.webgis-page) p,
+body:not(.webgis-page) li,
+body:not(.webgis-page) .hero-lead,
+body:not(.webgis-page) .hero-body,
+body:not(.webgis-page) .hero-closing,
+body:not(.webgis-page) .hero-showcase-frame__coords,
+body:not(.webgis-page) .about__bio,
+body:not(.webgis-page) .about__subhead,
+body:not(.webgis-page) .about__edu-detail strong,
+body:not(.webgis-page) .about__edu-detail span,
+body:not(.webgis-page) .section-intro > p:not(.eyebrow),
+body:not(.webgis-page) .experience-item__meta,
+body:not(.webgis-page) .experience-item__date,
+body:not(.webgis-page) .experience-item__desc,
+body:not(.webgis-page) .experience-item__list,
+body:not(.webgis-page) .experience-item__list li,
+body:not(.webgis-page) .project-card__year,
+body:not(.webgis-page) .project-card__subtitle,
+body:not(.webgis-page) .project-card__summary,
+body:not(.webgis-page) .project-card__details,
+body:not(.webgis-page) .project-card__details li,
+body:not(.webgis-page) .publication-card__volume,
+body:not(.webgis-page) .publication-card__summary,
+body:not(.webgis-page) .maps-deck-hint,
+body:not(.webgis-page) .contact-subtext,
+body:not(.webgis-page) .footer-meta-pill p,
+body:not(.webgis-page) .footer-meta-pill .footer-tagline,
+body:not(.webgis-page) .nav-menu a,
+html[data-theme="dark"] body:not(.webgis-page) .hero-narrative p,
+html[data-theme="dark"] body:not(.webgis-page) .hero-narrative__body,
+html[data-theme="dark"] body:not(.webgis-page) .hero-showcase-frame__coords,
+html[data-theme="dark"] body:not(.webgis-page) .footer-meta-pill p,
+html[data-theme="dark"] body:not(.webgis-page) .footer-meta-pill .footer-tagline {
+  color: var(--body-slate) !important;
+}
+
+/* Ensure solid clay pills always keep crisp black text in both Light & Dark mode */
+body:not(.webgis-page) .about__expertise .expertise-tags li,
+body:not(.webgis-page) .project-card__tags span,
+body:not(.webgis-page) .publication-card__year,
+body:not(.webgis-page) .portrait-frame__caption span,
+body:not(.webgis-page) .maps-carousel__plate-number {
+  color: #0B0F19 !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. UNIFY ALL CLAY BUTTON ANIMATIONS WITH "EXPLORE PROJECTS" PRESS-IN EFFECT
+      (CONSISTENT ACROSS LIGHT MODE & DARK MODE)
+   -------------------------------------------------------------------------- */
+body:not(.webgis-page) .nav-contact,
+body:not(.webgis-page) .hero-button--primary,
+body:not(.webgis-page) .hero-button--secondary,
+body:not(.webgis-page) .contact-cv-btn,
+body:not(.webgis-page) .button,
+body:not(.webgis-page) .button--outline,
+body:not(.webgis-page) .publication-card__doi,
+body:not(.webgis-page) .theme-toggle,
+body:not(.webgis-page) .menu-toggle,
+body:not(.webgis-page) .about__expertise .expertise-tags li,
+body:not(.webgis-page) .project-card__tags span,
+body:not(.webgis-page) .eyebrow,
+body:not(.webgis-page) .hero-kicker {
+  transition: all 0.25s ease-in-out !important;
+}
+
+/* 5A. Surface Clay Buttons & Eyebrows ("Explore Projects", Theme Toggle, Eyebrow):
+       Squishy Clay Press-In on Hover & Active in BOTH Light & Dark Mode */
+body:not(.webgis-page) .hero-button--secondary:hover,
+body:not(.webgis-page) .hero-button--secondary:active,
+body:not(.webgis-page) .button--outline:hover,
+body:not(.webgis-page) .button--outline:active,
+body:not(.webgis-page) .theme-toggle:hover,
+body:not(.webgis-page) .theme-toggle:active,
+body:not(.webgis-page) .menu-toggle:hover,
+body:not(.webgis-page) .menu-toggle:active,
+body:not(.webgis-page) .eyebrow:hover,
+body:not(.webgis-page) .eyebrow:active,
+body:not(.webgis-page) .hero-kicker:hover,
+body:not(.webgis-page) .hero-kicker:active,
+html[data-theme="dark"] body:not(.webgis-page) .hero-button--secondary:hover,
+html[data-theme="dark"] body:not(.webgis-page) .hero-button--secondary:active,
+html[data-theme="dark"] body:not(.webgis-page) .button--outline:hover,
+html[data-theme="dark"] body:not(.webgis-page) .button--outline:active,
+html[data-theme="dark"] body:not(.webgis-page) .theme-toggle:hover,
+html[data-theme="dark"] body:not(.webgis-page) .theme-toggle:active,
+html[data-theme="dark"] body:not(.webgis-page) .menu-toggle:hover,
+html[data-theme="dark"] body:not(.webgis-page) .menu-toggle:active,
+html[data-theme="dark"] body:not(.webgis-page) .eyebrow:hover,
+html[data-theme="dark"] body:not(.webgis-page) .eyebrow:active,
+html[data-theme="dark"] body:not(.webgis-page) .hero-kicker:hover,
+html[data-theme="dark"] body:not(.webgis-page) .hero-kicker:active {
+  box-shadow: var(--clay-pressed-shadow) !important;
+  transform: translateY(1.5px) scale(0.985) !important;
+}
+
+/* 5B. Solid Vivid Clay Pills (Expertise, Project Tags, Nav Links):
+       Same Press-In Motion + Specular Solid Inset Clay Shadow */
+body:not(.webgis-page) .about__expertise .expertise-tags li:hover,
+body:not(.webgis-page) .about__expertise .expertise-tags li:active,
+body:not(.webgis-page) .project-card__tags span:hover,
+body:not(.webgis-page) .project-card__tags span:active,
+body:not(.webgis-page) .nav-menu a:hover,
+body:not(.webgis-page) .nav-menu a:active,
+html[data-theme="dark"] body:not(.webgis-page) .about__expertise .expertise-tags li:hover,
+html[data-theme="dark"] body:not(.webgis-page) .about__expertise .expertise-tags li:active,
+html[data-theme="dark"] body:not(.webgis-page) .project-card__tags span:hover,
+html[data-theme="dark"] body:not(.webgis-page) .project-card__tags span:active,
+html[data-theme="dark"] body:not(.webgis-page) .nav-menu a:hover,
+html[data-theme="dark"] body:not(.webgis-page) .nav-menu a:active {
+  color: #0B0F19 !important;
+  box-shadow: var(--clay-solid-pressed-shadow) !important;
+  transform: translateY(1.5px) scale(0.985) !important;
+}
+
+/* 5C. Primary Blue Clay CTA Buttons: Same Press-In Motion (translateY(1.5px) scale(0.985) + Inset Clay Shadow) */
+body:not(.webgis-page) .nav-contact:hover,
+body:not(.webgis-page) .nav-contact:active,
+body:not(.webgis-page) .hero-button--primary:hover,
+body:not(.webgis-page) .hero-button--primary:active,
+body:not(.webgis-page) .contact-cv-btn:hover,
+body:not(.webgis-page) .contact-cv-btn:active,
+body:not(.webgis-page) .button:not(.button--outline):not(.button--ghost):hover,
+body:not(.webgis-page) .button:not(.button--outline):not(.button--ghost):active,
+body:not(.webgis-page) .publication-card__doi:hover,
+body:not(.webgis-page) .publication-card__doi:active,
+html[data-theme="dark"] body:not(.webgis-page) .nav-contact:hover,
+html[data-theme="dark"] body:not(.webgis-page) .nav-contact:active,
+html[data-theme="dark"] body:not(.webgis-page) .hero-button--primary:hover,
+html[data-theme="dark"] body:not(.webgis-page) .hero-button--primary:active,
+html[data-theme="dark"] body:not(.webgis-page) .contact-cv-btn:hover,
+html[data-theme="dark"] body:not(.webgis-page) .contact-cv-btn:active,
+html[data-theme="dark"] body:not(.webgis-page) .button:not(.button--outline):not(.button--ghost):hover,
+html[data-theme="dark"] body:not(.webgis-page) .button:not(.button--outline):not(.button--ghost):active,
+html[data-theme="dark"] body:not(.webgis-page) .publication-card__doi:hover,
+html[data-theme="dark"] body:not(.webgis-page) .publication-card__doi:active {
+  background: #236BB8 !important;
+  color: #FFFFFF !important;
+  transform: translateY(1.5px) scale(0.985) !important;
+  box-shadow:
+    inset 4px 4px 8px rgba(5, 8, 15, 0.42),
+    inset -3px -3px 6px rgba(255, 255, 255, 0.38) !important;
+}
+
+/* --------------------------------------------------------------------------
+   6. SELECTED WORK — 3D RAISED CLAY FRAME FOR PROJECT PHOTOS (LIGHT & DARK)
+   -------------------------------------------------------------------------- */
+body:not(.webgis-page) .project-card__image-wrapper,
+body:not(.webgis-page) .bubble-card .project-card__image-wrapper {
+  position: relative !important;
+  width: 100% !important;
+  aspect-ratio: 16 / 10 !important;
+  border-radius: 26px !important;
+  background: var(--clay-card-bg) !important;
+  border: none !important;
+  padding: 0.68rem 0.68rem 0.78rem !important;
+  box-shadow:
+    14px 14px 28px rgba(44, 62, 80, 0.12),
+    -10px -10px 20px rgba(255, 255, 255, 1),
+    inset 2.5px 2.5px 5px rgba(255, 255, 255, 0.95),
+    inset -2.5px -2.5px 5px rgba(44, 62, 80, 0.04) !important;
+  overflow: hidden !important;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease !important;
+  will-change: transform;
+}
+
+body:not(.webgis-page) .project-card__image-wrapper .project-card__image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border-radius: 18px !important;
+  display: block !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.45),
+    0 3px 10px rgba(15, 23, 42, 0.10) !important;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+/* Hover State: 3D Timbul Lift & Shadow Expansion */
+body:not(.webgis-page) .project-card:hover .project-card__image-wrapper,
+body:not(.webgis-page) .project-card__image-wrapper:hover {
+  transform: translateY(-4px) !important;
+  box-shadow:
+    18px 18px 34px rgba(44, 62, 80, 0.16),
+    -12px -12px 24px rgba(255, 255, 255, 1),
+    inset 2.5px 2.5px 5px rgba(255, 255, 255, 0.95),
+    inset -2.5px -2.5px 5px rgba(44, 62, 80, 0.04) !important;
+}
+
+body:not(.webgis-page) .project-card:hover .project-card__image,
+body:not(.webgis-page) .project-card__image-wrapper:hover .project-card__image {
+  transform: scale(1.025) !important;
+}
+
+/* Dark Mode 3D Raised Clay Frame for Project Photos */
+html[data-theme="dark"] body:not(.webgis-page) .project-card__image-wrapper,
+html[data-theme="dark"] body:not(.webgis-page) .bubble-card .project-card__image-wrapper {
+  background: var(--clay-card-bg) !important;
+  border: none !important;
+  box-shadow:
+    14px 14px 28px rgba(5, 8, 15, 0.78),
+    -6px -6px 14px rgba(56, 80, 120, 0.26),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.12),
+    inset -2px -2px 5px rgba(5, 8, 15, 0.62) !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .project-card__image-wrapper .project-card__image {
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 4px 14px rgba(5, 8, 15, 0.62) !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .project-card:hover .project-card__image-wrapper,
+html[data-theme="dark"] body:not(.webgis-page) .project-card__image-wrapper:hover {
+  transform: translateY(-4px) !important;
+  box-shadow:
+    18px 18px 36px rgba(5, 8, 15, 0.88),
+    -8px -8px 18px rgba(56, 80, 120, 0.32),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.14),
+    inset -2px -2px 5px rgba(5, 8, 15, 0.68) !important;
+}
+
+@media (max-width: 600px) {
+  body:not(.webgis-page) .project-card__image-wrapper,
+  body:not(.webgis-page) .bubble-card .project-card__image-wrapper {
+    border-radius: 20px !important;
+    padding: 0.5rem 0.5rem 0.6rem !important;
+  }
+
+  body:not(.webgis-page) .project-card__image-wrapper .project-card__image {
+    border-radius: 14px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:not(.webgis-page) .project-card__image-wrapper,
+  body:not(.webgis-page) .project-card__image-wrapper .project-card__image {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+

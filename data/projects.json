@@ -1,0 +1,572 @@
+[
+  {
+    "id": "proj-znt-bulungan",
+    "slug": "znt-bulungan",
+    "title": "Land Value Zoning — Bulungan",
+    "year": "2026",
+    "period": "Aug 2023 – Present",
+    "location": "Kabupaten Bulungan, Kalimantan Utara",
+    "category": [
+      "Land Valuation",
+      "GIS",
+      "Spatial Analysis",
+      "Spatial Data Management"
+    ],
+    "projectType": "Professional Work",
+    "role": "GIS Operator",
+    "organization": "PT Wahyudi Andy Laksito Setiarso",
+    "shortDescription": "Transforming complex land value zoning data into an accessible web-based visualization and official zoning maps.",
+    "overview": "Mengoordinasikan tim surveyor dan memvalidasi titik sampel tanah hasil survei lapangan. Melakukan kontrol kualitas dengan menghitung standar deviasi harga tanah, mengelola dan mengesahkan data lapangan melalui sistem SIPENTA, serta mengolah data spasial dengan ArcGIS Pro untuk menghasilkan Peta Zona Nilai Tanah. Mengembangkan dan mengelola dashboard spasial berbasis web untuk visualisasi dan pemantauan data secara terintegrasi.",
+    "myContribution": [
+      "Mengoordinasikan tim surveyor lapangan dan memvalidasi titik sampel tanah hasil survei",
+      "Melakukan kontrol kualitas data harga tanah dengan kalkulasi standar deviasi",
+      "Mengelola dan mengesahkan data lapangan melalui sistem SIPENTA",
+      "Mengolah data spasial dengan ArcGIS Pro untuk memproduksi Peta Zona Nilai Tanah",
+      "Mengembangkan dan mengelola dashboard spasial berbasis web untuk visualisasi dan pemantauan data"
+    ],
+    "methodology": [
+      "Survei lapangan dan pengumpulan titik sampel harga tanah",
+      "Validasi data sampel dan quality control standar deviasi harga tanah",
+      "Pengelolaan dan pengesahan data lapangan melalui sistem SIPENTA",
+      "Pengolahan geodatabase dan pembuatan peta zona nilai tanah di ArcGIS Pro",
+      "Penyusunan dashboard WebGIS interaktif berbasis Leaflet dan GeoJSON"
+    ],
+    "tools": [
+      "ArcGIS Pro",
+      "SIPENTA",
+      "Leaflet",
+      "HTML/CSS/JavaScript",
+      "GeoJSON"
+    ],
+    "deliverables": [
+      "Peta Zona Nilai Tanah Kabupaten Bulungan",
+      "WebGIS Dashboard Monitoring ZNT Bulungan"
+    ],
+    "gallery": [
+      {
+        "src": "assets/projects/znt-bulungan-thumb.webp",
+        "alt": "ZNT Bulungan Interactive WebGIS Dashboard Preview",
+        "caption": "Tampilan dashboard spasial WebGIS Zona Nilai Tanah Bulungan"
+      }
+    ],
+    "videos": [],
+    "externalLinks": [
+      {
+        "label": "Open WebGIS Dashboard",
+        "url": "https://itrianto.github.io/znt-bulungan-2026/"
+      }
+    ],
+    "featured": true,
+    "milestones": [
+      {
+        "period": "2026",
+        "title": "Peluncuran WebGIS Dashboard ZNT Bulungan",
+        "description": "Pengembangan dan rilis dashboard interaktif untuk visualisasi dan pemantauan data Zona Nilai Tanah secara real-time."
+      }
+    ],
+    "lastUpdated": "2026-11-02"
+  },
+  {
+    "id": "proj-karangkates-pv",
+    "slug": "karangkates-floating-solar",
+    "title": "Karangkates Floating Solar Power Plant",
+    "year": "2025",
+    "period": "50 hari (Apr – May 2026)",
+    "location": "Karangkates, Indonesia",
+    "category": [
+      "Infrastructure",
+      "GIS Survey",
+      "Positioning",
+      "Renewable Energy"
+    ],
+    "projectType": "Field Deployment",
+    "role": "GIS Surveyor",
+    "organization": "PT Gema Sarana Teknik",
+    "shortDescription": "Geospatial and hydrographic survey deployment supporting a 100 MWac Floating Photovoltaic solar power plant infrastructure project by PLN.",
+    "overview": "Deployment lapangan selama 50 hari untuk mendukung proyek infrastruktur strategis energi terbarukan Floating Photovoltaic berkapasitas 100 MWac yang berkaitan dengan PLN. Bertanggung jawab atas pengumpulan data geospasial dan hidrografi menggunakan instrumen GNSS/GPS presisi di lingkungan perairan waduk, serta penyusunan peta batimetri dan peta tematik untuk kajian risiko keteknikan.",
+    "myContribution": [
+      "Melakukan pengumpulan data geospasial dan hidrografi di lapangan selama 50 hari deployment",
+      "Mengoperasikan instrumen GNSS/GPS dan instrumen survei hidrografi pada kondisi perairan danau/waduk",
+      "Memvalidasi data posisi spasial untuk mendukung penilaian risiko teknis konstruksi terapung",
+      "Mengolah data pengukuran lapangan menjadi peta batimetri dan chart navigasi"
+    ],
+    "methodology": [
+      "Penentuan posisi teliti menggunakan GNSS/GPS geodesi",
+      "Pemeruman (sounding) batimetri perairan menggunakan alat ukur hidrografi",
+      "Pengolahan dan koreksi pasang surut/fluktuasi muka air waduk",
+      "Pemodelan kontur kedalaman dan integrasi data kartografi di ArcGIS Pro"
+    ],
+    "tools": [
+      "GNSS/GPS",
+      "Hydrographic Survey Instruments",
+      "ArcGIS Pro"
+    ],
+    "deliverables": [
+      "Peta batimetri perairan Karangkates",
+      "Nautical charts dan laporan validasi spasial posisi proyek"
+    ],
+    "gallery": [
+      {
+        "src": "projects/karangkates/gallery/IMG_0689.JPG",
+        "alt": "Karangkates Floating Solar Power Plant Survey 1",
+        "caption": "Aktivitas survei lapangan di area waduk Karangkates"
+      },
+      {
+        "src": "projects/karangkates/gallery/IMG_0640.JPG",
+        "alt": "Karangkates Floating Solar Power Plant Survey 2",
+        "caption": "Operasional tim survei di atas perahu pemetaan"
+      },
+      {
+        "src": "projects/karangkates/gallery/IMG_0567.JPG",
+        "alt": "Karangkates Floating Solar Power Plant Survey 3",
+        "caption": "Peralatan instrumen survei posisi dan hidrografi"
+      },
+      {
+        "src": "projects/karangkates/gallery/IMG_1417.JPG",
+        "alt": "Karangkates Floating Solar Power Plant Survey 4",
+        "caption": "Kondisi perairan lokasi proyek PLTS terapung"
+      },
+      {
+        "src": "projects/karangkates/gallery/IMG_2474.PNG",
+        "alt": "Karangkates Floating Solar Power Plant Survey 5",
+        "caption": "Data pemantauan spasial lapangan"
+      }
+    ],
+    "videos": [],
+    "externalLinks": [],
+    "featured": true,
+    "milestones": [
+      {
+        "period": "2025–2026",
+        "title": "50-Day Field Deployment Karangkates",
+        "description": "Penyelesaian survei hidrografi dan positioning spasial untuk proyek PLTS Terapung PLN 100 MWac."
+      }
+    ],
+    "lastUpdated": "2026-11-02"
+  },
+  {
+    "id": "proj-measuring-current",
+    "slug": "measuring-current-batam",
+    "title": "Offshore Hydrodynamic & Current Measurement Survey",
+    "year": "2026",
+    "period": "Feb 2023",
+    "location": "Batam, Indonesia",
+    "category": [
+      "Hydrography",
+      "Marine Survey",
+      "Hydrodynamic Data"
+    ],
+    "projectType": "Freelance Offshore Survey",
+    "role": "Hydrology Surveyor (Freelance)",
+    "organization": null,
+    "shortDescription": "Offshore environmental field surveys measuring sea currents using ADCP and Current Meter instruments with rigorous QA and hydrodynamic data validation.",
+    "overview": "Survei lapangan lepas pantai menggunakan Acoustic Doppler Current Profiler (ADCP) dan Current Meter di perairan Batam dalam kondisi laut dinamis, disertai prosedur quality assurance (QA) dan validasi data hidrodinamika untuk mendukung kajian risiko lingkungan perairan.",
+    "myContribution": [
+      "Melakukan pengukuran arus dan hidrodinamika perairan lepas pantai",
+      "Mengoperasikan instrumen ADCP dan Current Meter pada kondisi laut dinamis",
+      "Melaksanakan prosedur Quality Assurance (QA) dan validasi data kecepatan serta arah arus"
+    ],
+    "methodology": [
+      "Kalibrasi instrumen oseanografi sebelum deployment lepas pantai",
+      "Pengukuran profil kecepatan dan arah arus per lapisan kedalaman air",
+      "Penyaringan noise dan validasi QA/QC parameter hidrodinamika"
+    ],
+    "tools": [
+      "ADCP",
+      "Current Meter",
+      "QA/QC Validation Tools"
+    ],
+    "deliverables": [
+      "Dataset arus laut dan hidrodinamika tervalidasi",
+      "Laporan hasil observasi hidrodinamika lepas pantai"
+    ],
+    "gallery": [
+      {
+        "src": "assets/images/maps/thumbs/bati-bintan.webp",
+        "alt": "Offshore Hydrodynamic & Current Measurement Survey Context",
+        "caption": "Ilustrasi survei batimetri dan hidrodinamika perairan sekitar Batam-Bintan"
+      }
+    ],
+    "videos": [],
+    "externalLinks": [],
+    "featured": true,
+    "milestones": [
+      {
+        "period": "2026",
+        "title": "Pengukuran Arus Laut Lepas Pantai Batam",
+        "description": "Pengumpulan dan validasi data hidrodinamika menggunakan instrumen ADCP dan Current Meter."
+      }
+    ],
+    "lastUpdated": "2026-11-02"
+  },
+  {
+    "id": "proj-coral-reef-conservation",
+    "slug": "coral-reef-conservation",
+    "title": "Coral Reef Conservation & Coastal Ecosystem Mapping",
+    "year": "2024",
+    "period": "Feb 2024 – Jun 2024",
+    "location": "Jakarta, Indonesia",
+    "category": [
+      "Marine Conservation",
+      "Environmental GIS",
+      "Remote Sensing"
+    ],
+    "projectType": "Conservation Project",
+    "role": "Project Coordinator",
+    "organization": "PT Amati Karya Indonesia",
+    "shortDescription": "Satellite imagery processing, environmental monitoring, and coastal ecosystem mapping supporting coral reef conservation efforts.",
+    "overview": "Interpretasi citra satelit, monitoring lingkungan, pemetaan ekosistem pesisir, analisis spasial, koordinasi tim multidisiplin, dan presentasi hasil di forum internasional untuk mendukung program konservasi terumbu karang bersama tim Coral Reef Conservation.",
+    "myContribution": [
+      "Memproses dan menginterpretasi citra satelit untuk pemetaan ekosistem pesisir dan terumbu karang",
+      "Mengoordinasikan peneliti multidisiplin dan pemangku kepentingan lokal dalam kegiatan kajian lingkungan berbasis GIS",
+      "Melakukan analisis spasial zonasi kesehatan terumbu karang dan habitat pesisir",
+      "Mempresentasikan hasil pemetaan dan analisis spasial pada forum internasional"
+    ],
+    "methodology": [
+      "Pra-pengolahan citra satelit multispektral penginderaan jauh",
+      "Klasifikasi habitat bentik pesisir dan terumbu karang",
+      "Analisis spasial zonasi konservasi ekosistem pesisir",
+      "Koordinasi verifikasi data lapangan dengan tim peneliti"
+    ],
+    "tools": [
+      "ArcGIS Pro",
+      "QGIS",
+      "Remote Sensing Software",
+      "Multispectral Satellite Imagery"
+    ],
+    "deliverables": [
+      "Peta sebaran ekosistem terumbu karang",
+      "Laporan penilaian spasial lingkungan pesisir",
+      "Materi paparan forum internasional"
+    ],
+    "gallery": [
+      {
+        "src": "assets/images/maps/thumbs/coral.webp",
+        "alt": "Peta Sebaran Terumbu Karang",
+        "caption": "Peta tematik sebaran terumbu karang hasil pengolahan citra satelit dan survei lingkungan pesisir"
+      }
+    ],
+    "videos": [],
+    "externalLinks": [],
+    "featured": false,
+    "milestones": [
+      {
+        "period": "2024",
+        "title": "Koordinasi Konservasi Terumbu Karang",
+        "description": "Penyelesaian pemetaan ekosistem pesisir dan presentasi hasil pada forum internasional."
+      }
+    ],
+    "lastUpdated": "2026-11-02"
+  },
+  {
+    "id": "proj-marine-coastal-mapping",
+    "slug": "marine-coastal-mapping",
+    "title": "Marine & Coastal Thematic Mapping",
+    "year": "2025–2026",
+    "period": "2025–2026",
+    "location": "Indonesia",
+    "category": [
+      "Marine GIS",
+      "Cartography",
+      "Environmental Mapping"
+    ],
+    "projectType": "Spatial Analysis & Cartography",
+    "role": "GIS Surveyor",
+    "organization": "PT Gema Sarana Teknik",
+    "shortDescription": "Spatial data processing and field observation integration to produce nautical charts, mangrove distribution maps, and seagrass mapping.",
+    "overview": "Pengolahan data spasial dan observasi lapangan untuk menghasilkan nautical charts, peta distribusi mangrove, dan pemetaan lamun. Setiap luaran disusun secara objektif berdasarkan integrasi data citra dan observasi lapangan masing-masing tanpa menggeneralisasi lokasi survei yang berbeda.",
+    "myContribution": [
+      "Memproses data spasial kelautan dan citra satelit penginderaan jauh untuk pemetaan tematik pesisir",
+      "Mengintegrasikan observasi lapangan dengan batas ekosistem pesisir",
+      "Menyusun tata letak kartografi teknis nautical charts, peta distribusi mangrove, dan peta sebaran padang lamun"
+    ],
+    "methodology": [
+      "Kompilasi dan penyelarasan data batimetri perairan dengan garis pantai",
+      "Klasifikasi citra satelit untuk delineasi vegetasi mangrove dan padang lamun",
+      "Standardisasi simbol dan kartografi peta navigasi kelautan"
+    ],
+    "tools": [
+      "ArcGIS Pro",
+      "QGIS",
+      "Satellite Imagery",
+      "GNSS/GPS"
+    ],
+    "deliverables": [
+      "Nautical charts perairan",
+      "Peta distribusi dan tutupan mangrove",
+      "Peta sebaran padang lamun"
+    ],
+    "gallery": [
+      {
+        "src": "assets/images/maps/thumbs/bati-bintan.webp",
+        "alt": "Peta Batimetri",
+        "caption": "Peta Batimetri perairan pesisir"
+      },
+      {
+        "src": "assets/images/maps/thumbs/seagrass.webp",
+        "alt": "Peta Sebaran Lamun",
+        "caption": "Peta tematik sebaran lamun perairan pesisir"
+      }
+    ],
+    "videos": [],
+    "externalLinks": [],
+    "featured": false,
+    "milestones": [
+      {
+        "period": "2025–2026",
+        "title": "Produksi Seri Peta Tematik Pesisir",
+        "description": "Penyelesaian nautical charts, peta mangrove, dan peta lamun berbasis GIS kelautan."
+      }
+    ],
+    "lastUpdated": "2026-11-02"
+  },
+  {
+    "id": "proj-community-service-karanganyar",
+    "slug": "community-service-karanganyar",
+    "title": "Community Service Program (Pengabdian Masyarakat)",
+    "year": "2024–2025",
+    "period": "2024–2025",
+    "location": "Karanganyar, Indonesia",
+    "category": [
+      "Community Service",
+      "Program Coordination",
+      "Environmental Training"
+    ],
+    "projectType": "Community Development",
+    "role": "Project Coordinator",
+    "organization": null,
+    "shortDescription": "Leading 15 community empowerment activities and coordinating multidisciplinary programs in Karanganyar.",
+    "overview": "Memimpin 15 kegiatan pengabdian masyarakat dan mengoordinasikan pelaksanaan program lintas disiplin, termasuk pelatihan budidaya Trichoderma sp. sebagai fungisida alami bagi Kelompok Tani Hutan Lawu Hijau, Karanganyar.",
+    "myContribution": [
+      "Memimpin dan mengarahkan perencanaan serta pelaksanaan 15 kegiatan pengabdian masyarakat",
+      "Mengoordinasikan tim lintas disiplin dan berkoordinasi dengan aparatur desa serta masyarakat setempat",
+      "Memfasilitasi pelatihan budidaya dan pemanfaatan Trichoderma sp. bagi kelompok tani hutan"
+    ],
+    "methodology": [
+      "Penilaian kebutuhan masyarakat (need assessment) desa setempat",
+      "Penyusunan modul pelatihan teknis dan transfer pengetahuan praktis",
+      "Monitoring dan evaluasi ketercapaian 15 program kegiatan pengabdian"
+    ],
+    "tools": [
+      "Program Coordination Tools",
+      "Field Documentation Equipment"
+    ],
+    "deliverables": [
+      "Laporan pelaksanaan 15 program pengabdian masyarakat",
+      "Publikasi artikel pengabdian di Jurnal ABDIMAS"
+    ],
+    "gallery": [],
+    "videos": [],
+    "externalLinks": [
+      {
+        "label": "Publikasi ABDIMAS (DOI)",
+        "url": "https://doi.org/10.15294/q7khw835"
+      }
+    ],
+    "featured": false,
+    "milestones": [
+      {
+        "period": "2024–2025",
+        "title": "Pelaksanaan 15 Program Pengabdian Masyarakat",
+        "description": "Koordinasi keberhasilan 15 program lintas disiplin dan publikasi pelatihan tani di Jurnal ABDIMAS."
+      }
+    ],
+    "lastUpdated": "2026-11-02"
+  },
+  {
+    "id": "proj-geosphere-phenomena-karimunjawa",
+    "slug": "geosphere-phenomena-karimunjawa",
+    "title": "Geosphere Phenomena Study — Karimunjawa Coastal Dynamics",
+    "year": "2023",
+    "period": "2023",
+    "location": "Karimunjawa Island, Indonesia",
+    "category": [
+      "Coastal Geomorphology",
+      "Environmental GIS",
+      "Field Survey"
+    ],
+    "projectType": "Field Research Study",
+    "role": "Project Coordinator",
+    "organization": null,
+    "shortDescription": "Coastal environmental survey investigating coastal abrasion and shoreline changes on Karimunjawa Island.",
+    "overview": "Survei lingkungan pesisir untuk mengkaji fenomena geosfer, khususnya dinamika abrasi pantai dan perubahan garis pantai di Kepulauan Karimunjawa.",
+    "myContribution": [
+      "Mengoordinasikan tim survei lapangan di Kepulauan Karimunjawa",
+      "Mengumpulkan data koordinat titik-titik abrasi dan perubahan garis pantai",
+      "Mengompilasi data observasi geomorfologi pesisir ke dalam format spasial GIS"
+    ],
+    "methodology": [
+      "Survei transektual dan observasi morfologi pantai",
+      "Pengukuran titik koordinat abrasi dan sedimentasi",
+      "Analisis komparasi spasial dinamika garis pantai"
+    ],
+    "tools": [
+      "GNSS/GPS",
+      "ArcGIS",
+      "Field Survey Equipment"
+    ],
+    "deliverables": [
+      "Laporan studi fenomena geosfer dan abrasi pesisir Karimunjawa",
+      "Peta tematik observasi geomorfologi pesisir"
+    ],
+    "gallery": [],
+    "videos": [],
+    "externalLinks": [],
+    "featured": false,
+    "milestones": [
+      {
+        "period": "2023",
+        "title": "Studi Dinamika Pesisir Karimunjawa",
+        "description": "Survei lapangan dan kajian spasial abrasi pantai di Kepulauan Karimunjawa."
+      }
+    ],
+    "lastUpdated": "2026-11-02"
+  },
+  {
+    "id": "proj-batam-vegetation",
+    "slug": "batam-vegetation-monitoring",
+    "title": "Batam Vegetation Monitoring (NDVI Change Detection)",
+    "year": "2020–2025",
+    "period": "2020–2025",
+    "location": "Batam City, Indonesia",
+    "category": [
+      "Remote Sensing",
+      "Satellite Analysis",
+      "Environmental Monitoring"
+    ],
+    "projectType": "Remote Sensing Analysis",
+    "role": "GIS & Remote Sensing Analyst",
+    "organization": null,
+    "shortDescription": "Spatio-temporal vegetation analysis using Sentinel-2 imagery, Google Earth Engine, NDVI change detection, and Dynamic World land-cover data, 2020–2025.",
+    "overview": "Analisis spasiotemporal tutupan vegetasi Kota Batam periode 2020–2025 menggunakan citra Sentinel-2 pada platform Google Earth Engine. Menghasilkan deteksi perubahan NDVI di mana 615.07 km² vegetasi teridentifikasi pada komposit tahun 2020 dan 75.52 km² area vegetasi mengalami penurunan nilai NDVI selama periode 2020–2025.",
+    "myContribution": [
+      "Membangun pemrosesan tahunan (processing chain) citra Sentinel-2 (resolusi 10 m) di Google Earth Engine",
+      "Menerapkan masking awan, bayangan awan, dan tubuh air pada koleksi citra tahunan",
+      "Menghitung indeks vegetasi NDVI dan melakukan deteksi perubahan multi-tahun",
+      "Mengintegrasikan data tutupan lahan Dynamic World untuk konteks klasifikasi tutupan lahan"
+    ],
+    "methodology": [
+      "Akuisisi koleksi citra Sentinel-2 resolusi 10 m tahun 2020–2025",
+      "Masking awan, bayangan awan, dan tubuh air",
+      "Penyusunan annual median composite untuk representasi tahunan yang konsisten",
+      "Kalkulasi Normalized Difference Vegetation Index (NDVI)",
+      "Deteksi perubahan differencing multi-tahun dan analisis statistik luas area",
+      "Integrasi klasifikasi Dynamic World dan analisis deret waktu (time series)"
+    ],
+    "tools": [
+      "Google Earth Engine",
+      "Sentinel-2 Imagery",
+      "Dynamic World",
+      "NDVI"
+    ],
+    "deliverables": [
+      "Peta Spasiotemporal Perubahan Vegetasi Batam 2020–2025",
+      "Dataset statistik area tutupan dan defisit NDVI",
+      "Halaman dokumentasi proyek web (projects/batam-vegetation.html)"
+    ],
+    "gallery": [
+      {
+        "src": "assets/images/maps/thumbs/arahan-fungsi-lahan-kudus-2023.webp",
+        "alt": "Contoh analisis spasial tutupan lahan",
+        "caption": "Analisis spasial tutupan dan fungsi lahan"
+      }
+    ],
+    "videos": [],
+    "externalLinks": [
+      {
+        "label": "Project Documentation Page",
+        "url": "projects/batam-vegetation.html"
+      }
+    ],
+    "featured": false,
+    "milestones": [
+      {
+        "period": "2020–2025",
+        "title": "Analisis Time-Series Sentinel-2 Batam",
+        "description": "Pengolahan citra multitemporal dan kuantifikasi penurunan NDVI pada 75.52 km² vegetasi."
+      }
+    ],
+    "lastUpdated": "2026-11-02"
+  },
+  {
+    "id": "proj-wisata-religi-semarang",
+    "slug": "wisata-religi-semarang",
+    "title": "Connectivity Analysis of Religious Tourism Sites — Semarang",
+    "year": "2024–2026",
+    "period": "2024–2026",
+    "location": "Semarang City, Indonesia",
+    "category": [
+      "WebGIS",
+      "Network Analysis",
+      "Spatial Analysis",
+      "Academic Research"
+    ],
+    "projectType": "Academic / Research WebGIS",
+    "role": "GIS Researcher & WebGIS Developer",
+    "organization": "Universitas Negeri Semarang",
+    "shortDescription": "Interactive research WebGIS analyzing road network connectivity indices (α, β, γ) and spatial distribution of 22 religious tourism destinations in Semarang.",
+    "overview": "Pengembangan WebGIS interaktif berbasis penelitian skripsi mengenai analisis indeks konektivitas jaringan jalan terhadap 22 objek wisata religi di Kota Semarang. Menganalisis 607 simpul (nodes), 621 ruas jalan (edges), serta indeks konektivitas alfa (0.0124), beta (1.0231), dan gamma (0.3422) yang dipublikasikan pada Jurnal GeoImage (Vol. 15 No. 1, 2026).",
+    "myContribution": [
+      "Melakukan plotting koordinat lapangan untuk 22 objek wisata religi di Kota Semarang",
+      "Membangun topologi jaringan jalan (607 nodes dan 621 edges)",
+      "Menghitung indeks konektivitas jaringan jalan (alfa, beta, gamma) dengan teori graf",
+      "Mengembangkan aplikasi WebGIS interaktif berbasis Leaflet dan GeoJSON",
+      "Mendokumentasikan dan mempublikasikan hasil penelitian di GeoImage Journal"
+    ],
+    "methodology": [
+      "Plotting koordinat lapangan menggunakan Avenza Maps",
+      "Analisis spasial dan jaringan jalan berbasis GIS",
+      "Perhitungan indeks konektivitas graf (alfa, beta, gamma)",
+      "Penyajian data spasial interaktif menggunakan Leaflet, GeoJSON, dan CSV atribut"
+    ],
+    "tools": [
+      "Avenza Maps",
+      "QGIS / ArcGIS",
+      "Leaflet",
+      "GeoJSON",
+      "Graph Theory Indices"
+    ],
+    "deliverables": [
+      "Aplikasi WebGIS Wisata Religi Semarang",
+      "Dataset spasial GeoJSON (koordinat, rute, nodes, edges)",
+      "Artikel ilmiah di GeoImage Journal (DOI: 10.15294/geoimage.v15i1.40537)"
+    ],
+    "gallery": [
+      {
+        "src": "projects/wisatareligi/gallery/gereja-blenduk.jpg",
+        "alt": "Gereja Blenduk, Semarang",
+        "caption": "Gereja Blenduk - salah satu destinasi wisata religi bersejarah di Kota Semarang"
+      },
+      {
+        "src": "projects/wisatareligi/gallery/sam-poo-kong.jpg",
+        "alt": "Kelenteng Sam Poo Kong, Semarang",
+        "caption": "Kelenteng Sam Poo Kong - situs cagar budaya dan wisata religi"
+      },
+      {
+        "src": "projects/wisatareligi/gallery/masjid-agung-jawa-tengah.jpg",
+        "alt": "Masjid Agung Jawa Tengah",
+        "caption": "Masjid Agung Jawa Tengah (MAJT) Semarang"
+      }
+    ],
+    "videos": [],
+    "externalLinks": [
+      {
+        "label": "WebGIS Interaktif",
+        "url": "projects/wisatareligi/webgis/webgis-wisata-religi-semarang.html"
+      },
+      {
+        "label": "Jurnal GeoImage (DOI)",
+        "url": "https://doi.org/10.15294/geoimage.v15i1.40537"
+      }
+    ],
+    "featured": true,
+    "milestones": [
+      {
+        "period": "2026",
+        "title": "Publikasi Ilmiah & Peluncuran WebGIS",
+        "description": "Publikasi penelitian pada GeoImage Journal dan perilisan WebGIS konektivitas wisata religi Semarang."
+      }
+    ],
+    "lastUpdated": "2026-11-02"
+  }
+]

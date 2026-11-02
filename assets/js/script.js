@@ -420,3 +420,38 @@ mapsLbContent.addEventListener('touchend', (e) => {
 
 mapsUpdate();
 setDeckFanned(false);
+
+
+/* Profile Photo 2-Card Deck Swap (Touch / Tap & Keyboard Toggle) */
+const portraitDeck = document.querySelector('.portrait-deck');
+if (portraitDeck) {
+  const setPortraitFlipped = (flipped) => {
+    const next = Boolean(flipped);
+    portraitDeck.classList.toggle('is-flipped', next);
+    portraitDeck.setAttribute('aria-pressed', String(next));
+  };
+
+  portraitDeck.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setPortraitFlipped(!portraitDeck.classList.contains('is-flipped'));
+  });
+
+  portraitDeck.addEventListener('mouseleave', () => {
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      setPortraitFlipped(false);
+    }
+  });
+
+  portraitDeck.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      setPortraitFlipped(!portraitDeck.classList.contains('is-flipped'));
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (portraitDeck.classList.contains('is-flipped') && !portraitDeck.contains(e.target)) {
+      setPortraitFlipped(false);
+    }
+  });
+}
