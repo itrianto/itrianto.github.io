@@ -293,17 +293,35 @@ html[data-theme="dark"] body:not(.webgis-page) .hero-button--primary:hover { col
    Bubble Clearglass UI/UX Overhaul
    ========================================================================== */
 :root {
-  --bg-color: #000000;
-  --text-main: #F8FAFC;
-  --text-muted: #94A3B8;
-  --accent: #38BDF8;
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.15);
+  /* Primary Color Palette (60% Warm White, 20% Sky Blue, 10% Navy, 10% Pastel Accents) */
+  --bg-color: #F7F7F7;
+  --color-navy: #06122B;
+  --color-sky: #5FB4E0;
+  --color-blue: #007AFF;
+  --color-teal: #A9DCD9;
+  --color-yellow: #FFE58A;
+  --color-coral: #FFC2B0;
+  --color-ice: #E0F2FE;
+
+  /* Supporting Colors */
+  --text-main: #06122B;
+  --text-muted: #475569;
+  --status-bg: #D1FAE5;
+  --status-text: #065F46;
+  --color-white: #FFFFFF;
+  --color-border-token: #E2E8F0;
+
+  --accent: #007AFF;
+  --accent-bright: #5FB4E0;
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-border: #E2E8F0;
 }
 
 html {
-  background-color: #000000;
+  background-color: #F7F7F7;
   overflow-x: clip;
+  scroll-behavior: smooth !important;
+  scroll-padding-top: 5.5rem;
 }
 
 body,
@@ -311,21 +329,24 @@ body:not(.webgis-page),
 html[data-theme="dark"] body:not(.webgis-page),
 html[data-theme="light"] body:not(.webgis-page) {
   --color-background: var(--bg-color);
-  --color-surface: rgba(15, 23, 42, 0.72);
+  --color-surface: #FFFFFF;
   --color-text: var(--text-main);
   --color-secondary: var(--text-muted);
   --color-muted: var(--text-muted);
   --color-primary: var(--accent);
-  --color-primary-hover: #7DD3FC;
+  --color-primary-hover: #075985;
   --color-accent: var(--accent);
   --color-border: var(--glass-border);
-  --font-heading: "Space Grotesk", sans-serif;
+  --font-heading: "Inter", sans-serif;
   --font-body: "Inter", sans-serif;
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-mono: "Inter", sans-serif;
+  --mono: "Inter", sans-serif;
   --serif: var(--font-heading);
   --sans: var(--font-body);
-  background-color: #000000;
+  background-color: #F7F7F7;
   background-image: none;
-  color: #F8FAFC;
+  color: var(--text-main);
   position: relative;
   isolation: isolate;
   overflow-x: clip;
@@ -334,28 +355,11 @@ html[data-theme="light"] body:not(.webgis-page) {
   font-family: "Inter", sans-serif;
 }
 
+/* Latar polos: pola kontur & pendaran cahaya dihapus */
 body::before,
 body:not(.webgis-page)::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1; /* Di belakang konten, tapi di atas background hitam */
-  pointer-events: none; /* Agar tidak menghalangi klik mouse */
-
-  /* Pasang pola kontur + pendaran cahaya tipis agar efek blur kaca semakin jelas */
-  background-image:
-    url('../images/patterns/topography.svg'),
-    radial-gradient(circle at 18% 22%, rgba(56, 189, 248, 0.22) 0%, transparent 45%),
-    radial-gradient(circle at 82% 78%, rgba(20, 184, 166, 0.18) 0%, transparent 45%);
-  background-repeat: repeat, no-repeat, no-repeat;
-  background-position: center, center, center;
-  background-size: 600px 600px, 100% 100%, 100% 100%;
-
-  /* Naikkan opacity agar kontur topografi jelas terlihat & ter-blur oleh kaca */
-  opacity: 0.26;
+  content: none;
+  display: none;
 }
 
 body:not(.webgis-page) .reveal.is-visible {
@@ -363,15 +367,29 @@ body:not(.webgis-page) .reveal.is-visible {
   transform: none;
 }
 
-/* Tipografi: Space Grotesk untuk h1, h2, h3, dan navigasi; Inter untuk paragraf/body */
-body:not(.webgis-page) h1,
-body:not(.webgis-page) h2,
+/* Tipografi: Inter untuk semua elemen (paragraf, navigasi, tombol, tag, label, h3) */
 body:not(.webgis-page) h3,
 body:not(.webgis-page) .navbar,
 body:not(.webgis-page) .nav-menu a,
 body:not(.webgis-page) .nav-contact,
-body:not(.webgis-page) .brand__name {
-  font-family: "Space Grotesk", sans-serif;
+body:not(.webgis-page) .brand__name,
+body:not(.webgis-page) button {
+  font-family: "Inter", sans-serif;
+}
+
+/* Instrument Serif (bobot 400) hanya untuk judul besar: judul Hero (h1) & judul seksi (h2) */
+body:not(.webgis-page) h1,
+body:not(.webgis-page) h2,
+body:not(.webgis-page) h1 em,
+body:not(.webgis-page) h2 em {
+  font-family: var(--font-display) !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.02em !important;
+}
+
+body:not(.webgis-page) h1 em,
+body:not(.webgis-page) h2 em {
+  font-style: italic;
 }
 
 body:not(.webgis-page) h1,
@@ -384,56 +402,211 @@ body:not(.webgis-page) p {
   font-family: "Inter", sans-serif;
 }
 
-/* Header & Navigasi Clearglass */
+/* Header & Navigasi Clearglass: Sticky Navbar dengan efek kaca sangat tipis */
 body:not(.webgis-page) .site-header,
 html[data-theme="dark"] body:not(.webgis-page) .site-header {
-  background: rgba(0, 0, 0, 0.72);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--glass-border);
+  position: sticky !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  z-index: 1000 !important;
+  background: rgba(0, 0, 0, 0.35) !important;
+  backdrop-filter: blur(14px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(140%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, backdrop-filter 0.25s ease !important;
 }
 
 body:not(.webgis-page) .site-header.is-scrolled,
 html[data-theme="dark"] body:not(.webgis-page) .site-header.is-scrolled {
-  background: rgba(0, 0, 0, 0.88);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.72) !important;
+  backdrop-filter: blur(20px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(150%) !important;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.22) !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.65) !important;
+}
+
+body:not(.webgis-page) .navbar {
+  min-height: 72px;
 }
 
 body:not(.webgis-page) .nav-panel {
   background: transparent;
+  gap: 1.1rem;
 }
 
-@media (max-width: 800px) {
-  body:not(.webgis-page) .nav-panel {
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--glass-border);
-  }
+body:not(.webgis-page) .nav-menu {
+  gap: 0.3rem;
+}
+
+/* Nav links dengan touch target minimal 44px dan focus state */
+body:not(.webgis-page) .nav-menu a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.5rem 0.72rem;
+  font-family: "Inter", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  border-radius: 999px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+  text-transform: uppercase;
+}
+
+body:not(.webgis-page) .nav-menu a:hover,
+body:not(.webgis-page) .nav-menu a:focus-visible,
+body:not(.webgis-page) .nav-menu a[aria-current="page"] {
+  color: #38BDF8;
+  background: rgba(56, 189, 248, 0.1);
+}
+
+body:not(.webgis-page) .nav-contact {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.5rem 1.15rem;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.04);
+  font-family: "Inter", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+body:not(.webgis-page) .nav-contact:hover,
+body:not(.webgis-page) .nav-contact:focus-visible {
+  border-color: #38BDF8;
+  color: #38BDF8;
+  background: rgba(56, 189, 248, 0.14);
+}
+
+body:not(.webgis-page) .theme-toggle {
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+
+body:not(.webgis-page) .theme-toggle:hover,
+body:not(.webgis-page) .theme-toggle:focus-visible {
+  border-color: #38BDF8;
+  color: #38BDF8;
+  background: rgba(56, 189, 248, 0.1);
+}
+
+body:not(.webgis-page) .menu-toggle {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 0;
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+body:not(.webgis-page) .menu-toggle:hover,
+body:not(.webgis-page) .menu-toggle:focus-visible {
+  border-color: #38BDF8;
+  background: rgba(56, 189, 248, 0.1);
 }
 
 body:not(.webgis-page) .menu-toggle span:not(.sr-only) {
+  display: block;
+  width: 20px;
+  height: 2px;
   background: var(--text-main);
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-/* Seksi Hero dengan Background Image & Gradient Overlay */
+body:not(.webgis-page) .menu-toggle[aria-expanded="true"] span:nth-of-type(2) {
+  transform: translateY(3.5px) rotate(45deg);
+}
+
+body:not(.webgis-page) .menu-toggle[aria-expanded="true"] span:nth-of-type(3) {
+  transform: translateY(-3.5px) rotate(-45deg);
+}
+
+@media (max-width: 980px) {
+  body:not(.webgis-page) .menu-toggle {
+    display: inline-flex;
+  }
+
+  body:not(.webgis-page) .nav-menu a::after {
+    display: none;
+  }
+
+  body:not(.webgis-page) .nav-panel {
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 0;
+    width: 100%;
+    padding: 1.5rem 2rem;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.25rem;
+    background: rgba(11, 18, 32, 0.94) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    border-bottom: 1px solid var(--glass-border) !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8) !important;
+  }
+
+  body:not(.webgis-page) .nav-panel.is-open {
+    display: flex;
+  }
+
+  body:not(.webgis-page) .nav-menu {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.35rem;
+  }
+
+  body:not(.webgis-page) .nav-menu a {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 0.75rem 1.1rem;
+    font-size: 0.95rem;
+    border-radius: 12px;
+  }
+
+  body:not(.webgis-page) .nav-contact {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Seksi Hero: latar terang polos, tanpa gambar & overlay */
 body:not(.webgis-page) .hero,
 html[data-theme="dark"] body:not(.webgis-page) .hero {
-  background-color: #000000;
-  background-image:
-    linear-gradient(to bottom, rgba(11, 18, 32, 0.7) 0%, rgba(11, 18, 32, 0.95) 80%, #000000 100%),
-    url('../images/hero/background.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: #F7F7F7;
 }
 
 body:not(.webgis-page) .hero::before,
 html[data-theme="dark"] body:not(.webgis-page) .hero::before {
-  opacity: 0.03;
-  background-image:
-    linear-gradient(rgba(56, 189, 248, 0.5) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(56, 189, 248, 0.5) 1px, transparent 1px);
+  content: none;
+  display: none;
 }
 
 /* Pastikan seluruh wrapper di bawah Hero transparan penuh dan tidak memotong efek backdrop-filter */
@@ -502,15 +675,65 @@ body:not(.webgis-page) .portrait-coordinate {
 
 /* Tombol, Link, dan Highlight dengan --accent (#38BDF8) & kontras aksesibel */
 body:not(.webgis-page) .hero-button--primary,
+body:not(.webgis-page) .contact-cv-btn {
+  background: #38BDF8 !important;
+  background: linear-gradient(135deg, #38BDF8 0%, #0284C7 100%) !important;
+  border: 1px solid #7DD3FC !important;
+  color: #040914 !important;
+  font-family: "Inter", sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 0.86rem !important;
+  letter-spacing: 0.03em !important;
+  border-radius: 999px !important;
+  min-height: 48px !important;
+  min-width: 44px !important;
+  padding: 0.75rem 1.6rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.65rem !important;
+  box-shadow: 0 4px 20px rgba(56, 189, 248, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
+  transition: all 0.25s cubic-bezier(0.2, 0.7, 0.3, 1) !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+}
+
+body:not(.webgis-page) .hero-button--primary:hover,
+body:not(.webgis-page) .contact-cv-btn:hover {
+  background: linear-gradient(135deg, #7DD3FC 0%, #38BDF8 100%) !important;
+  border-color: #E0F2FE !important;
+  color: #020617 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 30px rgba(56, 189, 248, 0.7), 0 0 18px rgba(56, 189, 248, 0.5) !important;
+}
+
+body:not(.webgis-page) .hero-button--primary:active,
+body:not(.webgis-page) .contact-cv-btn:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 2px 10px rgba(56, 189, 248, 0.4) !important;
+}
+
+body:not(.webgis-page) .hero-btn-icon {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex-shrink: 0;
+  stroke: currentColor;
+}
+
+body:not(.webgis-page) .contact-cv-wrapper {
+  margin-top: 0.5rem;
+  display: flex;
+}
+
 body:not(.webgis-page) .button:not(.button--outline):not(.button--ghost),
 body:not(.webgis-page) .publication-card__doi {
   background: var(--accent);
   border-color: var(--accent);
   color: #0B1220;
   font-weight: 600;
+  min-height: 44px;
 }
 
-body:not(.webgis-page) .hero-button--primary:hover,
 body:not(.webgis-page) .button:not(.button--outline):not(.button--ghost):hover,
 body:not(.webgis-page) .publication-card__doi:hover {
   background: #7DD3FC;
@@ -531,6 +754,18 @@ body:not(.webgis-page) .button--outline {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--glass-border);
   color: var(--accent);
+  border-radius: 999px !important;
+  min-height: 48px;
+  min-width: 44px;
+  padding: 0.75rem 1.5rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 0.86rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.25s cubic-bezier(0.2, 0.7, 0.3, 1);
 }
 
 body:not(.webgis-page) .hero-button--secondary:hover,
@@ -538,11 +773,21 @@ body:not(.webgis-page) .button--outline:hover {
   background: rgba(56, 189, 248, 0.12);
   border-color: var(--accent);
   color: var(--text-main);
+  transform: translateY(-2px);
 }
 
-body:not(.webgis-page) :focus-visible {
-  outline: 3px solid rgba(56, 189, 248, 0.55);
-  outline-offset: 3px;
+body:not(.webgis-page) .contact-links a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Aksesibilitas: Focus state terang dan mencolok untuk navigasi keyboard */
+body:not(.webgis-page) a:focus-visible,
+body:not(.webgis-page) button:focus-visible,
+body:not(.webgis-page) [tabindex]:focus-visible {
+  outline: 3px solid #38BDF8 !important;
+  outline-offset: 3px !important;
 }
 
 /* Desain Card "Bubble Clearglass" (.bubble-card) */
@@ -688,3 +933,2966 @@ body:not(.webgis-page) .about__bio {
   }
 }
 
+
+/* Inter lebih lebar: cegah label navigasi & tombol terpotong ke dua baris */
+body:not(.webgis-page) .nav-menu a,
+body:not(.webgis-page) .nav-contact,
+body:not(.webgis-page) .hero-button {
+  white-space: nowrap;
+}
+
+@media (min-width: 981px) and (max-width: 1240px) {
+  body:not(.webgis-page) .nav-menu { gap: 0.1rem; }
+  body:not(.webgis-page) .nav-menu a { padding-inline: 0.55rem; font-size: 0.68rem; letter-spacing: 0.03em; }
+  body:not(.webgis-page) .nav-panel { gap: 0.75rem; }
+  body:not(.webgis-page) .nav-contact { padding-inline: 0.95rem; }
+}
+/* ==========================================================================
+   Tema Terang Polos (#F7F7F7)
+   Latar gambar Hero & pola kontur dihapus. Komponen kaca disesuaikan
+   agar tetap kontras (teks gelap, border & bayangan halus).
+   ========================================================================== */
+
+/* Navbar sticky: kaca terang tipis */
+body:not(.webgis-page) .site-header,
+html[data-theme="dark"] body:not(.webgis-page) .site-header {
+  background: rgba(247, 247, 247, 0.75) !important;
+  border-bottom: 1px solid rgba(17, 24, 39, 0.08) !important;
+}
+
+body:not(.webgis-page) .site-header.is-scrolled,
+html[data-theme="dark"] body:not(.webgis-page) .site-header.is-scrolled {
+  background: rgba(255, 255, 255, 0.88) !important;
+  border-bottom: 1px solid rgba(17, 24, 39, 0.1) !important;
+  box-shadow: 0 4px 20px rgba(17, 24, 39, 0.06) !important;
+}
+
+body:not(.webgis-page) .nav-menu a:hover,
+body:not(.webgis-page) .nav-menu a:focus-visible,
+body:not(.webgis-page) .nav-menu a[aria-current="page"] {
+  color: var(--accent);
+  background: rgba(3, 105, 161, 0.08);
+}
+
+body:not(.webgis-page) .nav-contact,
+body:not(.webgis-page) .menu-toggle {
+  background: rgba(17, 24, 39, 0.03);
+}
+
+body:not(.webgis-page) .nav-contact:hover,
+body:not(.webgis-page) .nav-contact:focus-visible,
+body:not(.webgis-page) .theme-toggle:hover,
+body:not(.webgis-page) .theme-toggle:focus-visible,
+body:not(.webgis-page) .menu-toggle:hover,
+body:not(.webgis-page) .menu-toggle:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(3, 105, 161, 0.08);
+}
+
+@media (max-width: 980px) {
+  body:not(.webgis-page) .nav-panel {
+    background: rgba(255, 255, 255, 0.97) !important;
+    box-shadow: 0 16px 40px rgba(17, 24, 39, 0.1) !important;
+  }
+}
+
+/* Tombol sekunder & tombol isi aksen (teks putih di atas biru gelap) */
+body:not(.webgis-page) .hero-button--secondary,
+body:not(.webgis-page) .button--outline {
+  background: rgba(17, 24, 39, 0.03);
+}
+
+body:not(.webgis-page) .hero-button--secondary:hover,
+body:not(.webgis-page) .button--outline:hover {
+  background: rgba(3, 105, 161, 0.08);
+  color: var(--accent);
+}
+
+body:not(.webgis-page) .button:not(.button--outline):not(.button--ghost),
+body:not(.webgis-page) .publication-card__doi,
+body:not(.webgis-page) .publication-card__doi-value {
+  color: #FFFFFF;
+}
+
+body:not(.webgis-page) .button:not(.button--outline):not(.button--ghost):hover,
+body:not(.webgis-page) .publication-card__doi:hover {
+  background: #075985;
+  border-color: #075985;
+  color: #FFFFFF;
+}
+
+body:not(.webgis-page) .publication-card__doi-label {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Focus ring: biru gelap agar terlihat jelas di latar terang */
+body:not(.webgis-page) a:focus-visible,
+body:not(.webgis-page) button:focus-visible,
+body:not(.webgis-page) [tabindex]:focus-visible {
+  outline-color: var(--accent) !important;
+}
+
+/* ==========================================================================
+   Tata Letak Kolom Sempit di Tengah (~560px) & Aliran Tanpa Kartu
+   Semua blok teks berada di kolom tengah ~560px dengan ruang putih kiri/kanan.
+   Konten mengalir berurutan tanpa kartu terpisah, dipisah garis putus-putus tipis.
+   ========================================================================== */
+
+body:not(.webgis-page) main .container,
+body:not(.webgis-page) .site-footer .container {
+  width: min(560px, calc(100% - 2.5rem)) !important;
+  max-width: 560px !important;
+  padding-inline: 0 !important;
+  margin-inline: auto !important;
+}
+
+/* Seksi mengalir berurutan, dipisah garis putus-putus tipis */
+body:not(.webgis-page) main > .section,
+body:not(.webgis-page) .hero,
+body:not(.webgis-page) .about,
+body:not(.webgis-page) .section--contact {
+  min-height: auto !important;
+  padding-block: 3.25rem !important;
+}
+
+body:not(.webgis-page) main > .section + .section {
+  border-top: 1px dashed rgba(17, 24, 39, 0.22) !important;
+}
+
+body:not(.webgis-page) .scroll-cue {
+  display: none !important;
+}
+
+/* Semua grid multi-kolom menjadi satu kolom vertikal 560px */
+body:not(.webgis-page) .hero-grid,
+body:not(.webgis-page) .hero-grid.grid--2,
+body:not(.webgis-page) .about__grid,
+body:not(.webgis-page) .about__grid.grid--2,
+body:not(.webgis-page) .section-intro,
+body:not(.webgis-page) .project-card {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 1.25rem !important;
+  padding-left: 0 !important;
+  align-items: start !important;
+}
+
+body:not(.webgis-page) .section h2,
+body:not(.webgis-page) .section-intro .text-link,
+body:not(.webgis-page) .contact-email,
+body:not(.webgis-page) .contact-links {
+  grid-column: 1 !important;
+}
+
+body:not(.webgis-page) .hero-copy,
+body:not(.webgis-page) .hero-lead,
+body:not(.webgis-page) .about__content,
+body:not(.webgis-page) .about__content h2,
+body:not(.webgis-page) .about__bio,
+body:not(.webgis-page) .section h2,
+body:not(.webgis-page) .section-intro > p:not(.eyebrow) {
+  max-width: 100% !important;
+}
+
+body:not(.webgis-page) .hero h1 {
+  font-size: clamp(3.25rem, 8vw, 4.75rem) !important;
+  line-height: 0.96 !important;
+  margin: 0.75rem 0 1.25rem !important;
+}
+
+body:not(.webgis-page) .section h2,
+body:not(.webgis-page) .about__content h2 {
+  font-size: clamp(2.25rem, 5.5vw, 3.35rem) !important;
+  line-height: 1.04 !important;
+  margin: 0.35rem 0 0.5rem !important;
+}
+
+/* Foto Hero & portret About mengalir tanpa kotak kartu */
+body:not(.webgis-page) .hero-map,
+body:not(.webgis-page) .portrait-frame {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: auto !important;
+  padding: 0 !important;
+  margin-top: 1.25rem !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  justify-self: stretch !important;
+}
+
+body:not(.webgis-page) .portrait-frame::before,
+body:not(.webgis-page) .portrait-frame::after {
+  display: none !important;
+}
+
+body:not(.webgis-page) .hero-map__image,
+body:not(.webgis-page) .portrait-frame__image {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: 380px !important;
+  object-fit: cover !important;
+  border-radius: 8px !important;
+  background: #ECECEC;
+}
+
+body:not(.webgis-page) .hero-map figcaption {
+  position: static !important;
+  padding: 0.5rem 0 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  color: var(--text-muted) !important;
+}
+
+body:not(.webgis-page) .portrait-coordinate {
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--text-main);
+}
+
+/* Sub-bagian di dalam About dipisah garis putus-putus tipis */
+body:not(.webgis-page) .about__expertise,
+body:not(.webgis-page) .about__education,
+body:not(.webgis-page) .about__portrait {
+  margin-top: 1.5rem !important;
+  padding-top: 1.5rem !important;
+  border-top: 1px dashed rgba(17, 24, 39, 0.2) !important;
+  max-width: 100% !important;
+}
+
+/* Tanpa kartu terpisah: item mengalir berurutan dipisah garis putus-putus tipis */
+body:not(.webgis-page) .experience-list,
+body:not(.webgis-page) .projects-grid,
+body:not(.webgis-page) .publications-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+  margin-top: 1.5rem !important;
+  border-top: 1px dashed rgba(17, 24, 39, 0.22) !important;
+}
+
+.bubble-card,
+.experience-item,
+.experience-item.bubble-card,
+.project-card,
+.project-card.bubble-card,
+.publication-card,
+.publication-card.bubble-card {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 1.85rem 0 !important;
+  margin: 0 !important;
+  transform: none !important;
+}
+
+.bubble-card:first-child,
+.experience-item:first-child,
+.project-card:first-child,
+.publication-card:first-child {
+  padding-top: 1.5rem !important;
+}
+
+.bubble-card:last-child,
+.experience-item:last-child,
+.project-card:last-child,
+.publication-card:last-child {
+  padding-bottom: 0.25rem !important;
+}
+
+.experience-item + .experience-item,
+.project-card + .project-card,
+.publication-card + .publication-card {
+  border-top: 1px dashed rgba(17, 24, 39, 0.22) !important;
+}
+
+.bubble-card::before,
+.bubble-card::after {
+  content: none !important;
+  display: none !important;
+}
+
+.bubble-card:hover,
+.experience-item:hover,
+.experience-item.bubble-card:hover,
+.project-card:hover,
+.project-card.bubble-card:hover,
+.publication-card:hover,
+.publication-card.bubble-card:hover {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+body:not(.webgis-page) .experience-item + .experience-item:hover,
+body:not(.webgis-page) .project-card + .project-card:hover,
+body:not(.webgis-page) .publication-card + .publication-card:hover {
+  border-top: 1px dashed rgba(17, 24, 39, 0.22) !important;
+}
+
+body:not(.webgis-page) .experience-item__press {
+  border-top: 1px dashed rgba(17, 24, 39, 0.18) !important;
+}
+
+body:not(.webgis-page) .bubble-card .project-card__image-wrapper,
+body:not(.webgis-page) .project-card__image-wrapper {
+  border-radius: 8px !important;
+  border: 1px solid rgba(17, 24, 39, 0.08) !important;
+  background: #ECECEC !important;
+}
+
+body:not(.webgis-page) .bubble-card .project-card__tags span,
+body:not(.webgis-page) .expertise-tags li,
+body:not(.webgis-page) .bubble-card .publication-card__year {
+  background: transparent;
+  border-color: rgba(17, 24, 39, 0.18);
+  color: var(--text-muted);
+}
+
+body:not(.webgis-page) .maps-carousel {
+  margin-top: 1.5rem !important;
+  padding-top: 1.5rem !important;
+  border-top: 1px dashed rgba(17, 24, 39, 0.2) !important;
+}
+
+body:not(.webgis-page) .maps-carousel__plate img {
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  border: 1px solid rgba(17, 24, 39, 0.1) !important;
+}
+
+body:not(.webgis-page) .contact-links {
+  margin-top: 1rem !important;
+  padding-top: 1.25rem !important;
+  border-top: 1px dashed rgba(17, 24, 39, 0.2) !important;
+}
+
+body:not(.webgis-page) .site-footer {
+  border-top: 1px dashed rgba(17, 24, 39, 0.22) !important;
+  padding: 2rem 0 !important;
+}
+
+/* ==========================================================================
+   Hero Wave Background (hero-bg.png) — Transisi Ombak Mulus & Animasi Air
+   ========================================================================== */
+
+body:not(.webgis-page) main > .hero + .section {
+  border-top: none !important;
+}
+
+body:not(.webgis-page) .hero,
+html[data-theme="dark"] body:not(.webgis-page) .hero {
+  position: relative !important;
+  margin-top: -76px !important;
+  padding-top: calc(3.25rem + 76px) !important;
+  padding-bottom: 2.75rem !important;
+  background-color: #F7F7F7 !important;
+  overflow: visible !important;
+}
+
+body:not(.webgis-page) .hero-wave {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: min(88vh, 620px);
+  width: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000000 0%,
+    #000000 32%,
+    rgba(0, 0, 0, 0.78) 50%,
+    rgba(0, 0, 0, 0.36) 68%,
+    rgba(0, 0, 0, 0.08) 82%,
+    transparent 94%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000000 0%,
+    #000000 32%,
+    rgba(0, 0, 0, 0.78) 50%,
+    rgba(0, 0, 0, 0.36) 68%,
+    rgba(0, 0, 0, 0.08) 82%,
+    transparent 94%
+  );
+}
+
+body:not(.webgis-page) .hero-wave::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse 720px 460px at 50% 48%,
+      rgba(247, 247, 247, 0.8) 0%,
+      rgba(247, 247, 247, 0.42) 56%,
+      transparent 88%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(247, 247, 247, 0) 0%,
+      rgba(247, 247, 247, 0.12) 34%,
+      rgba(247, 247, 247, 0.55) 58%,
+      rgba(247, 247, 247, 0.88) 76%,
+      #F7F7F7 90%,
+      #F7F7F7 100%
+    );
+  pointer-events: none;
+}
+
+body:not(.webgis-page) .hero-wave__layer {
+  position: absolute;
+  inset: -6% -5% 0% -5%;
+  background-image: url('../images/hero/hero-bg.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  will-change: transform;
+  transform-origin: center top;
+}
+
+body:not(.webgis-page) .hero-wave__layer--base {
+  transform: translate3d(var(--wave-x-slow, 0px), var(--wave-y, 0px), 0) scale(var(--wave-scale, 1.06));
+}
+
+body:not(.webgis-page) .hero-wave__layer--flow {
+  opacity: 0.42;
+  mix-blend-mode: soft-light;
+  filter: blur(1.5px) saturate(115%);
+  transform: translate3d(var(--wave-x, 0px), var(--wave-y-fast, 0px), 0) scale(1.1, var(--wave-stretch, 1.08));
+}
+
+body:not(.webgis-page) .hero > .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* ==========================================================================
+   Hero Narrative Centered & 3D Extruded Transition Showcase Border (No Gradient)
+   Semua elemen bubble menggunakan warna solid & timbul ke depan dengan efek 3D
+   ========================================================================== */
+
+body:not(.webgis-page) .hero-copy {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  margin-inline: auto !important;
+}
+
+body:not(.webgis-page) .hero-kicker {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.4rem !important;
+  padding: 0.34rem 0.9rem !important;
+  border-radius: 999px !important;
+  font-size: 0.66rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #06122B !important;
+  background: #FFFFFF !important;
+  border: 1.5px solid #E2E8F0 !important;
+  box-shadow:
+    0 3.5px 0 #CBD5E1,
+    0 8px 16px -2px rgba(6, 18, 43, 0.1),
+    inset 0 1.5px 0 #FFFFFF !important;
+}
+
+body:not(.webgis-page) .hero-kicker::before {
+  display: none !important;
+  content: none !important;
+}
+
+body:not(.webgis-page) .hero h1 {
+  font-size: clamp(2.35rem, 4.8vw, 3.35rem) !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.025em !important;
+  margin: 1rem 0 1.35rem !important;
+  text-align: center !important;
+  color: #06122B !important;
+  text-shadow: 0 2px 16px rgba(255, 255, 255, 0.9);
+}
+
+body:not(.webgis-page) .hero h1 em {
+  color: #007AFF !important;
+  font-style: italic;
+}
+
+body:not(.webgis-page) .hero-narrative {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  width: 100%;
+  text-align: center;
+}
+
+body:not(.webgis-page) .hero-narrative .hero-lead {
+  color: #06122B !important;
+  font-size: 1.02rem !important;
+  font-weight: 500 !important;
+  line-height: 1.68 !important;
+  text-shadow: 0 1px 12px rgba(255, 255, 255, 0.85);
+}
+
+body:not(.webgis-page) .hero-narrative .hero-body {
+  color: #475569 !important;
+  font-size: 0.94rem !important;
+  font-weight: 400 !important;
+  line-height: 1.72 !important;
+  text-shadow: 0 1px 12px rgba(255, 255, 255, 0.85);
+}
+
+body:not(.webgis-page) .hero-narrative .hero-closing {
+  color: #06122B !important;
+  font-size: 0.92rem !important;
+  font-weight: 600 !important;
+  line-height: 1.6 !important;
+  margin-top: 0.15rem;
+}
+
+body:not(.webgis-page) .hero-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 0.85rem !important;
+  margin-top: 1.65rem !important;
+}
+
+/* Bingkai 3D Timbul Transisi Antara Hero dan Isi Web (Tanpa Gradient) */
+body:not(.webgis-page) .hero-transition-showcase {
+  width: 100%;
+  margin-top: 2.4rem;
+  position: relative;
+  z-index: 3;
+}
+
+body:not(.webgis-page) .hero-showcase-frame {
+  position: relative;
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 28px;
+  background: #FFFFFF !important;
+  border: 1.5px solid #E2E8F0 !important;
+  box-shadow:
+    0 7px 0 #CBD5E1,
+    0 20px 38px -8px rgba(6, 18, 43, 0.15),
+    inset 0 2px 0 #FFFFFF !important;
+}
+
+body:not(.webgis-page) .hero-showcase-frame__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.2rem 0.6rem 0.65rem;
+}
+
+body:not(.webgis-page) .hero-showcase-frame__dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+body:not(.webgis-page) .hero-showcase-frame__dots .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+body:not(.webgis-page) .hero-showcase-frame__dots .dot--coral {
+  background: #FFC2B0 !important;
+  box-shadow: 0 2px 0 #E58D73, inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+body:not(.webgis-page) .hero-showcase-frame__dots .dot--yellow {
+  background: #FFE58A !important;
+  box-shadow: 0 2px 0 #E0B836, inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+body:not(.webgis-page) .hero-showcase-frame__dots .dot--teal {
+  background: #A9DCD9 !important;
+  box-shadow: 0 2px 0 #68B5B0, inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+body:not(.webgis-page) .hero-showcase-frame__badge {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #06122B;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  background: #E0F2FE !important;
+  border: 1px solid #BAE6FD;
+  box-shadow: 0 2px 0 #93C5FD, inset 0 1px 0 #FFFFFF;
+}
+
+body:not(.webgis-page) .hero-showcase-frame__coords {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #475569;
+}
+
+body:not(.webgis-page) .hero-showcase-frame__viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F0F9FF !important;
+  border: 1.5px solid #E2E8F0;
+  box-shadow: inset 0 3px 6px rgba(6, 18, 43, 0.06);
+}
+
+body:not(.webgis-page) .hero-showcase-frame__viewport img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+body:not(.webgis-page) .hero-showcase-frame__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(95, 180, 224, 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(95, 180, 224, 0.16) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+body:not(.webgis-page) .hero-showcase-frame__placeholder {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.45rem;
+  padding: 1.25rem 1.5rem;
+  max-width: 86%;
+  border-radius: 20px;
+  background: #FFFFFF !important;
+  border: 1.5px solid #E2E8F0;
+  box-shadow:
+    0 5px 0 #CBD5E1,
+    0 12px 24px -4px rgba(6, 18, 43, 0.1),
+    inset 0 1.5px 0 #FFFFFF;
+}
+
+body:not(.webgis-page) .hero-showcase-frame__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #007AFF;
+  background: #E0F2FE !important;
+  border: 1.5px solid #BAE6FD;
+  box-shadow:
+    0 3px 0 #93C5FD,
+    0 6px 12px rgba(0, 122, 255, 0.12),
+    inset 0 1.5px 0 #FFFFFF;
+}
+
+body:not(.webgis-page) .hero-showcase-frame__title {
+  font-size: 0.84rem !important;
+  font-weight: 600 !important;
+  color: #06122B !important;
+  margin: 0.15rem 0 0 !important;
+}
+
+body:not(.webgis-page) .hero-showcase-frame__hint {
+  font-size: 0.74rem !important;
+  color: #475569 !important;
+  line-height: 1.45 !important;
+  margin: 0 !important;
+}
+
+/* ==========================================================================
+   Floating 3D Raised Header — Solid Color, Timbul ke Depan dengan Efek 3D
+   ========================================================================== */
+
+@keyframes balloon-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+body:not(.webgis-page) .site-header,
+html[data-theme="dark"] body:not(.webgis-page) .site-header,
+body:not(.webgis-page) .site-header.is-scrolled,
+html[data-theme="dark"] body:not(.webgis-page) .site-header.is-scrolled {
+  position: sticky !important;
+  top: 0.75rem !important;
+  z-index: 1000 !important;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  padding: 0 0.75rem !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  pointer-events: none;
+}
+
+/* Kapsul Dock 3D Solid Timbul (Tanpa Gradient) */
+body:not(.webgis-page) .site-header .navbar {
+  pointer-events: auto;
+  position: relative;
+  width: fit-content !important;
+  max-width: min(940px, calc(100vw - 1.5rem)) !important;
+  min-height: 44px !important;
+  margin-inline: auto !important;
+  padding: 0.26rem 0.35rem 0.26rem 0.55rem !important;
+  border-radius: 999px !important;
+  gap: 0.38rem !important;
+
+  background: rgba(255, 255, 255, 0.94) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1.5px solid #E2E8F0 !important;
+
+  /* Efek 3D Timbul ke Depan: 3D Bottom Lip + Drop Shadow + Top Rim */
+  box-shadow:
+    0 4.5px 0 #CBD5E1,
+    0 12px 24px -4px rgba(6, 18, 43, 0.14),
+    inset 0 2px 0 #FFFFFF !important;
+
+  animation: balloon-float 5.2s ease-in-out infinite;
+  transition: box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+body:not(.webgis-page) .site-header.is-scrolled .navbar {
+  background: #FFFFFF !important;
+  box-shadow:
+    0 5px 0 #CBD5E1,
+    0 14px 28px -4px rgba(6, 18, 43, 0.18),
+    inset 0 2px 0 #FFFFFF !important;
+}
+
+/* Hapus pseudo-element gradient lama pada navbar */
+body:not(.webgis-page) .site-header .navbar::before {
+  content: none !important;
+  display: none !important;
+}
+
+body:not(.webgis-page) .brand,
+body:not(.webgis-page) .nav-panel,
+body:not(.webgis-page) .menu-toggle {
+  position: relative;
+  z-index: 1;
+}
+
+body:not(.webgis-page) .brand {
+  gap: 0.42rem !important;
+  padding-right: 0.2rem;
+}
+
+body:not(.webgis-page) .brand__logo {
+  width: 26px !important;
+  height: 26px !important;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 0 rgba(6, 18, 43, 0.14));
+  transition: transform 0.22s ease;
+}
+
+body:not(.webgis-page) .brand:hover .brand__logo {
+  transform: translateY(-1.5px) scale(1.06);
+}
+
+body:not(.webgis-page) .brand__name {
+  display: inline-block !important;
+  color: #06122B !important;
+  font-size: 0.73rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+  text-transform: none !important;
+  padding-left: 0.45rem !important;
+  border-left: 1.5px solid #E2E8F0 !important;
+  white-space: nowrap;
+}
+
+body:not(.webgis-page) .brand__name small {
+  display: none !important;
+}
+
+/* Jalur menu desktop solid tanpa gradient */
+@media (min-width: 981px) {
+  body:not(.webgis-page) .nav-panel {
+    gap: 0.35rem !important;
+  }
+
+  body:not(.webgis-page) .nav-menu {
+    gap: 0.12rem !important;
+    padding: 0.16rem !important;
+    border-radius: 999px !important;
+    background: #F7F7F7 !important;
+    border: 1px solid #E2E8F0 !important;
+    box-shadow: inset 0 2px 3px rgba(6, 18, 43, 0.06) !important;
+  }
+}
+
+/* Item Menu Navigasi Minimalis & Timbul 3D saat Aktif/Hover */
+body:not(.webgis-page) .nav-menu a {
+  color: #475569 !important;
+  font-size: 0.71rem !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.005em !important;
+  text-transform: none !important;
+  border-radius: 999px !important;
+  min-height: 28px !important;
+  padding: 0.22rem 0.58rem !important;
+  background: transparent !important;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease, color 0.18s ease !important;
+}
+
+body:not(.webgis-page) .nav-menu a::after {
+  display: none !important;
+}
+
+body:not(.webgis-page) .nav-menu a:hover,
+body:not(.webgis-page) .nav-menu a:focus-visible,
+body:not(.webgis-page) .nav-menu a[aria-current="page"] {
+  color: #06122B !important;
+  font-weight: 600 !important;
+  background: #E0F2FE !important;
+  box-shadow:
+    0 2.5px 0 #93C5FD,
+    0 5px 10px rgba(6, 18, 43, 0.08),
+    inset 0 1.5px 0 #FFFFFF !important;
+  transform: translateY(-1.5px);
+}
+
+/* Tombol Theme Toggle Bulat Timbul 3D (Solid) */
+body:not(.webgis-page) .theme-toggle {
+  min-width: 30px !important;
+  min-height: 30px !important;
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 50% !important;
+  border: 1.5px solid #E2E8F0 !important;
+  color: #06122B !important;
+  background: #FFFFFF !important;
+  box-shadow:
+    0 3px 0 #CBD5E1,
+    0 6px 10px rgba(6, 18, 43, 0.08),
+    inset 0 1.5px 0 #FFFFFF !important;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, color 0.18s ease !important;
+}
+
+body:not(.webgis-page) .theme-toggle__icon {
+  width: 0.85rem !important;
+  height: 0.85rem !important;
+}
+
+body:not(.webgis-page) .theme-toggle:hover,
+body:not(.webgis-page) .theme-toggle:focus-visible {
+  color: #007AFF !important;
+  transform: translateY(-1.5px);
+  box-shadow:
+    0 4px 0 #CBD5E1,
+    0 8px 14px rgba(6, 18, 43, 0.12),
+    inset 0 1.5px 0 #FFFFFF !important;
+}
+
+body:not(.webgis-page) .theme-toggle:active {
+  transform: translateY(1.5px);
+  box-shadow:
+    0 1.5px 0 #CBD5E1,
+    inset 0 1px 0 #FFFFFF !important;
+}
+
+/* Tombol "Let's talk" Pil 3D Solid Biru Timbul */
+body:not(.webgis-page) .nav-contact {
+  min-height: 30px !important;
+  padding: 0.24rem 0.78rem !important;
+  font-size: 0.71rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.005em !important;
+  text-transform: none !important;
+  border-radius: 999px !important;
+  border: 1.5px solid #0062CC !important;
+  color: #FFFFFF !important;
+  background: #007AFF !important;
+  box-shadow:
+    0 3px 0 #004999,
+    0 6px 12px rgba(0, 122, 255, 0.28),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.45) !important;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease !important;
+}
+
+body:not(.webgis-page) .nav-contact:hover,
+body:not(.webgis-page) .nav-contact:focus-visible {
+  color: #FFFFFF !important;
+  background: #007AFF !important;
+  transform: translateY(-1.5px);
+  box-shadow:
+    0 4.5px 0 #004999,
+    0 9px 16px rgba(0, 122, 255, 0.34),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.55) !important;
+}
+
+body:not(.webgis-page) .nav-contact:active {
+  transform: translateY(1.5px);
+  box-shadow:
+    0 1.5px 0 #004999,
+    inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+}
+
+/* Tombol CTA Utama & Sekunder — Warna Solid & Timbul ke Depan 3D (Tanpa Gradient) */
+body:not(.webgis-page) .hero-button--primary,
+body:not(.webgis-page) .contact-cv-btn,
+body:not(.webgis-page) .button:not(.button--outline):not(.button--ghost),
+body:not(.webgis-page) .publication-card__doi {
+  background: #007AFF !important;
+  border: 1.5px solid #0062CC !important;
+  border-radius: 999px !important;
+  color: #FFFFFF !important;
+  box-shadow:
+    0 5px 0 #004999,
+    0 12px 22px -4px rgba(0, 122, 255, 0.35),
+    inset 0 2px 0 rgba(255, 255, 255, 0.42) !important;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease !important;
+}
+
+body:not(.webgis-page) .hero-button--primary:hover,
+body:not(.webgis-page) .contact-cv-btn:hover,
+body:not(.webgis-page) .button:not(.button--outline):not(.button--ghost):hover,
+body:not(.webgis-page) .publication-card__doi:hover {
+  background: #007AFF !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2.5px) !important;
+  box-shadow:
+    0 7.5px 0 #004999,
+    0 16px 28px -4px rgba(0, 122, 255, 0.42),
+    inset 0 2px 0 rgba(255, 255, 255, 0.5) !important;
+}
+
+body:not(.webgis-page) .hero-button--primary:active,
+body:not(.webgis-page) .contact-cv-btn:active,
+body:not(.webgis-page) .button:not(.button--outline):not(.button--ghost):active,
+body:not(.webgis-page) .publication-card__doi:active {
+  transform: translateY(2.5px) !important;
+  box-shadow:
+    0 2px 0 #004999,
+    0 5px 10px rgba(0, 122, 255, 0.25),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.35) !important;
+}
+
+body:not(.webgis-page) .hero-button--secondary,
+body:not(.webgis-page) .button--outline {
+  background: #FFFFFF !important;
+  border: 1.5px solid #E2E8F0 !important;
+  border-radius: 999px !important;
+  color: #06122B !important;
+  box-shadow:
+    0 5px 0 #CBD5E1,
+    0 10px 20px -4px rgba(6, 18, 43, 0.1),
+    inset 0 2px 0 #FFFFFF !important;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, color 0.18s ease !important;
+}
+
+body:not(.webgis-page) .hero-button--secondary:hover,
+body:not(.webgis-page) .button--outline:hover {
+  background: #FFFFFF !important;
+  color: #007AFF !important;
+  transform: translateY(-2.5px) !important;
+  box-shadow:
+    0 7.5px 0 #CBD5E1,
+    0 14px 24px -4px rgba(6, 18, 43, 0.14),
+    inset 0 2px 0 #FFFFFF !important;
+}
+
+body:not(.webgis-page) .hero-button--secondary:active,
+body:not(.webgis-page) .button--outline:active {
+  transform: translateY(2.5px) !important;
+  box-shadow:
+    0 2px 0 #CBD5E1,
+    0 4px 8px rgba(6, 18, 43, 0.08),
+    inset 0 1.5px 0 #FFFFFF !important;
+}
+
+/* Pastel Balloon Accents pada Tag — Warna Solid & Timbul 3D (Tanpa Gradient) */
+body:not(.webgis-page) .project-card__tags span,
+body:not(.webgis-page) .expertise-tags li,
+body:not(.webgis-page) .publication-card__year {
+  border-radius: 999px !important;
+  border: 1.5px solid #BAE6FD !important;
+  color: #06122B !important;
+  font-weight: 600 !important;
+  background: #E0F2FE !important;
+  box-shadow:
+    0 3px 0 #93C5FD,
+    0 6px 10px rgba(6, 18, 43, 0.06),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.75) !important;
+  transition: transform 0.18s ease, box-shadow 0.18s ease !important;
+}
+
+body:not(.webgis-page) .project-card__tags span:nth-child(4n+2),
+body:not(.webgis-page) .expertise-tags li:nth-child(4n+2) {
+  background: #A9DCD9 !important;
+  border-color: #88C9C5 !important;
+  box-shadow:
+    0 3px 0 #68B5B0,
+    0 6px 10px rgba(6, 18, 43, 0.06),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.75) !important;
+}
+
+body:not(.webgis-page) .project-card__tags span:nth-child(4n+3),
+body:not(.webgis-page) .expertise-tags li:nth-child(4n+3) {
+  background: #FFE58A !important;
+  border-color: #F5D061 !important;
+  box-shadow:
+    0 3px 0 #DFB434,
+    0 6px 10px rgba(6, 18, 43, 0.06),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.75) !important;
+}
+
+body:not(.webgis-page) .project-card__tags span:nth-child(4n+4),
+body:not(.webgis-page) .expertise-tags li:nth-child(4n+4) {
+  background: #FFC2B0 !important;
+  border-color: #F5A891 !important;
+  box-shadow:
+    0 3px 0 #E08A70,
+    0 6px 10px rgba(6, 18, 43, 0.06),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.75) !important;
+}
+
+body:not(.webgis-page) .project-card__tags span:hover,
+body:not(.webgis-page) .expertise-tags li:hover {
+  transform: translateY(-1.5px);
+}
+
+/* Responsif Mobile: Kapsul Gelembung 3D Solid di Layar Kecil */
+@media (max-width: 980px) {
+  body:not(.webgis-page) .site-header .navbar {
+    width: min(480px, calc(100vw - 1.5rem)) !important;
+    justify-content: space-between !important;
+    padding: 0.3rem 0.45rem 0.3rem 0.7rem !important;
+  }
+
+  body:not(.webgis-page) .menu-toggle {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+    border-radius: 50% !important;
+    border: 1.5px solid #E2E8F0 !important;
+    background: #FFFFFF !important;
+    box-shadow:
+      0 3px 0 #CBD5E1,
+      0 6px 10px rgba(6, 18, 43, 0.08),
+      inset 0 1.5px 0 #FFFFFF !important;
+  }
+
+  body:not(.webgis-page) .nav-panel {
+    position: absolute !important;
+    top: calc(100% + 0.65rem) !important;
+    left: 0 !important;
+    width: 100% !important;
+    border-radius: 24px !important;
+    background: #FFFFFF !important;
+    border: 1.5px solid #E2E8F0 !important;
+    box-shadow:
+      0 6px 0 #CBD5E1,
+      0 20px 40px -8px rgba(6, 18, 43, 0.18),
+      inset 0 2px 0 #FFFFFF !important;
+  }
+
+  body:not(.webgis-page) .theme-toggle,
+  body:not(.webgis-page) .nav-contact {
+    min-height: 44px !important;
+  }
+
+  body:not(.webgis-page) .theme-toggle {
+    width: 44px !important;
+    height: 44px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:not(.webgis-page) .hero-wave__layer--base,
+  body:not(.webgis-page) .hero-wave__layer--flow,
+  body:not(.webgis-page) .site-header .navbar {
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
+/* ==========================================================================
+   05 / Arsip Peta — 3D Playing-Card Deck Stack & Fan Animation (Solid 3D Raised)
+   ========================================================================== */
+
+body:not(.webgis-page) #maps-archive {
+  overflow: visible !important;
+}
+
+body:not(.webgis-page) .maps-carousel {
+  margin-top: 1.25rem !important;
+  padding-top: 1rem !important;
+  border-top: 1px dashed rgba(17, 24, 39, 0.2) !important;
+  overflow: visible !important;
+  position: relative;
+}
+
+body:not(.webgis-page) .maps-carousel__nav {
+  display: none !important;
+}
+
+body:not(.webgis-page) .maps-carousel__viewer {
+  position: relative;
+  width: min(980px, calc(100vw - 2rem)) !important;
+  max-width: none !important;
+  margin-left: 50% !important;
+  transform: translateX(-50%) !important;
+  margin-bottom: 0.25rem !important;
+  overflow: visible !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+body:not(.webgis-page) .maps-carousel__main {
+  position: relative !important;
+  width: 100% !important;
+  height: 350px !important;
+  overflow: visible !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer;
+}
+
+/* Kartu Peta 3D Solid Timbul (Tanpa Gradient, 60fps GPU Composited) */
+body:not(.webgis-page) .maps-carousel__plate {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 224px !important;
+  max-width: 224px !important;
+  padding: 0.65rem !important;
+  border-radius: 22px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.5rem !important;
+  text-align: left !important;
+  cursor: pointer !important;
+  user-select: none;
+  transform-origin: 50% 85% !important;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  contain: layout style paint;
+
+  background: #FFFFFF !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1.5px solid #E2E8F0 !important;
+  box-shadow:
+    0 6px 0 #CBD5E1,
+    0 14px 26px -6px rgba(6, 18, 43, 0.16),
+    inset 0 2px 0 #FFFFFF !important;
+
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+body:not(.webgis-page) .maps-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+
+body:not(.webgis-page) .maps-carousel__plate-number {
+  margin: 0 !important;
+  padding: 0.18rem 0.58rem !important;
+  border-radius: 999px !important;
+  font-size: 0.58rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  color: #06122B !important;
+  border: 1px solid #BAE6FD !important;
+  background: #E0F2FE !important;
+  box-shadow: 0 2px 0 #93C5FD, inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+}
+
+body:not(.webgis-page) .maps-carousel__plate:nth-child(4n+2) .maps-carousel__plate-number {
+  background: #A9DCD9 !important;
+  border-color: #88C9C5 !important;
+  box-shadow: 0 2px 0 #68B5B0, inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+}
+
+body:not(.webgis-page) .maps-carousel__plate:nth-child(4n+3) .maps-carousel__plate-number {
+  background: #FFE58A !important;
+  border-color: #F5D061 !important;
+  box-shadow: 0 2px 0 #DFB434, inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+}
+
+body:not(.webgis-page) .maps-carousel__plate:nth-child(4n+4) .maps-carousel__plate-number {
+  background: #FFC2B0 !important;
+  border-color: #F5A891 !important;
+  box-shadow: 0 2px 0 #E08A70, inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+}
+
+body:not(.webgis-page) .maps-card__Zoom {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #007AFF;
+  background: #E0F2FE;
+  border: 1px solid #BAE6FD;
+  box-shadow: 0 2px 0 #93C5FD;
+}
+
+body:not(.webgis-page) .maps-card__media {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #F7F7F7;
+  border: 1.5px solid #E2E8F0;
+}
+
+body:not(.webgis-page) .maps-carousel__plate img {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: none !important;
+  object-fit: cover !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+body:not(.webgis-page) .maps-carousel__plate-title {
+  margin: 0.08rem 0 0.1rem !important;
+  font-size: 0.76rem !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  color: #06122B !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* STATE 1: Tumpukan Kartu (Stacked Deck — Saat kursor tidak diarahkan) */
+body:not(.webgis-page) .maps-carousel:not(.is-fanned) .maps-carousel__main:not(:hover) .maps-carousel__plate[data-index="0"] {
+  z-index: 6;
+  transform: translate3d(-50%, -52%, 0) rotate(-2deg) scale(1);
+}
+
+body:not(.webgis-page) .maps-carousel:not(.is-fanned) .maps-carousel__main:not(:hover) .maps-carousel__plate[data-index="1"] {
+  z-index: 5;
+  transform: translate3d(calc(-50% + 12px), calc(-52% + 5px), 0) rotate(3.5deg) scale(0.98);
+}
+
+body:not(.webgis-page) .maps-carousel:not(.is-fanned) .maps-carousel__main:not(:hover) .maps-carousel__plate[data-index="2"] {
+  z-index: 4;
+  transform: translate3d(calc(-50% - 14px), calc(-52% + 10px), 0) rotate(-5deg) scale(0.96);
+}
+
+body:not(.webgis-page) .maps-carousel:not(.is-fanned) .maps-carousel__main:not(:hover) .maps-carousel__plate[data-index="3"] {
+  z-index: 3;
+  transform: translate3d(calc(-50% + 18px), calc(-52% + 15px), 0) rotate(6.5deg) scale(0.94);
+}
+
+body:not(.webgis-page) .maps-carousel:not(.is-fanned) .maps-carousel__main:not(:hover) .maps-carousel__plate[data-index="4"] {
+  z-index: 2;
+  transform: translate3d(calc(-50% - 18px), calc(-52% + 20px), 0) rotate(-8deg) scale(0.92);
+}
+
+body:not(.webgis-page) .maps-carousel:not(.is-fanned) .maps-carousel__main:not(:hover) .maps-carousel__plate[data-index="5"] {
+  z-index: 1;
+  transform: translate3d(calc(-50% + 10px), calc(-52% + 25px), 0) rotate(9deg) scale(0.9);
+}
+
+/* STATE 2: Otomatis Berjejer Seperti Kartu Remi Saat Kursor Diarahkan (:hover / .is-fanned) */
+body:not(.webgis-page) .maps-carousel__main:hover .maps-carousel__plate[data-index="0"],
+body:not(.webgis-page) .maps-carousel.is-fanned .maps-carousel__plate[data-index="0"] {
+  z-index: 1;
+  transform: translate3d(calc(-50% - 315px), calc(-50% + 30px), 0) rotate(-15deg) scale(0.94);
+}
+
+body:not(.webgis-page) .maps-carousel__main:hover .maps-carousel__plate[data-index="1"],
+body:not(.webgis-page) .maps-carousel.is-fanned .maps-carousel__plate[data-index="1"] {
+  z-index: 2;
+  transform: translate3d(calc(-50% - 189px), calc(-50% + 10px), 0) rotate(-9deg) scale(0.96);
+}
+
+body:not(.webgis-page) .maps-carousel__main:hover .maps-carousel__plate[data-index="2"],
+body:not(.webgis-page) .maps-carousel.is-fanned .maps-carousel__plate[data-index="2"] {
+  z-index: 3;
+  transform: translate3d(calc(-50% - 63px), calc(-50% - 4px), 0) rotate(-3deg) scale(0.98);
+}
+
+body:not(.webgis-page) .maps-carousel__main:hover .maps-carousel__plate[data-index="3"],
+body:not(.webgis-page) .maps-carousel.is-fanned .maps-carousel__plate[data-index="3"] {
+  z-index: 4;
+  transform: translate3d(calc(-50% + 63px), calc(-50% - 4px), 0) rotate(3deg) scale(0.98);
+}
+
+body:not(.webgis-page) .maps-carousel__main:hover .maps-carousel__plate[data-index="4"],
+body:not(.webgis-page) .maps-carousel.is-fanned .maps-carousel__plate[data-index="4"] {
+  z-index: 5;
+  transform: translate3d(calc(-50% + 189px), calc(-50% + 10px), 0) rotate(9deg) scale(0.96);
+}
+
+body:not(.webgis-page) .maps-carousel__main:hover .maps-carousel__plate[data-index="5"],
+body:not(.webgis-page) .maps-carousel.is-fanned .maps-carousel__plate[data-index="5"] {
+  z-index: 6;
+  transform: translate3d(calc(-50% + 315px), calc(-50% + 30px), 0) rotate(15deg) scale(0.94);
+}
+
+/* Hover pada Kartu Spesifik di dalam Jajaran: Kartu Terangkat 3D */
+body:not(.webgis-page) .maps-carousel__main:hover .maps-carousel__plate[data-index="0"]:hover,
+body:not(.webgis-page) .maps-carousel.is-fanned .maps-carousel__plate[data-index="0"]:hover {
+  z-index: 20;
+  transform: translate3d(calc(-50% - 315px), calc(-50% - 16px), 0) rotate(-3deg) scale(1.05);
+}
+
+body:not(.webgis-page) .maps-carousel__main:hover .maps-carousel__plate[data-index="1"]:hover,
+body:not(.webgis-page) .maps-carousel.is-fanned .maps-carousel__plate[data-index="1"]:hover {
+  z-index: 20;
+  transform: translate3d(calc(-50% - 189px), calc(-50% - 26px), 0) rotate(-1.5deg) scale(1.05);
+}
+
+body:not(.webgis-page) .maps-carousel__main:hover .maps-carousel__plate[data-index="2"]:hover,
+body:not(.webgis-page) .maps-carousel.is-fanned .maps-carousel__plate[data-index="2"]:hover {
+  z-index: 20;
+  transform: translate3d(calc(-50% - 63px), calc(-50% - 34px), 0) rotate(0deg) scale(1.05);
+}
+
+body:not(.webgis-page) .maps-carousel__main:hover .maps-carousel__plate[data-index="3"]:hover,
+body:not(.webgis-page) .maps-carousel.is-fanned .maps-carousel__plate[data-index="3"]:hover {
+  z-index: 20;
+  transform: translate3d(calc(-50% + 63px), calc(-50% - 34px), 0) rotate(0deg) scale(1.05);
+}
+
+body:not(.webgis-page) .maps-carousel__main:hover .maps-carousel__plate[data-index="4"]:hover,
+body:not(.webgis-page) .maps-carousel.is-fanned .maps-carousel__plate[data-index="4"]:hover {
+  z-index: 20;
+  transform: translate3d(calc(-50% + 189px), calc(-50% - 26px), 0) rotate(1.5deg) scale(1.05);
+}
+
+body:not(.webgis-page) .maps-carousel__main:hover .maps-carousel__plate[data-index="5"]:hover,
+body:not(.webgis-page) .maps-carousel.is-fanned .maps-carousel__plate[data-index="5"]:hover {
+  z-index: 20;
+  transform: translate3d(calc(-50% + 315px), calc(-50% - 16px), 0) rotate(3deg) scale(1.05);
+}
+
+body:not(.webgis-page) .maps-deck-hint {
+  text-align: center;
+  font-size: 0.75rem !important;
+  color: #475569 !important;
+  margin-top: 0.15rem !important;
+}
+
+/* Responsif Tablet & Mobile */
+@media (max-width: 920px) {
+  body:not(.webgis-page) .maps-carousel__main {
+    height: 430px !important;
+  }
+
+  body:not(.webgis-page) .maps-carousel__plate {
+    width: 172px !important;
+    max-width: 172px !important;
+    padding: 0.5rem !important;
+    border-radius: 18px !important;
+  }
+
+  body:not(.webgis-page) .maps-carousel__main:hover .maps-carousel__plate[data-index="0"],
+  body:not(.webgis-page) .maps-carousel.is-fanned .maps-carousel__plate[data-index="0"] {
+    transform: translate3d(calc(-50% - 100px), calc(-50% - 90px), 0) rotate(-9deg) scale(0.92);
+  }
+  body:not(.webgis-page) .maps-carousel__main:hover .maps-carousel__plate[data-index="1"],
+  body:not(.webgis-page) .maps-carousel.is-fanned .maps-carousel__plate[data-index="1"] {
+    transform: translate3d(-50%, calc(-50% - 102px), 0) rotate(0deg) scale(0.94);
+  }
+  body:not(.webgis-page) .maps-carousel__main:hover .maps-carousel__plate[data-index="2"],
+  body:not(.webgis-page) .maps-carousel.is-fanned .maps-carousel__plate[data-index="2"] {
+    transform: translate3d(calc(-50% + 100px), calc(-50% - 90px), 0) rotate(9deg) scale(0.92);
+  }
+  body:not(.webgis-page) .maps-carousel__main:hover .maps-carousel__plate[data-index="3"],
+  body:not(.webgis-page) .maps-carousel.is-fanned .maps-carousel__plate[data-index="3"] {
+    transform: translate3d(calc(-50% - 100px), calc(-50% + 90px), 0) rotate(-7deg) scale(0.92);
+  }
+  body:not(.webgis-page) .maps-carousel__main:hover .maps-carousel__plate[data-index="4"],
+  body:not(.webgis-page) .maps-carousel.is-fanned .maps-carousel__plate[data-index="4"] {
+    transform: translate3d(-50%, calc(-50% + 80px), 0) rotate(0deg) scale(0.94);
+  }
+  body:not(.webgis-page) .maps-carousel__main:hover .maps-carousel__plate[data-index="5"],
+  body:not(.webgis-page) .maps-carousel.is-fanned .maps-carousel__plate[data-index="5"] {
+    transform: translate3d(calc(-50% + 100px), calc(-50% + 90px), 0) rotate(7deg) scale(0.92);
+  }
+}
+
+/* ==========================================================================
+   Wildlife Cross-Section Composition (Moose + Elang Jawa) & Scenic Footer
+   ========================================================================== */
+
+html,
+body:not(.webgis-page) {
+  overflow-x: clip;
+}
+
+/* Footer scenic: satu pemandangan (landscape + teks nama + moose + elang) */
+body:not(.webgis-page) .site-footer.site-footer--scenic {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  margin-top: 2rem !important;
+  padding: 0 !important;
+  border-top: none !important;
+  background: transparent !important;
+  overflow: visible !important;
+  z-index: 3;
+}
+
+body:not(.webgis-page) .footer-scenic-stage {
+  position: relative;
+  width: 100%;
+  padding-top: clamp(1rem, 3vw, 2.5rem);
+  overflow: hidden;
+}
+
+/* Teks nama: satu baris, serif, tinggi alami, biru langit pudar. Puncak gunung menutup sebagian bawah huruf */
+body:not(.webgis-page) .footer-giant-watermark {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+body:not(.webgis-page) .footer-giant-watermark__main {
+  display: block;
+  font-family: var(--font-display, "Instrument Serif", Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(3rem, 15vw, 15rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: rgba(95, 180, 224, 0.3);
+  white-space: nowrap;
+}
+
+body:not(.webgis-page) .footer-landscape-wrap {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  margin-top: clamp(-9rem, -9.5vw, -2.2rem);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Moose: tegak, berdiri di lembah kiri, badan terpotong tepi bawah footer */
+body:not(.webgis-page) .wildlife-moose {
+  position: absolute;
+  left: -3vw;
+  bottom: -4.2vw;
+  width: clamp(240px, 31vw, 480px);
+  z-index: 5;
+  pointer-events: none;
+  user-select: none;
+}
+
+body:not(.webgis-page) .wildlife-moose img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Elang: besar di langit kanan footer, ujung sayap kirinya melewati batas section Contact */
+body:not(.webgis-page) .wildlife-eagle {
+  position: absolute;
+  top: clamp(-9rem, -8vw, -3.5rem);
+  right: 2vw;
+  width: clamp(270px, 40vw, 600px);
+  z-index: 8;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform;
+  animation: eagle-glide 7s ease-in-out infinite;
+}
+
+body:not(.webgis-page) .wildlife-eagle img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@keyframes eagle-glide {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(-10px, 10px, 0) rotate(-1.2deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:not(.webgis-page) .wildlife-eagle { animation: none; }
+}
+
+body:not(.webgis-page) .footer-landscape-img {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 220px;
+  max-height: 560px;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+body:not(.webgis-page) .footer-bottom-bar {
+  position: absolute;
+  bottom: clamp(0.9rem, 2.2vw, 1.85rem);
+  left: 0;
+  right: 0;
+  z-index: 6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+body:not(.webgis-page) .footer-meta-pill {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.42rem 1.15rem;
+  border-radius: 999px;
+  background: #FFFFFF !important;
+  border: 2px solid #DBEAFE !important;
+  box-shadow:
+    0 5px 0 #CBD5E1,
+    0 12px 24px rgba(6, 18, 43, 0.22),
+    inset 0 2px 0 #FFFFFF !important;
+  color: #06122B !important;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+body:not(.webgis-page) .footer-meta-pill .footer-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: #E0F2FE;
+  border: 1.5px solid #BAE6FD;
+  box-shadow: 0 2px 0 #93C5FD;
+  margin: 0 !important;
+}
+
+body:not(.webgis-page) .footer-meta-pill .footer-logo img {
+  width: 18px !important;
+  height: 18px !important;
+  object-fit: contain;
+}
+
+body:not(.webgis-page) .footer-meta-pill p {
+  margin: 0 !important;
+  font-size: 0.76rem !important;
+  color: #06122B !important;
+}
+
+body:not(.webgis-page) .footer-meta-pill .footer-tagline {
+  color: #475569 !important;
+  font-weight: 500;
+}
+
+body:not(.webgis-page) .footer-meta-pill .footer-sep {
+  color: #94A3B8;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  body:not(.webgis-page) .wildlife-moose {
+    width: 46vw;
+    left: -7vw;
+    bottom: -7vw;
+  }
+
+  body:not(.webgis-page) .wildlife-eagle {
+    width: 58vw;
+    right: -2vw;
+    top: -3.8rem;
+  }
+
+  body:not(.webgis-page) .footer-landscape-wrap {
+    margin-top: -11vw;
+  }
+
+  body:not(.webgis-page) .footer-bottom-bar {
+    justify-content: flex-end;
+    padding-right: 0.9rem;
+  }
+
+  body:not(.webgis-page) .footer-meta-pill .footer-tagline,
+  body:not(.webgis-page) .footer-meta-pill .footer-sep {
+    display: none;
+  }
+}
+
+
+/* ==========================================================================
+   01 / ABOUT ME — 2-Column Layout (Kiri: Narasi, Kanan: Foto) & 3D Soft Bubbles
+   ========================================================================== */
+
+body:not(.webgis-page) .section.about .about__grid.grid--2 {
+  max-width: min(1040px, calc(100% - 2.5rem)) !important;
+  margin-inline: auto !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.25fr) minmax(290px, 0.85fr) !important;
+  gap: clamp(2rem, 4.5vw, 3.75rem) !important;
+  align-items: start !important;
+}
+
+body:not(.webgis-page) .about__content .eyebrow {
+  font-family: var(--font-sans, 'Inter', sans-serif) !important;
+  font-size: 0.74rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: #007AFF !important;
+  margin-bottom: 0.35rem !important;
+}
+
+body:not(.webgis-page) .about__content h2#about-title {
+  font-family: var(--font-display, "Instrument Serif", Georgia, serif) !important;
+  font-size: clamp(2.8rem, 5.2vw, 4.1rem) !important;
+  font-weight: 400 !important;
+  line-height: 0.96 !important;
+  letter-spacing: -0.02em !important;
+  color: #06122B !important;
+  margin: 0.25rem 0 1.35rem !important;
+}
+
+body:not(.webgis-page) .about__content h2#about-title em {
+  font-style: italic !important;
+  color: #007AFF !important;
+}
+
+body:not(.webgis-page) .about__narrative {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+}
+
+body:not(.webgis-page) .about__bio {
+  font-family: var(--font-sans, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif) !important;
+  font-size: 0.96rem !important;
+  line-height: 1.74 !important;
+  color: #475569 !important;
+  margin: 0 !important;
+}
+
+/* Core Expertise — Bubble Lembut & Timbul 3D Ke Depan (Kontras dengan #F7F7F7) */
+body:not(.webgis-page) .about__expertise.about-bubble-3d {
+  margin-top: 1.75rem !important;
+  padding: 1.35rem 1.45rem 1.5rem !important;
+  border-radius: 26px !important;
+  background: #FFFFFF !important;
+  border: 2px solid #DBEAFE !important;
+  box-shadow:
+    0 7px 0 #CBD5E1,
+    0 18px 36px rgba(6, 18, 43, 0.10),
+    inset 0 2px 0 #FFFFFF !important;
+}
+
+body:not(.webgis-page) .about__subhead {
+  font-family: var(--font-sans, 'Inter', sans-serif) !important;
+  font-size: 0.8rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  color: #06122B !important;
+  margin: 0 0 0.95rem !important;
+}
+
+body:not(.webgis-page) .about__expertise .expertise-tags {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 0.7rem !important;
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+body:not(.webgis-page) .about__expertise .expertise-tags li {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  padding: 0.62rem 0.95rem !important;
+  border-radius: 16px !important;
+  font-family: var(--font-sans, 'Inter', sans-serif) !important;
+  font-size: 0.81rem !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  color: #06122B !important;
+  background: #E0F2FE !important;
+  border: 1.5px solid #BAE6FD !important;
+  box-shadow:
+    0 4px 0 #93C5FD,
+    0 8px 14px rgba(6, 18, 43, 0.07),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.85) !important;
+  transition: transform 0.18s ease, box-shadow 0.18s ease !important;
+}
+
+body:not(.webgis-page) .about__expertise .expertise-tags li::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #007AFF;
+  flex-shrink: 0;
+}
+
+body:not(.webgis-page) .about__expertise .expertise-tags li:nth-child(4n+2) {
+  background: #A9DCD9 !important;
+  border-color: #88C9C5 !important;
+  box-shadow:
+    0 4px 0 #68B5B0,
+    0 8px 14px rgba(6, 18, 43, 0.07),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.85) !important;
+}
+
+body:not(.webgis-page) .about__expertise .expertise-tags li:nth-child(4n+2)::before {
+  background: #065F46;
+}
+
+body:not(.webgis-page) .about__expertise .expertise-tags li:nth-child(4n+3) {
+  background: #FFE58A !important;
+  border-color: #F5D061 !important;
+  box-shadow:
+    0 4px 0 #DFB434,
+    0 8px 14px rgba(6, 18, 43, 0.07),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.85) !important;
+}
+
+body:not(.webgis-page) .about__expertise .expertise-tags li:nth-child(4n+3)::before {
+  background: #B45309;
+}
+
+body:not(.webgis-page) .about__expertise .expertise-tags li:nth-child(4n+4) {
+  background: #FFC2B0 !important;
+  border-color: #F5A891 !important;
+  box-shadow:
+    0 4px 0 #E08A70,
+    0 8px 14px rgba(6, 18, 43, 0.07),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.85) !important;
+}
+
+body:not(.webgis-page) .about__expertise .expertise-tags li:nth-child(4n+4)::before {
+  background: #C2410C;
+}
+
+body:not(.webgis-page) .about__expertise .expertise-tags li:hover {
+  transform: translateY(-2px) !important;
+}
+
+/* Education */
+body:not(.webgis-page) .about__education {
+  margin-top: 1.5rem !important;
+  padding: 1.15rem 1.35rem !important;
+  border-radius: 22px !important;
+  background: #FFFFFF !important;
+  border: 2px solid #E2E8F0 !important;
+  box-shadow:
+    0 5px 0 #CBD5E1,
+    0 12px 24px rgba(6, 18, 43, 0.07),
+    inset 0 2px 0 #FFFFFF !important;
+}
+
+body:not(.webgis-page) .about__education .about__subhead {
+  margin-bottom: 0.45rem !important;
+}
+
+body:not(.webgis-page) .about__edu-detail {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.18rem !important;
+  margin: 0 !important;
+}
+
+body:not(.webgis-page) .about__edu-detail strong {
+  font-family: var(--font-sans, 'Inter', sans-serif) !important;
+  font-size: 0.96rem !important;
+  font-weight: 700 !important;
+  color: #06122B !important;
+}
+
+body:not(.webgis-page) .about__edu-detail span {
+  font-family: var(--font-sans, 'Inter', sans-serif) !important;
+  font-size: 0.88rem !important;
+  font-weight: 500 !important;
+  color: #475569 !important;
+}
+
+/* Foto Profil Kanan — Bubble Lembut & Timbul 3D Ke Depan (Kontras dengan #F7F7F7) */
+body:not(.webgis-page) .about__portrait {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  position: sticky;
+  top: 5.5rem;
+}
+
+body:not(.webgis-page) .portrait-frame.portrait-bubble-3d {
+  width: 100% !important;
+  padding: 0.95rem 0.95rem 1.1rem !important;
+  margin: 0 !important;
+  border-radius: 30px !important;
+  background: #FFFFFF !important;
+  border: 2.5px solid #DBEAFE !important;
+  box-shadow:
+    0 9px 0 #CBD5E1,
+    0 24px 48px rgba(6, 18, 43, 0.13),
+    inset 0 2px 0 #FFFFFF !important;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease !important;
+}
+
+body:not(.webgis-page) .portrait-frame.portrait-bubble-3d:hover {
+  transform: translateY(-4px) !important;
+  box-shadow:
+    0 12px 0 #CBD5E1,
+    0 30px 56px rgba(6, 18, 43, 0.16),
+    inset 0 2px 0 #FFFFFF !important;
+}
+
+body:not(.webgis-page) .portrait-frame__media {
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #E0F2FE;
+  border: 2px solid #E2E8F0;
+}
+
+body:not(.webgis-page) .portrait-frame.portrait-bubble-3d .portrait-frame__image {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 3 / 4 !important;
+  max-height: 480px !important;
+  object-fit: cover !important;
+  object-position: center top !important;
+  border-radius: 20px !important;
+  display: block !important;
+}
+
+body:not(.webgis-page) .portrait-frame.portrait-bubble-3d .portrait-coordinate {
+  position: absolute !important;
+  z-index: 3 !important;
+  padding: 0.28rem 0.68rem !important;
+  border-radius: 999px !important;
+  background: #FFFFFF !important;
+  border: 1.5px solid #DBEAFE !important;
+  box-shadow:
+    0 3px 0 #CBD5E1,
+    0 6px 12px rgba(6, 18, 43, 0.12) !important;
+  color: #06122B !important;
+  font-family: var(--font-sans, 'Inter', sans-serif) !important;
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+}
+
+body:not(.webgis-page) .portrait-frame.portrait-bubble-3d .portrait-coordinate--top {
+  top: 0.85rem !important;
+  left: 0.85rem !important;
+}
+
+body:not(.webgis-page) .portrait-frame.portrait-bubble-3d .portrait-coordinate--bottom {
+  right: 0.85rem !important;
+  bottom: 0.85rem !important;
+}
+
+body:not(.webgis-page) .portrait-frame__caption {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 0.75rem !important;
+  margin-top: 0.85rem !important;
+  padding: 0 0.35rem !important;
+}
+
+body:not(.webgis-page) .portrait-frame__caption strong {
+  font-family: var(--font-sans, 'Inter', sans-serif) !important;
+  font-size: 0.88rem !important;
+  font-weight: 800 !important;
+  color: #06122B !important;
+  letter-spacing: -0.01em !important;
+}
+
+body:not(.webgis-page) .portrait-frame__caption span {
+  font-family: var(--font-sans, 'Inter', sans-serif) !important;
+  font-size: 0.74rem !important;
+  font-weight: 700 !important;
+  color: #007AFF !important;
+  background: #E0F2FE !important;
+  border: 1.5px solid #BAE6FD !important;
+  box-shadow: 0 2px 0 #93C5FD !important;
+  padding: 0.2rem 0.65rem !important;
+  border-radius: 999px !important;
+}
+
+@media (max-width: 860px) {
+  body:not(.webgis-page) .section.about .about__grid.grid--2 {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  body:not(.webgis-page) .about__portrait {
+    position: static;
+    max-width: 420px;
+    margin-inline: auto !important;
+    width: 100%;
+  }
+
+  body:not(.webgis-page) .about__expertise .expertise-tags {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Fix container width override on #about so 2-column layout is wide and spacious */
+body:not(.webgis-page) #about .container.about__grid {
+  width: min(980px, calc(100% - 2.5rem)) !important;
+  max-width: 980px !important;
+  grid-template-columns: minmax(0, 1.32fr) minmax(300px, 0.78fr) !important;
+  gap: clamp(2.25rem, 4.5vw, 3.75rem) !important;
+}
+
+body:not(.webgis-page) .about__content h2#about-title {
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: none !important;
+}
+
+body:not(.webgis-page) .portrait-frame__caption {
+  flex-wrap: nowrap !important;
+}
+
+body:not(.webgis-page) .portrait-frame__caption strong {
+  white-space: nowrap !important;
+}
+
+body:not(.webgis-page) .portrait-frame__caption span {
+  white-space: nowrap !important;
+}
+
+body:not(.webgis-page) .portrait-frame__caption {
+  letter-spacing: 0.01em !important;
+  padding: 0 0.2rem !important;
+}
+
+body:not(.webgis-page) .portrait-frame__caption strong {
+  font-size: 0.84rem !important;
+  letter-spacing: 0.02em !important;
+}
+
+body:not(.webgis-page) .portrait-frame__caption span {
+  font-size: 0.66rem !important;
+  letter-spacing: 0.04em !important;
+  padding: 0.22rem 0.58rem !important;
+}
+
+
+/* ==========================================================================
+   ORGANIC CANVAS & CLAYMORPHISM DESIGN SYSTEM (WCAG AA/AAA Eye-Comfort Edition)
+   ========================================================================== */
+
+:root {
+  /* 1. Global Artistic Canvas & Card Surfaces */
+  --canvas-body-bg: #F0F4F8;     /* Soft cool-gray artistic canvas (reduces eye strain) */
+  --clay-card-bg: #FDFBF7;       /* Warm off-white / cream canvas for clay cards */
+  --clay-recess-bg: #E4EBF2;     /* Soft recessed clay well */
+
+  /* 2. Eye-Comfort Typography Colors (WCAG AA/AAA Compliant, No Harsh Pure Black) */
+  --heading-charcoal: #1E293B;   /* Rich soft charcoal for h1, h2, h3 (12.5:1 contrast) */
+  --heading-secondary: #2C3E50;  /* Warm deep slate for subheadings & labels */
+  --body-slate: #334155;         /* Highly readable dark slate for paragraphs (8.9:1 contrast) */
+  --body-muted: #475569;         /* Secondary metadata text (6.5:1 contrast) */
+
+  /* 3. Milky Pastel Clay Pill Backgrounds + Color-Matched Dark Accessible Text */
+  --clay-blue: #D8ECFA;
+  --clay-blue-text: #163A5F;     /* Deep navy-blue text on light blue pill (9.4:1 contrast) */
+
+  --clay-green: #D0EFE8;
+  --clay-green-text: #134E4A;    /* Deep forest-teal text on light green pill (8.8:1 contrast) */
+
+  --clay-yellow: #FBECC4;
+  --clay-yellow-text: #5C3D0E;   /* Deep umber-brown text on light yellow pill (8.6:1 contrast) */
+
+  --clay-pink: #FCDAD0;
+  --clay-pink-text: #69271A;     /* Deep terracotta text on light pink pill (8.5:1 contrast) */
+
+  /* Vibrant Clay CTA ("Let's Talk" & Primary Buttons) */
+  --clay-cta-bg: #2B7CD3;        /* Accessible vibrant clay blue */
+  --clay-cta-text: #FFFFFF;
+
+  /* 4. Tinted Claymorphism Shadows (Using rgba(44, 62, 80, ...) instead of pure black) */
+  --clay-formula:
+    12px 12px 24px rgba(44, 62, 80, 0.085),
+    -8px -8px 16px rgba(255, 255, 255, 1),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.85),
+    inset -2px -2px 5px rgba(44, 62, 80, 0.035);
+
+  --clay-pill-shadow:
+    8px 8px 16px rgba(44, 62, 80, 0.08),
+    -6px -6px 12px rgba(255, 255, 255, 0.95),
+    inset 2.5px 2.5px 5px rgba(255, 255, 255, 0.85),
+    inset -2.5px -2.5px 5px rgba(44, 62, 80, 0.045);
+
+  --clay-pressed-shadow:
+    inset 4px 4px 8px rgba(44, 62, 80, 0.095),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.9);
+}
+
+/* --------------------------------------------------------------------------
+   1. GLOBAL BACKGROUND (#F0F4F8) & SUBTLE CANVAS GRAIN TEXTURE
+   -------------------------------------------------------------------------- */
+html,
+body:not(.webgis-page),
+body:not(.webgis-page) main,
+body:not(.webgis-page) .section,
+body:not(.webgis-page) .about,
+body:not(.webgis-page) .section--tint,
+body:not(.webgis-page) .section--contact {
+  background-color: var(--canvas-body-bg) !important;
+  color: var(--body-slate) !important;
+}
+
+/* Smooth transition from Hero wave into #F0F4F8 canvas */
+body:not(.webgis-page) .hero {
+  background: linear-gradient(180deg, #F7F7F7 0%, #F4F6F9 62%, var(--canvas-body-bg) 100%) !important;
+}
+
+/* Subtle SVG Paper / Canvas Grain Overlay */
+body:not(.webgis-page)::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* --------------------------------------------------------------------------
+   2. EYE-COMFORT TYPOGRAPHY (Charcoal Headings & Dark Slate Body Text)
+   -------------------------------------------------------------------------- */
+body:not(.webgis-page) h1,
+body:not(.webgis-page) h2,
+body:not(.webgis-page) h3,
+body:not(.webgis-page) h4,
+body:not(.webgis-page) .hero h1,
+body:not(.webgis-page) .about__content h2#about-title,
+body:not(.webgis-page) .section h2,
+body:not(.webgis-page) .experience-item h3,
+body:not(.webgis-page) .project-card__title,
+body:not(.webgis-page) .publication-card__title,
+body:not(.webgis-page) .about__edu-detail strong {
+  color: var(--heading-charcoal) !important;
+}
+
+body:not(.webgis-page) .about__subhead {
+  color: var(--heading-secondary) !important;
+}
+
+body:not(.webgis-page) p,
+body:not(.webgis-page) .about__bio,
+body:not(.webgis-page) .hero-narrative p,
+body:not(.webgis-page) .experience-item__desc,
+body:not(.webgis-page) .project-card__summary,
+body:not(.webgis-page) .publication-card__summary,
+body:not(.webgis-page) .section-intro > p:not(.eyebrow) {
+  color: var(--body-slate) !important;
+}
+
+body:not(.webgis-page) .about__edu-detail span,
+body:not(.webgis-page) .experience-item__meta,
+body:not(.webgis-page) .experience-item__date,
+body:not(.webgis-page) .maps-deck-hint {
+  color: var(--body-muted) !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. CARD BACKGROUNDS (#FDFBF7 Cream Canvas + Tinted Clay Shadows)
+   -------------------------------------------------------------------------- */
+body:not(.webgis-page) .about__expertise.about-bubble-3d,
+body:not(.webgis-page) .about__education,
+body:not(.webgis-page) .hero-showcase-frame,
+body:not(.webgis-page) .maps-carousel__plate,
+body:not(.webgis-page) .footer-meta-pill {
+  background: var(--clay-card-bg) !important;
+  border: none !important;
+  border-radius: 24px !important;
+  box-shadow: var(--clay-formula) !important;
+  transition: all 0.25s ease-in-out !important;
+}
+
+body:not(.webgis-page) .about__expertise.about-bubble-3d {
+  padding: 1.5rem 1.55rem 1.6rem !important;
+}
+
+body:not(.webgis-page) .about__education {
+  padding: 1.3rem 1.5rem !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. EXPERTISE PILLS & INTERACTION STATES (High-Contrast Dark Text on Pastels)
+   -------------------------------------------------------------------------- */
+/* Pill 1 & 5: Milky Blue with Deep Navy-Blue Text (#163A5F) */
+body:not(.webgis-page) .about__expertise .expertise-tags li,
+body:not(.webgis-page) .project-card__tags span,
+body:not(.webgis-page) .publication-card__year {
+  border: none !important;
+  border-radius: 9999px !important;
+  padding: 0.72rem 1.1rem !important;
+  background: var(--clay-blue) !important;
+  color: var(--clay-blue-text) !important;
+  font-weight: 700 !important;
+  box-shadow: var(--clay-pill-shadow) !important;
+  transition: all 0.25s ease-in-out !important;
+  cursor: pointer;
+}
+
+/* Pill 2 & 6: Milky Green with Deep Forest-Teal Text (#134E4A) */
+body:not(.webgis-page) .about__expertise .expertise-tags li:nth-child(4n+2),
+body:not(.webgis-page) .project-card__tags span:nth-child(4n+2) {
+  background: var(--clay-green) !important;
+  color: var(--clay-green-text) !important;
+  border: none !important;
+  box-shadow: var(--clay-pill-shadow) !important;
+}
+
+/* Pill 3: Milky Yellow with Deep Umber-Brown Text (#5C3D0E) */
+body:not(.webgis-page) .about__expertise .expertise-tags li:nth-child(4n+3),
+body:not(.webgis-page) .project-card__tags span:nth-child(4n+3) {
+  background: var(--clay-yellow) !important;
+  color: var(--clay-yellow-text) !important;
+  border: none !important;
+  box-shadow: var(--clay-pill-shadow) !important;
+}
+
+/* Pill 4: Milky Pink with Deep Terracotta Text (#69271A) */
+body:not(.webgis-page) .about__expertise .expertise-tags li:nth-child(4n+4),
+body:not(.webgis-page) .project-card__tags span:nth-child(4n+4) {
+  background: var(--clay-pink) !important;
+  color: var(--clay-pink-text) !important;
+  border: none !important;
+  box-shadow: var(--clay-pill-shadow) !important;
+}
+
+/* Tiny 3D Clay Beads (Dots inside Expertise Pills) */
+body:not(.webgis-page) .about__expertise .expertise-tags li::before {
+  content: "";
+  width: 11px !important;
+  height: 11px !important;
+  border-radius: 50% !important;
+  background: #3B82F6 !important;
+  box-shadow:
+    2px 2px 4px rgba(44, 62, 80, 0.20),
+    -1.5px -1.5px 3px rgba(255, 255, 255, 0.95),
+    inset 2px 2px 3px rgba(255, 255, 255, 0.85),
+    inset -1.5px -1.5px 3px rgba(44, 62, 80, 0.20) !important;
+  flex-shrink: 0;
+  transition: all 0.25s ease-in-out !important;
+}
+
+body:not(.webgis-page) .about__expertise .expertise-tags li:nth-child(4n+2)::before {
+  background: #14B8A6 !important;
+}
+
+body:not(.webgis-page) .about__expertise .expertise-tags li:nth-child(4n+3)::before {
+  background: #D97706 !important;
+}
+
+body:not(.webgis-page) .about__expertise .expertise-tags li:nth-child(4n+4)::before {
+  background: #E15B3E !important;
+}
+
+/* Hover / Active State: "Pressed In" while keeping dark accessible text color */
+body:not(.webgis-page) .about__expertise .expertise-tags li:hover,
+body:not(.webgis-page) .about__expertise .expertise-tags li:active,
+body:not(.webgis-page) .project-card__tags span:hover,
+body:not(.webgis-page) .project-card__tags span:active {
+  box-shadow: var(--clay-pressed-shadow) !important;
+  transform: translateY(1.5px) scale(0.985) !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. PROFILE PICTURE & FLOATING CLAY TAGS + ATTACHED NAMEPLATE
+   -------------------------------------------------------------------------- */
+body:not(.webgis-page) .portrait-frame.portrait-bubble-3d {
+  background: var(--clay-card-bg) !important;
+  border: none !important;
+  border-radius: 28px !important;
+  padding: 1.15rem 1.15rem 1.2rem !important;
+  box-shadow: var(--clay-formula) !important;
+  transition: all 0.25s ease-in-out !important;
+}
+
+body:not(.webgis-page) .portrait-frame.portrait-bubble-3d:hover {
+  transform: translateY(-3px) !important;
+  box-shadow:
+    16px 16px 30px rgba(44, 62, 80, 0.11),
+    -10px -10px 20px rgba(255, 255, 255, 1),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.85),
+    inset -2px -2px 5px rgba(44, 62, 80, 0.04) !important;
+}
+
+body:not(.webgis-page) .portrait-frame__media {
+  position: relative;
+  border: none !important;
+  border-radius: 22px !important;
+  background: var(--clay-recess-bg) !important;
+  padding: 0.4rem !important;
+  box-shadow:
+    inset 3px 3px 7px rgba(44, 62, 80, 0.10),
+    inset -3px -3px 7px rgba(255, 255, 255, 0.9) !important;
+}
+
+body:not(.webgis-page) .portrait-frame.portrait-bubble-3d .portrait-frame__image {
+  border: none !important;
+  border-radius: 18px !important;
+}
+
+/* Coordinate Tags ("01° 06′ S" & "106° 49′ E") — Floating Physical Clay Badges */
+body:not(.webgis-page) .portrait-frame.portrait-bubble-3d .portrait-coordinate {
+  background: var(--clay-card-bg) !important;
+  border: none !important;
+  border-radius: 9999px !important;
+  padding: 0.38rem 0.88rem !important;
+  color: var(--heading-charcoal) !important;
+  font-size: 0.7rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.06em !important;
+  box-shadow:
+    0 10px 20px rgba(30, 41, 59, 0.22),
+    4px 4px 10px rgba(44, 62, 80, 0.14),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.95),
+    inset -2px -2px 4px rgba(44, 62, 80, 0.06) !important;
+  transition: all 0.25s ease-in-out !important;
+}
+
+body:not(.webgis-page) .portrait-frame.portrait-bubble-3d .portrait-coordinate--top {
+  top: 1.15rem !important;
+  left: 1.15rem !important;
+}
+
+body:not(.webgis-page) .portrait-frame.portrait-bubble-3d .portrait-coordinate--bottom {
+  right: 1.15rem !important;
+  bottom: 1.15rem !important;
+}
+
+/* Solid Clay Nameplate ("IRVAN TRIANTO" & "GEOSPATIAL PROFESSIONAL") Attached to Bottom */
+body:not(.webgis-page) .portrait-frame__caption {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 0.6rem !important;
+  margin-top: 1rem !important;
+  padding: 0.72rem 0.95rem !important;
+  border-radius: 20px !important;
+  background: var(--clay-card-bg) !important;
+  border: none !important;
+  box-shadow: var(--clay-formula) !important;
+  transition: all 0.25s ease-in-out !important;
+}
+
+body:not(.webgis-page) .portrait-frame__caption strong {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  font-size: 0.82rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.02em !important;
+  color: var(--heading-charcoal) !important;
+}
+
+body:not(.webgis-page) .portrait-frame__caption span {
+  display: inline-flex !important;
+  align-items: center !important;
+  background: var(--clay-blue) !important;
+  border: none !important;
+  border-radius: 9999px !important;
+  padding: 0.34rem 0.78rem !important;
+  font-size: 0.65rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.04em !important;
+  color: var(--clay-blue-text) !important;
+  box-shadow: var(--clay-pill-shadow) !important;
+  transition: all 0.25s ease-in-out !important;
+}
+
+/* --------------------------------------------------------------------------
+   6. NAVBAR, "LET'S TALK" BUTTON & EYEBROW CLAY PILLS
+   -------------------------------------------------------------------------- */
+body:not(.webgis-page) .site-header .navbar,
+body:not(.webgis-page) .site-header.is-scrolled .navbar {
+  background: var(--clay-card-bg) !important;
+  border: none !important;
+  border-radius: 9999px !important;
+  padding: 0.44rem 0.68rem 0.44rem 0.95rem !important;
+  box-shadow: var(--clay-formula) !important;
+  transition: all 0.25s ease-in-out !important;
+}
+
+body:not(.webgis-page) .brand__name {
+  border-left: none !important;
+  padding-left: 0.35rem !important;
+  color: var(--heading-charcoal) !important;
+  font-weight: 700 !important;
+}
+
+@media (min-width: 981px) {
+  body:not(.webgis-page) .nav-menu {
+    background: var(--clay-recess-bg) !important;
+    border: none !important;
+    border-radius: 9999px !important;
+    padding: 0.22rem 0.32rem !important;
+    gap: 0.2rem !important;
+    box-shadow:
+      inset 3px 3px 6px rgba(44, 62, 80, 0.075),
+      inset -3px -3px 6px rgba(255, 255, 255, 0.85) !important;
+  }
+}
+
+body:not(.webgis-page) .nav-menu a {
+  border: none !important;
+  border-radius: 9999px !important;
+  color: var(--body-slate) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transition: all 0.25s ease-in-out !important;
+}
+
+body:not(.webgis-page) .nav-menu a[aria-current="page"] {
+  background: var(--clay-card-bg) !important;
+  color: var(--heading-charcoal) !important;
+  font-weight: 700 !important;
+  box-shadow: var(--clay-pill-shadow) !important;
+  transform: none !important;
+}
+
+body:not(.webgis-page) .nav-menu a:hover,
+body:not(.webgis-page) .nav-menu a:active {
+  background: var(--clay-blue) !important;
+  color: var(--clay-blue-text) !important;
+  box-shadow: var(--clay-pressed-shadow) !important;
+  transform: scale(0.98) !important;
+}
+
+body:not(.webgis-page) .theme-toggle,
+body:not(.webgis-page) .menu-toggle {
+  background: var(--clay-card-bg) !important;
+  border: none !important;
+  border-radius: 9999px !important;
+  color: var(--heading-charcoal) !important;
+  box-shadow: var(--clay-pill-shadow) !important;
+  transition: all 0.25s ease-in-out !important;
+}
+
+body:not(.webgis-page) .theme-toggle:hover,
+body:not(.webgis-page) .theme-toggle:active,
+body:not(.webgis-page) .menu-toggle:hover,
+body:not(.webgis-page) .menu-toggle:active {
+  box-shadow: var(--clay-pressed-shadow) !important;
+  transform: scale(0.96) !important;
+}
+
+/* "Let's Talk" & Primary Clay CTA Buttons */
+body:not(.webgis-page) .nav-contact,
+body:not(.webgis-page) .hero-button--primary,
+body:not(.webgis-page) .contact-cv-btn,
+body:not(.webgis-page) .button:not(.button--outline):not(.button--ghost),
+body:not(.webgis-page) .publication-card__doi {
+  background: var(--clay-cta-bg) !important;
+  border: none !important;
+  border-radius: 9999px !important;
+  color: var(--clay-cta-text) !important;
+  font-weight: 700 !important;
+  box-shadow:
+    8px 8px 18px rgba(44, 62, 80, 0.20),
+    -6px -6px 14px rgba(255, 255, 255, 0.95),
+    inset 2.5px 2.5px 5px rgba(255, 255, 255, 0.50),
+    inset -2.5px -2.5px 5px rgba(22, 58, 95, 0.22) !important;
+  transition: all 0.25s ease-in-out !important;
+}
+
+body:not(.webgis-page) .nav-contact:hover,
+body:not(.webgis-page) .hero-button--primary:hover,
+body:not(.webgis-page) .contact-cv-btn:hover,
+body:not(.webgis-page) .button:not(.button--outline):not(.button--ghost):hover,
+body:not(.webgis-page) .publication-card__doi:hover {
+  background: #236BB8 !important;
+  color: var(--clay-cta-text) !important;
+  transform: translateY(-1.5px) !important;
+}
+
+body:not(.webgis-page) .nav-contact:active,
+body:not(.webgis-page) .hero-button--primary:active,
+body:not(.webgis-page) .contact-cv-btn:active,
+body:not(.webgis-page) .button:not(.button--outline):not(.button--ghost):active,
+body:not(.webgis-page) .publication-card__doi:active {
+  background: #1D5CA0 !important;
+  color: var(--clay-cta-text) !important;
+  transform: translateY(1.5px) scale(0.98) !important;
+  box-shadow:
+    inset 4px 4px 8px rgba(15, 23, 42, 0.32),
+    inset -3px -3px 6px rgba(255, 255, 255, 0.4) !important;
+}
+
+body:not(.webgis-page) .hero-button--secondary,
+body:not(.webgis-page) .button--outline {
+  background: var(--clay-card-bg) !important;
+  border: none !important;
+  border-radius: 9999px !important;
+  color: var(--heading-charcoal) !important;
+  font-weight: 700 !important;
+  box-shadow: var(--clay-formula) !important;
+  transition: all 0.25s ease-in-out !important;
+}
+
+body:not(.webgis-page) .hero-button--secondary:hover,
+body:not(.webgis-page) .hero-button--secondary:active,
+body:not(.webgis-page) .button--outline:hover,
+body:not(.webgis-page) .button--outline:active {
+  box-shadow: var(--clay-pressed-shadow) !important;
+  transform: translateY(1.5px) scale(0.985) !important;
+}
+
+/* Section Eyebrow Clay Pills ("01 / ABOUT ME", "02 / EXPERIENCE") */
+body:not(.webgis-page) .eyebrow,
+body:not(.webgis-page) .hero-kicker {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: fit-content !important;
+  padding: 0.46rem 1.15rem !important;
+  border-radius: 9999px !important;
+  background: var(--clay-card-bg) !important;
+  border: none !important;
+  color: #1D63B8 !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  box-shadow: var(--clay-formula) !important;
+  margin-bottom: 0.85rem !important;
+  transition: all 0.25s ease-in-out !important;
+}
+
+body:not(.webgis-page) .eyebrow:hover,
+body:not(.webgis-page) .eyebrow:active,
+body:not(.webgis-page) .hero-kicker:hover {
+  box-shadow: var(--clay-pressed-shadow) !important;
+  transform: translateY(1px) scale(0.98) !important;
+}
+
+body:not(.webgis-page) .footer-meta-pill {
+  border-radius: 9999px !important;
+  padding: 0.5rem 1.25rem !important;
+}
+
+body:not(.webgis-page) .footer-meta-pill .footer-logo {
+  background: var(--clay-blue) !important;
+  border: none !important;
+  box-shadow: var(--clay-pill-shadow) !important;
+}
+
+
+/* ==========================================================================
+   DARK MODE CLAYMORPHISM OVERHAUL — #121824 (Deep Navy)
+   ========================================================================== */
+
+html[data-theme="dark"] {
+  background-color: #121824 !important;
+  color-scheme: dark;
+
+  /* 1. Deep Navy Canvas & Elevated Clay Card Surfaces */
+  --canvas-body-bg: #121824;     /* Deep Navy primary background */
+  --clay-card-bg: #1A2333;       /* Elevated Deep Slate-Navy clay surface */
+  --clay-recess-bg: #0D121C;     /* Recessed Deep Navy clay well */
+
+  /* 2. Eye-Comfort Dark Mode Typography (WCAG AA/AAA Compliant) */
+  --heading-charcoal: #F1F5F9;   /* Soft Starlight Off-White for h1, h2, h3 */
+  --heading-secondary: #E2E8F0;  /* Crisp Silver for subheadings */
+  --body-slate: #CBD5E1;         /* Comfortable Slate-Silver for body paragraphs */
+  --body-muted: #94A3B8;         /* Muted Slate for secondary captions/dates */
+
+  /* 3. Nocturnal Pastel Clay Pills + High-Contrast Luminous Pastel Text */
+  --clay-blue: #1D334E;
+  --clay-blue-text: #E0F2FE;
+
+  --clay-green: #163636;
+  --clay-green-text: #CCFBF1;
+
+  --clay-yellow: #382D1A;
+  --clay-yellow-text: #FEF3C7;
+
+  --clay-pink: #3B2226;
+  --clay-pink-text: #FFE4E6;
+
+  /* Vibrant Clay CTA */
+  --clay-cta-bg: #2573C9;
+  --clay-cta-text: #FFFFFF;
+
+  /* 4. Dark Mode 3D Extruded Clay Shadows (Top-Left Rim Light + Deep Navy Drop Shadow) */
+  --clay-formula:
+    12px 12px 24px rgba(5, 8, 15, 0.65),
+    -8px -8px 16px rgba(38, 52, 78, 0.28),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.08),
+    inset -2px -2px 5px rgba(5, 8, 15, 0.55);
+
+  --clay-pill-shadow:
+    8px 8px 16px rgba(5, 8, 15, 0.58),
+    -5px -5px 12px rgba(38, 52, 78, 0.25),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.10),
+    inset -2px -2px 4px rgba(5, 8, 15, 0.48);
+
+  --clay-pressed-shadow:
+    inset 4px 4px 8px rgba(5, 8, 15, 0.72),
+    inset -3px -3px 6px rgba(255, 255, 255, 0.07);
+}
+
+/* Global Deep Navy (#121824) Background Across All Sections */
+html[data-theme="dark"],
+html[data-theme="dark"] body:not(.webgis-page),
+html[data-theme="dark"] body:not(.webgis-page) main,
+html[data-theme="dark"] body:not(.webgis-page) .section,
+html[data-theme="dark"] body:not(.webgis-page) .about,
+html[data-theme="dark"] body:not(.webgis-page) .section--tint,
+html[data-theme="dark"] body:not(.webgis-page) .section--contact,
+html[data-theme="dark"] body:not(.webgis-page) .site-footer {
+  background-color: #121824 !important;
+  color: var(--body-slate) !important;
+}
+
+/* Seamless Hero Wave Transition into #121824 Deep Navy */
+html[data-theme="dark"] body:not(.webgis-page) .hero {
+  background: #121824 !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .hero-wave::after {
+  background:
+    radial-gradient(
+      ellipse 720px 460px at 50% 48%,
+      rgba(18, 24, 36, 0.84) 0%,
+      rgba(18, 24, 36, 0.48) 56%,
+      transparent 88%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(18, 24, 36, 0.15) 0%,
+      rgba(18, 24, 36, 0.35) 34%,
+      rgba(18, 24, 36, 0.68) 58%,
+      rgba(18, 24, 36, 0.92) 76%,
+      #121824 90%,
+      #121824 100%
+    ) !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .hero-wave__layer--base {
+  filter: brightness(0.78) contrast(1.06) saturate(0.95);
+}
+
+/* Dark Mode Section Dividers & Borders */
+html[data-theme="dark"] body:not(.webgis-page) main > .section + .section,
+html[data-theme="dark"] body:not(.webgis-page) .experience-list,
+html[data-theme="dark"] body:not(.webgis-page) .projects-grid,
+html[data-theme="dark"] body:not(.webgis-page) .publications-grid,
+html[data-theme="dark"] body:not(.webgis-page) .experience-item + .experience-item,
+html[data-theme="dark"] body:not(.webgis-page) .project-card + .project-card,
+html[data-theme="dark"] body:not(.webgis-page) .publication-card + .publication-card,
+html[data-theme="dark"] body:not(.webgis-page) .maps-carousel,
+html[data-theme="dark"] body:not(.webgis-page) .contact-links {
+  border-top-color: rgba(148, 163, 184, 0.16) !important;
+}
+
+/* Dark Mode Accent Headings & Links */
+html[data-theme="dark"] body:not(.webgis-page) .hero h1 em,
+html[data-theme="dark"] body:not(.webgis-page) .about__content h2#about-title em,
+html[data-theme="dark"] body:not(.webgis-page) .section h2 em {
+  color: #60A5FA !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .eyebrow,
+html[data-theme="dark"] body:not(.webgis-page) .hero-kicker {
+  color: #60A5FA !important;
+  background: var(--clay-card-bg) !important;
+  box-shadow: var(--clay-formula) !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .hero-narrative__lead {
+  color: #F1F5F9 !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .text-link,
+html[data-theme="dark"] body:not(.webgis-page) .contact-email,
+html[data-theme="dark"] body:not(.webgis-page) .contact-whatsapp,
+html[data-theme="dark"] body:not(.webgis-page) .publication-card__journal {
+  color: #60A5FA !important;
+  border-color: rgba(96, 165, 250, 0.35) !important;
+}
+
+/* Dark Mode Hero Showcase Frame */
+html[data-theme="dark"] body:not(.webgis-page) .hero-showcase-frame {
+  background: var(--clay-card-bg) !important;
+  box-shadow: var(--clay-formula) !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .hero-showcase-frame__bar {
+  background: var(--clay-recess-bg) !important;
+  border: none !important;
+  box-shadow:
+    inset 2px 2px 5px rgba(5, 8, 15, 0.65),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.05) !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .hero-showcase-frame__badge {
+  color: #E2E8F0 !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .hero-showcase-frame__coords {
+  color: #60A5FA !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .hero-showcase-frame__viewport {
+  background: var(--clay-recess-bg) !important;
+  border: none !important;
+  box-shadow:
+    inset 3px 3px 7px rgba(5, 8, 15, 0.7),
+    inset -3px -3px 7px rgba(255, 255, 255, 0.05) !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .hero-showcase-frame__icon {
+  background: var(--clay-card-bg) !important;
+  border: none !important;
+  color: #60A5FA !important;
+  box-shadow: var(--clay-pill-shadow) !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .hero-showcase-frame__title {
+  color: #F1F5F9 !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .hero-showcase-frame__hint {
+  color: #94A3B8 !important;
+}
+
+/* Dark Mode 3D Clay Beads inside Expertise Pills */
+html[data-theme="dark"] body:not(.webgis-page) .about__expertise .expertise-tags li::before {
+  background: #60A5FA !important;
+  box-shadow:
+    2px 2px 4px rgba(5, 8, 15, 0.65),
+    -1px -1px 2px rgba(255, 255, 255, 0.25),
+    inset 1.5px 1.5px 2px rgba(255, 255, 255, 0.45),
+    inset -1.5px -1.5px 2px rgba(5, 8, 15, 0.5) !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .about__expertise .expertise-tags li:nth-child(4n+2)::before {
+  background: #2DD4BF !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .about__expertise .expertise-tags li:nth-child(4n+3)::before {
+  background: #FBBF24 !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .about__expertise .expertise-tags li:nth-child(4n+4)::before {
+  background: #FB7185 !important;
+}
+
+/* Dark Mode Maps Deck & Cards */
+html[data-theme="dark"] body:not(.webgis-page) .maps-carousel__plate {
+  background: var(--clay-card-bg) !important;
+  box-shadow: var(--clay-formula) !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .maps-carousel__plate-title {
+  color: #F1F5F9 !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .maps-card__badge {
+  background: var(--clay-blue) !important;
+  color: var(--clay-blue-text) !important;
+  border: none !important;
+  box-shadow: var(--clay-pill-shadow) !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .maps-card__media {
+  background: var(--clay-recess-bg) !important;
+  border: none !important;
+}
+
+/* Dark Mode Footer Meta Pill & Watermark */
+html[data-theme="dark"] body:not(.webgis-page) .footer-giant-watermark__main {
+  color: rgba(96, 165, 250, 0.22) !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .footer-meta-pill p {
+  color: #F1F5F9 !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .footer-meta-pill .footer-tagline {
+  color: #94A3B8 !important;
+}
+
+/* Dark Mode Mobile Nav Panel */
+@media (max-width: 980px) {
+  html[data-theme="dark"] body:not(.webgis-page) .nav-panel {
+    background: var(--clay-card-bg) !important;
+    border: none !important;
+    box-shadow: var(--clay-formula) !important;
+  }
+}
+
+/* Fix Hero Narrative Text, Primary Button Rim Light, and Showcase Placeholder in Dark Mode */
+html[data-theme="dark"] body:not(.webgis-page) .hero h1 {
+  color: #F1F5F9 !important;
+  text-shadow: 0 2px 18px rgba(5, 8, 15, 0.65) !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .hero-narrative p,
+html[data-theme="dark"] body:not(.webgis-page) .hero-narrative__body {
+  color: #CBD5E1 !important;
+  text-shadow: 0 1px 12px rgba(5, 8, 15, 0.75) !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .hero-narrative__lead,
+html[data-theme="dark"] body:not(.webgis-page) .hero-narrative__closing {
+  color: #F1F5F9 !important;
+  text-shadow: 0 1px 12px rgba(5, 8, 15, 0.75) !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .nav-contact,
+html[data-theme="dark"] body:not(.webgis-page) .hero-button--primary,
+html[data-theme="dark"] body:not(.webgis-page) .contact-cv-btn,
+html[data-theme="dark"] body:not(.webgis-page) .button:not(.button--outline):not(.button--ghost),
+html[data-theme="dark"] body:not(.webgis-page) .publication-card__doi {
+  background: var(--clay-cta-bg) !important;
+  color: #FFFFFF !important;
+  box-shadow:
+    8px 8px 18px rgba(5, 8, 15, 0.65),
+    -5px -5px 12px rgba(56, 128, 216, 0.22),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.35),
+    inset -2px -2px 5px rgba(5, 8, 15, 0.45) !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .nav-contact:hover,
+html[data-theme="dark"] body:not(.webgis-page) .hero-button--primary:hover,
+html[data-theme="dark"] body:not(.webgis-page) .contact-cv-btn:hover,
+html[data-theme="dark"] body:not(.webgis-page) .button:not(.button--outline):not(.button--ghost):hover,
+html[data-theme="dark"] body:not(.webgis-page) .publication-card__doi:hover {
+  background: #3282DC !important;
+  box-shadow:
+    10px 10px 22px rgba(5, 8, 15, 0.72),
+    -6px -6px 14px rgba(72, 148, 240, 0.28),
+    inset 2.5px 2.5px 5px rgba(255, 255, 255, 0.42),
+    inset -2.5px -2.5px 5px rgba(5, 8, 15, 0.48) !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .hero-showcase-frame__badge {
+  background: var(--clay-card-bg) !important;
+  border: none !important;
+  color: #E2E8F0 !important;
+  box-shadow: var(--clay-pill-shadow) !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .hero-showcase-frame__placeholder {
+  background: var(--clay-card-bg) !important;
+  border: none !important;
+  border-radius: 22px !important;
+  box-shadow: var(--clay-formula) !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .hero-showcase-frame__grid {
+  background-image:
+    linear-gradient(to right, rgba(96, 165, 250, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(96, 165, 250, 0.08) 1px, transparent 1px) !important;
+}
+
+
+/* ==========================================================================
+   SCENIC FOOTER TRANSITION (No Moose / No Watermark — Smooth Light & Dark Mode)
+   ========================================================================== */
+
+body:not(.webgis-page) .section--contact {
+  padding-bottom: 1rem !important;
+}
+
+body:not(.webgis-page) .site-footer.site-footer--scenic {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  margin-top: 0 !important;
+  padding: 0 !important;
+  border-top: none !important;
+  background: var(--canvas-body-bg) !important;
+  overflow: visible !important;
+  z-index: 3;
+}
+
+body:not(.webgis-page) .footer-scenic-stage {
+  position: relative;
+  width: 100%;
+  padding-top: clamp(1.5rem, 4vw, 3.5rem);
+  overflow: hidden;
+  /* Seamless atmospheric horizon glow behind the mountain silhouette in Light Mode (#F0F4F8) */
+  background:
+    radial-gradient(
+      ellipse 72% 48% at 44% 58%,
+      rgba(252, 218, 208, 0.42) 0%,
+      rgba(216, 236, 250, 0.38) 48%,
+      rgba(240, 244, 248, 0) 82%
+    ),
+    linear-gradient(
+      to bottom,
+      var(--canvas-body-bg) 0%,
+      var(--canvas-body-bg) 42%,
+      #E5EEF6 78%,
+      #DAE6F1 100%
+    ) !important;
+}
+
+body:not(.webgis-page) .footer-scenic-stage::before {
+  display: none !important;
+}
+
+body:not(.webgis-page) .footer-landscape-wrap {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  margin-top: 0 !important;
+  pointer-events: none;
+  user-select: none;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+
+body:not(.webgis-page) .footer-landscape-img {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 230px;
+  max-height: 540px;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: drop-shadow(0 -8px 24px rgba(252, 218, 208, 0.25));
+  transition: filter 0.3s ease;
+}
+
+/* Eagle soaring on the right across the transition between #contact and footer */
+body:not(.webgis-page) .wildlife-eagle {
+  position: absolute;
+  top: clamp(-4.5rem, -4vw, -1.5rem) !important;
+  right: clamp(0.5rem, 2.5vw, 3rem) !important;
+  width: clamp(240px, 33vw, 490px) !important;
+  z-index: 8;
+  pointer-events: none;
+  user-select: none;
+  transition: filter 0.3s ease;
+}
+
+/* Centered Claymorphic Footer Meta Pill */
+body:not(.webgis-page) .footer-bottom-bar {
+  position: absolute;
+  bottom: clamp(1rem, 2.4vw, 2rem);
+  left: 0;
+  right: 0;
+  z-index: 6;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding-right: 0 !important;
+  pointer-events: none;
+}
+
+/* Dark Mode (#121824) Footer Transition & Twilight Mountain Grading */
+html[data-theme="dark"] body:not(.webgis-page) .site-footer.site-footer--scenic {
+  background: #121824 !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .footer-scenic-stage {
+  /* Seamless Deep Navy (#121824) horizon with soft twilight alpenglow behind the peaks */
+  background:
+    radial-gradient(
+      ellipse 72% 48% at 44% 58%,
+      rgba(225, 91, 62, 0.14) 0%,
+      rgba(37, 115, 201, 0.16) 48%,
+      rgba(18, 24, 36, 0) 82%
+    ),
+    linear-gradient(
+      to bottom,
+      #121824 0%,
+      #121824 44%,
+      #151E2E 78%,
+      #182336 100%
+    ) !important;
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .footer-landscape-img {
+  filter: brightness(0.84) contrast(1.06) saturate(0.92) drop-shadow(0 -10px 28px rgba(37, 115, 201, 0.16));
+}
+
+html[data-theme="dark"] body:not(.webgis-page) .wildlife-eagle {
+  filter: brightness(0.88) contrast(1.04);
+}
+
+@media (max-width: 900px) {
+  body:not(.webgis-page) .footer-scenic-stage {
+    padding-top: clamp(1.5rem, 6vw, 2.75rem);
+  }
+
+  body:not(.webgis-page) .wildlife-eagle {
+    width: clamp(190px, 48vw, 290px) !important;
+    right: -1vw !important;
+    top: -1.8rem !important;
+  }
+
+  body:not(.webgis-page) .footer-bottom-bar {
+    justify-content: center !important;
+    padding-inline: 1rem !important;
+  }
+}

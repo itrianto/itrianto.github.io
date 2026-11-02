@@ -30,6 +30,11 @@ menuLinks.forEach((link) => link.addEventListener('click', () => {
   toggle.setAttribute('aria-expanded', 'false');
 }));
 
+document.querySelector('.nav-contact')?.addEventListener('click', () => {
+  menu.classList.remove('is-open');
+  toggle.setAttribute('aria-expanded', 'false');
+});
+
 document.addEventListener('keydown', (event) => {
   if (event.key !== 'Escape' || !menu.classList.contains('is-open')) return;
   menu.classList.remove('is-open');
@@ -40,6 +45,44 @@ document.addEventListener('keydown', (event) => {
 window.addEventListener('scroll', () => {
   header.classList.toggle('is-scrolled', window.scrollY > 12);
 }, { passive: true });
+
+/* Animasi ombak mengalir ke atas seperti air saat di-scroll ke bawah */
+const heroWave = document.querySelector('.hero-wave');
+if (heroWave && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  let targetScroll = window.scrollY;
+  let currentScroll = window.scrollY;
+  let rafId = null;
+
+  const updateWave = () => {
+    currentScroll += (targetScroll - currentScroll) * 0.12;
+    const ySlow = -currentScroll * 0.46;
+    const yFast = -currentScroll * 0.72;
+    const xFast = Math.sin(currentScroll * 0.018) * 14;
+    const xSlow = Math.cos(currentScroll * 0.012) * -8;
+    const scale = 1.06 + Math.min(currentScroll * 0.00022, 0.14);
+    const stretch = 1.08 + Math.sin(currentScroll * 0.022) * 0.035;
+
+    heroWave.style.setProperty('--wave-y', `${ySlow.toFixed(2)}px`);
+    heroWave.style.setProperty('--wave-y-fast', `${yFast.toFixed(2)}px`);
+    heroWave.style.setProperty('--wave-x', `${xFast.toFixed(2)}px`);
+    heroWave.style.setProperty('--wave-x-slow', `${xSlow.toFixed(2)}px`);
+    heroWave.style.setProperty('--wave-scale', scale.toFixed(4));
+    heroWave.style.setProperty('--wave-stretch', stretch.toFixed(4));
+
+    if (Math.abs(targetScroll - currentScroll) > 0.15) {
+      rafId = requestAnimationFrame(updateWave);
+    } else {
+      rafId = null;
+    }
+  };
+
+  window.addEventListener('scroll', () => {
+    targetScroll = Math.max(0, window.scrollY);
+    if (!rafId) {
+      rafId = requestAnimationFrame(updateWave);
+    }
+  }, { passive: true });
+}
 
 const sections = menuLinks.map((link) => document.querySelector(link.getAttribute('href')));
 const observer = new IntersectionObserver((entries) => {
@@ -222,7 +265,7 @@ const imageObserver = new IntersectionObserver((entries, obs) => {
 
 lazyImages.forEach((img) => imageObserver.observe(img));
 
-/* Maps Archive Carousel & Lightbox */
+/* Maps Archive Deck (Hover Auto Fan & Stack) & Lightbox */
 const mapsCarousel = document.querySelector('.maps-carousel');
 const mapsPlates = [...document.querySelectorAll('.maps-carousel__plate')];
 const mapsThumbs = [...document.querySelectorAll('.maps-carousel__thumb')];
@@ -239,19 +282,27 @@ const mapsLbTitle = mapsLightbox.querySelector('.maps-lightbox__plate-title');
 const mapsLbBackdrop = mapsLightbox.querySelector('.maps-lightbox__backdrop');
 
 let mapsIndex = 0;
+let isDeckFanned = false;
+
+function setDeckFanned(fanned) {
+  const next = Boolean(fanned);
+  if (isDeckFanned === next && mapsCarousel?.classList.contains('is-fanned') === next) return;
+  isDeckFanned = next;
+  if (!mapsCarousel) return;
+  mapsCarousel.classList.toggle('is-fanned', isDeckFanned);
+  mapsCarousel.setAttribute('data-deck-state', isDeckFanned ? 'fanned' : 'stacked');
+}
 
 function mapsUpdate() {
   mapsPlates.forEach((plate, i) => {
-    const show = i === mapsIndex;
-    plate.style.display = show ? '' : 'none';
-    if (show) plate.querySelector('img').loading = 'eager';
+    plate.style.display = '';
+    plate.classList.toggle('is-active', i === mapsIndex);
   });
   mapsThumbs.forEach((thumb, i) => {
     thumb.classList.toggle('maps-carousel__thumb--active', i === mapsIndex);
-    thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
   });
-  mapsPrev.disabled = mapsIndex === 0;
-  mapsNext.disabled = mapsIndex === mapsPlates.length - 1;
+  if (mapsPrev) mapsPrev.disabled = mapsIndex === 0;
+  if (mapsNext) mapsNext.disabled = mapsIndex === mapsPlates.length - 1;
 }
 
 function mapsGoTo(index) {
@@ -277,7 +328,7 @@ function mapsCloseLightbox() {
 function mapsSyncLightbox() {
   const plate = mapsPlates[mapsIndex];
   const img = plate.querySelector('img');
-  mapsLbImage.src = img.src;
+  mapsLbImage.src = img.dataset.full || img.src;
   mapsLbImage.alt = img.alt;
   mapsLbImage.loading = 'eager';
   mapsLbNumber.textContent = plate.querySelector('.maps-carousel__plate-number').textContent;
@@ -286,11 +337,53 @@ function mapsSyncLightbox() {
   mapsLbNext.disabled = mapsIndex === mapsPlates.length - 1;
 }
 
-mapsPrev.addEventListener('click', () => mapsGoTo(mapsIndex - 1));
-mapsNext.addEventListener('click', () => mapsGoTo(mapsIndex + 1));
+if (mapsPrev) mapsPrev.addEventListener('click', () => mapsGoTo(mapsIndex - 1));
+if (mapsNext) mapsNext.addEventListener('click', () => mapsGoTo(mapsIndex + 1));
+
+const mapsMain = document.querySelector('.maps-carousel__main');
+if (mapsMain) {
+  mapsMain.addEventListener('mouseenter', () => {
+    setDeckFanned(true);
+  });
+  mapsMain.addEventListener('mouseleave', () => {
+    setDeckFanned(false);
+  });
+}
 
 mapsPlates.forEach((plate) => {
-  plate.addEventListener('click', () => mapsOpenLightbox(Number(plate.dataset.index)));
+  plate.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const idx = Number(plate.dataset.index);
+    if (!isDeckFanned) {
+      mapsIndex = idx;
+      mapsUpdate();
+      setDeckFanned(true);
+    } else {
+      mapsOpenLightbox(idx);
+    }
+  });
+
+  plate.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      e.stopPropagation();
+      const idx = Number(plate.dataset.index);
+      if (!isDeckFanned) {
+        mapsIndex = idx;
+        mapsUpdate();
+        setDeckFanned(true);
+      } else {
+        mapsOpenLightbox(idx);
+      }
+    }
+  });
+});
+
+document.addEventListener('click', (e) => {
+  if (!isDeckFanned || mapsLightbox.classList.contains('is-open')) return;
+  if (mapsCarousel && !mapsCarousel.contains(e.target)) {
+    setDeckFanned(false);
+  }
 });
 
 mapsThumbs.forEach((thumb) => {
@@ -315,16 +408,6 @@ mapsLightbox.addEventListener('keydown', (event) => {
   if (event.key === 'ArrowRight') { event.preventDefault(); mapsGoTo(mapsIndex + 1); mapsSyncLightbox(); }
 });
 
-let mapsTouchStartX = 0;
-const mapsMain = document.querySelector('.maps-carousel__main');
-mapsMain.addEventListener('touchstart', (e) => {
-  mapsTouchStartX = e.changedTouches[0].screenX;
-}, { passive: true });
-mapsMain.addEventListener('touchend', (e) => {
-  const diff = mapsTouchStartX - e.changedTouches[0].screenX;
-  if (Math.abs(diff) > 50) { mapsGoTo(diff > 0 ? mapsIndex + 1 : mapsIndex - 1); }
-}, { passive: true });
-
 const mapsLbContent = mapsLightbox.querySelector('.maps-lightbox__content');
 let mapsLbTouchStartX = 0;
 mapsLbContent.addEventListener('touchstart', (e) => {
@@ -336,3 +419,4 @@ mapsLbContent.addEventListener('touchend', (e) => {
 }, { passive: true });
 
 mapsUpdate();
+setDeckFanned(false);

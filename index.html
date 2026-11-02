@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Portofolio GIS Irvan Trianto: pemetaan, hidrografi, lingkungan, dan WebGIS.">
   <title>Irvan Trianto | GIS Portfolio</title>
-  <link rel="icon" href="assets/icons/logo.png" type="image/png">
+  <link rel="icon" href="assets/images/icons/logo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="assets/images/hero/background.jpg">
-  <link rel="stylesheet" href="assets/css/style.css?v=bubble-glass">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/images/hero/hero-bg.png">
+  <link rel="stylesheet" href="assets/css/style.css?v=balloon-3d">
   <script>(function(){try{var t=localStorage.getItem('theme');if((t==='dark')||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
 </head>
 <body>
@@ -27,9 +27,13 @@
       </button>
       <div class="nav-panel" id="nav-menu">
         <ul class="nav-menu">
-          <li><a href="#home">Home</a></li><li><a href="#about">About</a></li>
-          <li><a href="#experience">Experience</a></li><li><a href="#projects">Projects</a></li>
-          <li><a href="#webgis">WebGIS</a></li><li><a href="#maps-archive">Arsip Peta</a></li><li><a href="#publications">Publications</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Selected Work</a></li>
+          <li><a href="#webgis">WebGIS</a></li>
+          <li><a href="#maps-archive">Arsip Peta</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
         <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Aktifkan mode gelap"><svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg><svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path></svg></button>
         <a class="nav-contact" href="#contact">Let's talk <span aria-hidden="true">↗</span></a>
@@ -39,20 +43,53 @@
 
   <main id="main-content">
     <section class="hero" id="home" aria-labelledby="hero-title">
-      <div class="container section__content hero-grid grid grid--2">
+      <div class="hero-wave" aria-hidden="true">
+        <div class="hero-wave__layer hero-wave__layer--base"></div>
+        <div class="hero-wave__layer hero-wave__layer--flow"></div>
+      </div>
+      <div class="container section__content hero-grid">
         <div class="hero-copy section__header">
-          <p class="hero-kicker">GIS &amp; Spatial Data Analyst</p>
-          <h1 id="hero-title">Irvan<br><em>Trianto</em></h1>
-          <p class="hero-lead">Geography graduate with hands-on experience in GIS, hydrographic surveying, environmental mapping, and spatial analysis. Experienced in supporting marine infrastructure, conservation, and renewable energy projects through accurate spatial data, mapping, and field surveying.</p>
+          <p class="hero-kicker">GEOSPATIAL PROFESSIONAL · SPATIAL DATA &amp; MAPPING</p>
+          <h1 id="hero-title">Understanding places through data, maps, and <em>real-world perspectives.</em></h1>
+          <div class="hero-narrative">
+            <p class="hero-lead">I'm Irvan Trianto, a Geospatial Professional with a passion for exploring the world through spatial data, mapping technologies, and analytical thinking.</p>
+            <p class="hero-body">My work brings together geographic information, technology, and real-world observations to uncover spatial patterns, understand complex environments, and communicate meaningful insights. Through professional projects, research, and fieldwork, I continuously explore different ways to transform spatial information into something useful, accessible, and impactful.</p>
+            <p class="hero-closing">Every project offers a new perspective on the world around us.</p>
+          </div>
           <div class="hero-actions">
-            <a class="hero-button hero-button--primary" href="#projects">Explore Projects <span aria-hidden="true">→</span></a>
-            <a class="hero-button hero-button--secondary" href="assets/documents/irvan-trianto-cv.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
+            <a class="hero-button hero-button--primary" href="#projects">
+              <span>Explore my work</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a class="hero-button hero-button--secondary" href="#contact">
+              <span>Get in touch</span>
+            </a>
           </div>
         </div>
-        <figure class="hero-map" aria-label="Hero photography">
-          <img class="hero-map__image" src="assets/images/hero/hero.png" alt="Hero photography" width="800" height="600" fetchpriority="high">
-          <figcaption><span>GIS · Hydrography</span><span>Environmental Mapping · Spatial Analysis</span></figcaption>
-        </figure>
+
+        <div class="hero-transition-showcase" aria-label="Bingkai visual peta atau foto utama">
+          <div class="hero-showcase-frame">
+            <div class="hero-showcase-frame__bar" aria-hidden="true">
+              <div class="hero-showcase-frame__dots">
+                <span class="dot dot--coral"></span>
+                <span class="dot dot--yellow"></span>
+                <span class="dot dot--teal"></span>
+              </div>
+              <span class="hero-showcase-frame__badge">SPATIAL VIEWPORT · MAP / PHOTO</span>
+              <span class="hero-showcase-frame__coords">WGS 84 · EPSG:4326</span>
+            </div>
+            <div class="hero-showcase-frame__viewport">
+              <div class="hero-showcase-frame__grid" aria-hidden="true"></div>
+              <div class="hero-showcase-frame__placeholder">
+                <span class="hero-showcase-frame__icon" aria-hidden="true">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+                </span>
+                <p class="hero-showcase-frame__title">Featured Spatial Map / Photo Frame</p>
+                <p class="hero-showcase-frame__hint">Area bingkai transisi 3D untuk menampilkan peta utama atau dokumentasi lapangan</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <a class="scroll-cue" href="#about"><span>Scroll to explore</span><i aria-hidden="true"></i></a>
     </section>
@@ -60,25 +97,44 @@
     <section class="section about" id="about" aria-labelledby="about-title">
       <div class="container section__content about__grid grid grid--2">
         <div class="about__content section__header about-reveal">
-          <p class="eyebrow">01 / About me</p>
+          <p class="eyebrow">01 / ABOUT ME</p>
           <h2 id="about-title">Geospatial<br><em>professional.</em></h2>
-          <p class="about__bio">Geospatial professional with hands on experience in spatial data management, digital mapping, and GIS based project support within a government/BUMN infrastructure project (PLN floating solar power plant, 100 MWac). Skilled in processing spatial data in GeoJSON, SHP, KML, and Excel/CSV formats, working with GPS coordinates and projection systems, and managing spatial databases (PostgreSQL/PostGIS). Familiar with Leaflet for WebGIS visualization. Brings distinct domain strength in marine and coastal/fisheries related geospatial data from hydrographic survey and coral reef conservation project experience. Comfortable coordinating between technical and operational teams, with a track record of cross disciplinary collaboration in field and research settings.</p>
-          <div class="about__expertise" aria-labelledby="expertise-title">
-            <p id="expertise-title">Core expertise</p>
-            <ul class="expertise-tags"><li>Geographic Information Systems (GIS)</li><li>Hydrographic Survey</li><li>Spatial Analysis</li><li>Environmental Mapping</li><li>Remote Sensing</li><li>Cartography</li></ul>
+          <div class="about__narrative">
+            <p class="about__bio">My journey in geospatial work has taken me across different environments, industries, and project disciplines. From land and infrastructure mapping to marine surveys, coastal conservation, and environmental monitoring, each experience has shaped how I approach spatial challenges.</p>
+            <p class="about__bio">I have worked across both field and office environments, combining data collection, spatial processing, quality control, analysis, and visualization. Beyond producing maps, I value the process behind them: understanding the context, ensuring data reliability, and translating technical information into something meaningful and useful.</p>
+            <p class="about__bio">I believe that every geospatial project offers a different perspective, and I enjoy exploring how spatial technology can contribute to a better understanding of the world around us.</p>
+          </div>
+          <div class="about__expertise about-bubble-3d" aria-labelledby="expertise-title">
+            <h3 class="about__subhead" id="expertise-title">Core Expertise</h3>
+            <ul class="expertise-tags">
+              <li>GIS &amp; Spatial Data Management</li>
+              <li>Spatial Analysis &amp; Cartography</li>
+              <li>Remote Sensing &amp; Environmental Mapping</li>
+              <li>Hydrographic &amp; Marine Surveying</li>
+              <li>Land &amp; Infrastructure Mapping</li>
+              <li>WebGIS &amp; Spatial Visualization</li>
+            </ul>
           </div>
           <div class="about__education" aria-labelledby="education-title">
-            <p id="education-title">Education</p>
-            <p><strong>Bachelor of Geography</strong><span>Universitas Negeri Semarang</span><span>2021–2025 · GPA 3.79/4.00</span></p>
+            <h3 class="about__subhead" id="education-title">Education</h3>
+            <p class="about__edu-detail">
+              <strong>Bachelor's Degree in Geography</strong>
+              <span>Universitas Negeri Semarang</span>
+            </p>
           </div>
         </div>
-        <figure class="about__portrait about-reveal" aria-label="Portret profesional Irvan Trianto">
-          <div class="portrait-frame">
-            <img class="portrait-frame__image" src="assets/images/profile/aboutme.JPG" alt="Irvan Trianto, Geospatial practitioner" width="600" height="800" loading="lazy">
-            <span class="portrait-coordinate portrait-coordinate--top" aria-hidden="true">01° 06′ S</span>
-            <span class="portrait-coordinate portrait-coordinate--bottom" aria-hidden="true">106° 49′ E</span>
+        <figure class="about__portrait about-reveal" aria-label="Potret profesional Irvan Trianto">
+          <div class="portrait-frame portrait-bubble-3d">
+            <div class="portrait-frame__media">
+              <img class="portrait-frame__image" src="assets/images/profile/aboutme.JPG" alt="Irvan Trianto, Geospatial Professional" width="600" height="800" loading="lazy">
+              <span class="portrait-coordinate portrait-coordinate--top" aria-hidden="true">01° 06′ S</span>
+              <span class="portrait-coordinate portrait-coordinate--bottom" aria-hidden="true">106° 49′ E</span>
+            </div>
+            <figcaption class="portrait-frame__caption">
+              <strong>Irvan Trianto</strong>
+              <span>Geospatial Professional</span>
+            </figcaption>
           </div>
-          <figcaption><span>Irvan Trianto</span><span>Geospatial practitioner</span></figcaption>
         </figure>
       </div>
     </section>
@@ -245,50 +301,81 @@
           <h2 id="maps-title">Peta <em>pilihan.</em></h2>
           <p>Koleksi peta tematik dari berbagai proyek survei dan analisis spasial.</p>
         </div>
-        <div class="maps-carousel">
+        <div class="maps-carousel" data-deck-state="stacked">
           <div class="maps-carousel__viewer">
             <button class="maps-carousel__nav maps-carousel__nav--prev" type="button" aria-label="Peta sebelumnya">←</button>
-            <div class="maps-carousel__main">
-              <div class="maps-carousel__plate" data-index="0">
-                <p class="maps-carousel__plate-number">PLATE 01</p>
+            <div class="maps-carousel__main" role="region" aria-label="Tumpukan kartu peta interaktif, arahkan kursor untuk membuka jajaran kartu">
+              <div class="maps-carousel__plate" data-index="0" style="--i: 0;" tabindex="0" role="button" aria-label="Plate 01: Peta Batimetri, Perairan Bintan">
+                <div class="maps-card__top">
+                  <p class="maps-carousel__plate-number">PLATE 01</p>
+                  <span class="maps-card__Zoom" aria-hidden="true">↗</span>
+                </div>
+                <div class="maps-card__media">
+                  <img src="assets/images/maps/thumbs/bati-bintan.webp" data-full="assets/images/maps/bati-bintan.jpg" alt="Peta Batimetri, Perairan Bintan" width="520" height="390" decoding="async">
+                </div>
                 <h3 class="maps-carousel__plate-title">Peta Batimetri, Perairan Bintan</h3>
-                <img src="assets/images/maps/bati-bintan.jpg" alt="Peta Batimetri, Perairan Bintan" loading="lazy">
               </div>
-              <div class="maps-carousel__plate" data-index="1" style="display:none;">
-                <p class="maps-carousel__plate-number">PLATE 02</p>
+              <div class="maps-carousel__plate" data-index="1" style="--i: 1;" tabindex="0" role="button" aria-label="Plate 02: Arahan Fungsi Lahan, Kudus (2023)">
+                <div class="maps-card__top">
+                  <p class="maps-carousel__plate-number">PLATE 02</p>
+                  <span class="maps-card__Zoom" aria-hidden="true">↗</span>
+                </div>
+                <div class="maps-card__media">
+                  <img src="assets/images/maps/thumbs/arahan-fungsi-lahan-kudus-2023.webp" data-full="assets/images/maps/arahan-fungsi-lahan-kudus-2023.jpg" alt="Arahan Fungsi Lahan, Kudus (2023)" width="520" height="390" decoding="async">
+                </div>
                 <h3 class="maps-carousel__plate-title">Arahan Fungsi Lahan, Kudus (2023)</h3>
-                <img src="assets/images/maps/arahan-fungsi-lahan-kudus-2023.jpg" alt="Arahan Fungsi Lahan, Kudus (2023)" loading="lazy">
               </div>
-              <div class="maps-carousel__plate" data-index="2" style="display:none;">
-                <p class="maps-carousel__plate-number">PLATE 03</p>
+              <div class="maps-carousel__plate" data-index="2" style="--i: 2;" tabindex="0" role="button" aria-label="Plate 03: Sebaran Terumbu Karang, Perairan Bintan">
+                <div class="maps-card__top">
+                  <p class="maps-carousel__plate-number">PLATE 03</p>
+                  <span class="maps-card__Zoom" aria-hidden="true">↗</span>
+                </div>
+                <div class="maps-card__media">
+                  <img src="assets/images/maps/thumbs/coral.webp" data-full="assets/images/maps/coral.png" alt="Sebaran Terumbu Karang, Perairan Bintan" width="520" height="390" decoding="async">
+                </div>
                 <h3 class="maps-carousel__plate-title">Sebaran Terumbu Karang, Perairan Bintan</h3>
-                <img src="assets/images/maps/coral.png" alt="Sebaran Terumbu Karang, Perairan Bintan" loading="lazy">
               </div>
-              <div class="maps-carousel__plate" data-index="3" style="display:none;">
-                <p class="maps-carousel__plate-number">PLATE 04</p>
+              <div class="maps-carousel__plate" data-index="3" style="--i: 3;" tabindex="0" role="button" aria-label="Plate 04: Sebaran Kasus TBC (2025)">
+                <div class="maps-card__top">
+                  <p class="maps-carousel__plate-number">PLATE 04</p>
+                  <span class="maps-card__Zoom" aria-hidden="true">↗</span>
+                </div>
+                <div class="maps-card__media">
+                  <img src="assets/images/maps/thumbs/peta-persebaran-tbc-2025.webp" data-full="assets/images/maps/peta-persebaran-tbc-2025.png" alt="Sebaran Kasus TBC (2025)" width="520" height="390" decoding="async">
+                </div>
                 <h3 class="maps-carousel__plate-title">Sebaran Kasus TBC (2025)</h3>
-                <img src="assets/images/maps/peta-persebaran-tbc-2025.png" alt="Sebaran Kasus TBC (2025)" loading="lazy">
               </div>
-              <div class="maps-carousel__plate" data-index="4" style="display:none;">
-                <p class="maps-carousel__plate-number">PLATE 05</p>
+              <div class="maps-carousel__plate" data-index="4" style="--i: 4;" tabindex="0" role="button" aria-label="Plate 05: Sebaran Lamun, Perairan Bintan">
+                <div class="maps-card__top">
+                  <p class="maps-carousel__plate-number">PLATE 05</p>
+                  <span class="maps-card__Zoom" aria-hidden="true">↗</span>
+                </div>
+                <div class="maps-card__media">
+                  <img src="assets/images/maps/thumbs/seagrass.webp" data-full="assets/images/maps/seagrass.png" alt="Sebaran Lamun, Perairan Bintan" width="520" height="390" decoding="async">
+                </div>
                 <h3 class="maps-carousel__plate-title">Sebaran Lamun, Perairan Bintan</h3>
-                <img src="assets/images/maps/seagrass.png" alt="Sebaran Lamun, Perairan Bintan" loading="lazy">
               </div>
-              <div class="maps-carousel__plate" data-index="5" style="display:none;">
-                <p class="maps-carousel__plate-number">PLATE 06</p>
+              <div class="maps-carousel__plate" data-index="5" style="--i: 5;" tabindex="0" role="button" aria-label="Plate 06: Peta Geomorfologi, Kediri (2023)">
+                <div class="maps-card__top">
+                  <p class="maps-carousel__plate-number">PLATE 06</p>
+                  <span class="maps-card__Zoom" aria-hidden="true">↗</span>
+                </div>
+                <div class="maps-card__media">
+                  <img src="assets/images/maps/thumbs/geomor-map-kediri-2023.webp" data-full="assets/images/maps/geomor-map-kediri-2023.jpg" alt="Peta Geomorfologi, Kediri (2023)" width="520" height="390" decoding="async">
+                </div>
                 <h3 class="maps-carousel__plate-title">Peta Geomorfologi, Kediri (2023)</h3>
-                <img src="assets/images/maps/geomor-map-kediri-2023.jpg" alt="Peta Geomorfologi, Kediri (2023)" loading="lazy">
               </div>
             </div>
             <button class="maps-carousel__nav maps-carousel__nav--next" type="button" aria-label="Peta berikutnya">→</button>
           </div>
-          <div class="maps-carousel__thumbnails">
-            <button class="maps-carousel__thumb maps-carousel__thumb--active" data-index="0" type="button" aria-label="Lihat Plate 01"><img src="assets/images/maps/bati-bintan.jpg" alt="" loading="lazy"></button>
-            <button class="maps-carousel__thumb" data-index="1" type="button" aria-label="Lihat Plate 02"><img src="assets/images/maps/arahan-fungsi-lahan-kudus-2023.jpg" alt="" loading="lazy"></button>
-            <button class="maps-carousel__thumb" data-index="2" type="button" aria-label="Lihat Plate 03"><img src="assets/images/maps/coral.png" alt="" loading="lazy"></button>
-            <button class="maps-carousel__thumb" data-index="3" type="button" aria-label="Lihat Plate 04"><img src="assets/images/maps/peta-persebaran-tbc-2025.png" alt="" loading="lazy"></button>
-            <button class="maps-carousel__thumb" data-index="4" type="button" aria-label="Lihat Plate 05"><img src="assets/images/maps/seagrass.png" alt="" loading="lazy"></button>
-            <button class="maps-carousel__thumb" data-index="5" type="button" aria-label="Lihat Plate 06"><img src="assets/images/maps/geomor-map-kediri-2023.jpg" alt="" loading="lazy"></button>
+          <p class="maps-deck-hint">Arahkan kursor ke tumpukan kartu untuk membuka jajaran peta · Klik kartu untuk memperbesar</p>
+          <div class="maps-carousel__thumbnails" aria-hidden="true" style="display:none;">
+            <button class="maps-carousel__thumb maps-carousel__thumb--active" data-index="0" type="button" aria-label="Lihat Plate 01"><img src="assets/images/maps/thumbs/bati-bintan.webp" alt="" loading="lazy"></button>
+            <button class="maps-carousel__thumb" data-index="1" type="button" aria-label="Lihat Plate 02"><img src="assets/images/maps/thumbs/arahan-fungsi-lahan-kudus-2023.webp" alt="" loading="lazy"></button>
+            <button class="maps-carousel__thumb" data-index="2" type="button" aria-label="Lihat Plate 03"><img src="assets/images/maps/thumbs/coral.webp" alt="" loading="lazy"></button>
+            <button class="maps-carousel__thumb" data-index="3" type="button" aria-label="Lihat Plate 04"><img src="assets/images/maps/thumbs/peta-persebaran-tbc-2025.webp" alt="" loading="lazy"></button>
+            <button class="maps-carousel__thumb" data-index="4" type="button" aria-label="Lihat Plate 05"><img src="assets/images/maps/thumbs/seagrass.webp" alt="" loading="lazy"></button>
+            <button class="maps-carousel__thumb" data-index="5" type="button" aria-label="Lihat Plate 06"><img src="assets/images/maps/thumbs/geomor-map-kediri-2023.webp" alt="" loading="lazy"></button>
           </div>
         </div>
       </div>
@@ -356,12 +443,37 @@
         <div class="contact-links">
           <a class="contact-email" href="mailto:irvntriantoo@gmail.com">irvntriantoo@gmail.com <span aria-hidden="true">↗</span></a>
           <a class="contact-whatsapp" href="https://wa.me/628238955874" target="_blank" rel="noopener noreferrer">WhatsApp: +62 823-8955-874 <span aria-hidden="true">↗</span></a>
+          <div class="contact-cv-wrapper">
+            <a class="hero-button hero-button--primary contact-cv-btn" href="assets/documents/irvan-trianto-cv.pdf" download="Irvan-Trianto-CV.pdf" aria-label="Download CV Irvan Trianto (PDF)">
+              <span>Download CV</span>
+              <svg class="hero-btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            </a>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer"><div class="container"><a class="footer-logo" href="#home" aria-label="Kembali ke beranda"><img src="assets/images/icons/logo.png" alt="" aria-hidden="true"></a><p>© <span id="current-year"></span> Irvan Trianto</p><p>Built with care & geographic curiosity.</p></div></footer>
+  <footer class="site-footer site-footer--scenic" aria-label="Footer">
+    <div class="wildlife-eagle" aria-hidden="true">
+      <img src="assets/images/footer/elangjawa.webp" alt="" loading="lazy" decoding="async">
+    </div>
+    <div class="footer-scenic-stage">
+      <div class="footer-landscape-wrap" aria-hidden="true">
+        <img class="footer-landscape-img" src="assets/images/footer/landscape.webp" alt="" loading="lazy" decoding="async">
+      </div>
+      <div class="container footer-bottom-bar">
+        <div class="footer-meta-pill">
+          <a class="footer-logo" href="#home" aria-label="Kembali ke beranda">
+            <img src="assets/images/icons/logo.png" alt="" aria-hidden="true">
+          </a>
+          <p class="footer-copy">© <span id="current-year"></span> Irvan Trianto</p>
+          <span class="footer-sep" aria-hidden="true">·</span>
+          <p class="footer-tagline">Built with care &amp; geographic curiosity.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <div class="gallery-modal" id="gallery-modal" role="dialog" aria-modal="true" aria-label="Galeri proyek">
     <div class="gallery-modal__backdrop" aria-hidden="true"></div>
