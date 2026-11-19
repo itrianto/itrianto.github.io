@@ -180,12 +180,14 @@ function openGallery(name) {
   updateSlider();
   modal.classList.add('is-open');
   document.body.style.overflow = 'hidden';
+  if (window.__portfolioLenis) window.__portfolioLenis.stop();
   modalClose.focus();
 }
 
 function closeGallery() {
   modal.classList.remove('is-open');
   document.body.style.overflow = '';
+  if (window.__portfolioLenis) window.__portfolioLenis.start();
   if (activeTrigger) activeTrigger.focus();
 }
 
@@ -317,12 +319,14 @@ function mapsOpenLightbox(index) {
   mapsSyncLightbox();
   mapsLightbox.classList.add('is-open');
   document.body.style.overflow = 'hidden';
+  if (window.__portfolioLenis) window.__portfolioLenis.stop();
   mapsLbClose.focus();
 }
 
 function mapsCloseLightbox() {
   mapsLightbox.classList.remove('is-open');
   document.body.style.overflow = '';
+  if (window.__portfolioLenis) window.__portfolioLenis.start();
 }
 
 function mapsSyncLightbox() {
@@ -455,3 +459,814 @@ if (portraitDeck) {
     }
   });
 }
+
+
+/* ==========================================================================
+   GSAP + SCROLLTRIGGER + LENIS SMOOTH MOTION ENGINE & CARTOGRAPHIC UX
+   ========================================================================== */
+(function initCartographicMotion() {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hasGSAP = typeof window.gsap !== 'undefined';
+  const hasScrollTrigger = typeof window.ScrollTrigger !== 'undefined';
+  const hasLenis = typeof window.Lenis !== 'undefined';
+
+  let lenis = null;
+
+  /* 1. Initialize Lenis Smooth Scroll & Synchronize with GSAP Ticker */
+  if (!prefersReducedMotion && hasLenis) {
+    lenis = new window.Lenis({
+      duration: 1.15,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 0.95,
+      touchMultiplier: 1.35
+    });
+
+    window.__portfolioLenis = lenis;
+
+    if (hasGSAP && hasScrollTrigger) {
+      window.gsap.registerPlugin(window.ScrollTrigger);
+      lenis.on('scroll', window.ScrollTrigger.update);
+      window.gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+      window.gsap.ticker.lagSmoothing(0);
+    } else {
+      const rafLoop = (time) => {
+        lenis.raf(time);
+        requestAnimationFrame(rafLoop);
+      };
+      requestAnimationFrame(rafLoop);
+    }
+  } else if (hasGSAP && hasScrollTrigger) {
+    window.gsap.registerPlugin(window.ScrollTrigger);
+  }
+
+  /* 2. Smooth Anchor Navigation via Lenis */
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', (event) => {
+      const targetId = anchor.getAttribute('href');
+      if (!targetId || targetId === '#') return;
+      const targetEl = document.querySelector(targetId);
+      if (!targetEl) return;
+
+      if (lenis) {
+        event.preventDefault();
+        lenis.scrollTo(targetEl, {
+          offset: targetId === '#home' ? 0 : -86,
+          duration: 1.15
+        });
+      }
+    });
+  });
+
+  /* 3. Top Cartographic Progress Bar & Floating Geospatial Telemetry HUD */
+  const progressFill = document.querySelector('.geo-scroll-progress__fill');
+  const geoHud = document.querySelector('.geo-hud');
+  const geoHudSection = document.querySelector('.geo-hud__section');
+  const geoHudPercent = document.querySelector('.geo-hud__percent');
+  const geoHudCompassSvg = document.querySelector('.geo-hud__compass svg');
+
+  const sectionLabels = [
+    { id: 'home', label: '00 / HERO' },
+    { id: 'about', label: '01 / ABOUT' },
+    { id: 'experience', label: '02 / EXP' },
+    { id: 'projects', label: '03 / WORK' },
+    { id: 'webgis', label: '04 / WEBGIS' },
+    { id: 'maps-archive', label: '05 / MAPS' },
+    { id: 'publications', label: '06 / PUBS' },
+    { id: 'contact', label: '07 / CONTACT' }
+  ];
+
+  const updateScrollTelemetry = () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+    const docHeight = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    const ratio = Math.min(1, Math.max(0, scrollTop / docHeight));
+
+    if (progressFill) {
+      progressFill.style.transform = `scaleX(${ratio.toFixed(4)})`;
+    }
+    if (geoHudPercent) {
+      geoHudPercent.textContent = `${Math.round(ratio * 100)}%`;
+    }
+    if (geoHudCompassSvg) {
+      geoHudCompassSvg.style.transform = `rotate(${(ratio * 360).toFixed(1)}deg)`;
+    }
+    if (geoHud) {
+      geoHud.classList.toggle('is-visible', scrollTop > 220);
+    }
+
+    let currentId = sectionLabels[0].id;
+    let currentLabel = sectionLabels[0].label;
+    const probeY = scrollTop + window.innerHeight * 0.36;
+    for (let i = 0; i < sectionLabels.length; i += 1) {
+      const el = document.getElementById(sectionLabels[i].id);
+      if (el && el.offsetTop <= probeY) {
+        currentId = sectionLabels[i].id;
+        currentLabel = sectionLabels[i].label;
+      }
+    }
+
+    if (geoHudSection && geoHudSection.textContent !== currentLabel) {
+      geoHudSection.textContent = currentLabel;
+    }
+
+    menuLinks.forEach((link) => {
+      if (currentId !== 'home' && link.getAttribute('href') === `#${currentId}`) {
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+  };
+
+  if (lenis) {
+    lenis.on('scroll', updateScrollTelemetry);
+  }
+  window.addEventListener('scroll', updateScrollTelemetry, { passive: true });
+  window.addEventListener('resize', updateScrollTelemetry, { passive: true });
+  updateScrollTelemetry();
+
+  if (geoHud) {
+    geoHud.addEventListener('click', () => {
+      if (lenis) {
+        lenis.scrollTo(0, { duration: 1.2 });
+      } else {
+        window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+      }
+    });
+  }
+
+  /* 4. Interactive Hero Work Map — Leaflet + CARTO (OSM) + 7 Factual Work History Pins */
+  const heroFrame = document.querySelector('.hero-showcase-frame');
+  const heroMapEl = document.getElementById('hero-work-map');
+  const heroMapCoords = document.getElementById('hero-map-coords');
+
+  if (heroMapEl && typeof window.L !== 'undefined' && typeof window.L.map === 'function') {
+    try {
+    const L = window.L;
+    const workPins = [
+      {
+        id: 'bulungan',
+        coords: [2.8375, 117.3653],
+        location: 'Bulungan, Kalimantan Utara',
+        role: 'GIS Operator · Land Value Zoning (ZNT)',
+        meta: 'Sep 2026 – Present · PT Wahyudi Andy Laksito Setiarso',
+        color: '#60A5FA',
+        action: { label: 'Open WebGIS Dashboard ↗', href: 'https://itrianto.github.io/znt-bulungan-2026/', external: true }
+      },
+      {
+        id: 'karangkates',
+        coords: [-8.1618, 112.4525],
+        location: 'Karangkates, Jawa Timur',
+        role: 'GIS Surveyor · Floating Solar PV 100 MWac (PLN)',
+        meta: 'Aug 2025 – Aug 2026 · PT Gema Sarana Teknik',
+        color: '#FBBF24',
+        action: { label: 'View Field Gallery →', gallery: 'karangkates' }
+      },
+      {
+        id: 'batam',
+        coords: [1.0456, 104.0305],
+        location: 'Batam, Kepulauan Riau',
+        role: 'Hydrology Surveyor · Measuring Current & Vegetation Study',
+        meta: 'Feb 2025 · CV. Tizen Construction · 2020–2025 NDVI Study',
+        color: '#34D399',
+        action: { label: 'Batam Vegetation Study ↗', href: 'projects/batam-vegetation.html', external: false }
+      },
+      {
+        id: 'semarang',
+        coords: [-6.9667, 110.4167],
+        location: 'Semarang, Jawa Tengah',
+        role: 'GIS Researcher · Religious Tourism Connectivity WebGIS',
+        meta: '2024 – 2026 · Universitas Negeri Semarang',
+        color: '#60A5FA',
+        action: { label: 'Buka WebGIS Penelitian ↗', href: 'projects/wisatareligi/webgis/webgis-wisata-religi-semarang.html', external: false }
+      },
+      {
+        id: 'karimunjawa',
+        coords: [-5.8476, 110.4314],
+        location: 'Karimunjawa, Jawa Tengah',
+        role: 'Project Coordinator · Geosphere & Coastal Abrasion Study',
+        meta: '2023 · Coastal Geomorphology Survey',
+        color: '#FB7185'
+      },
+      {
+        id: 'karanganyar',
+        coords: [-7.5961, 110.9506],
+        location: 'Karanganyar, Jawa Tengah',
+        role: 'Project Coordinator · Community Service Program',
+        meta: '2024 – 2025 · 15 Community Programs',
+        color: '#34D399',
+        action: { label: 'ABDIMAS Publication ↗', href: 'https://doi.org/10.15294/q7khw835', external: true }
+      },
+      {
+        id: 'barrang-lompo',
+        coords: [-5.0493, 119.3282],
+        location: 'Barrang Lompo, Makassar, Sulawesi Selatan',
+        role: 'Project Coordinator · Coral Reef Conservation',
+        meta: 'Feb 2024 – Jun 2024 · PT Amati Karya Indonesia',
+        color: '#FB7185'
+      }
+    ];
+
+    const heroMap = L.map(heroMapEl, {
+      center: [-2.4, 112.4],
+      zoom: 5,
+      minZoom: 2,
+      maxZoom: 16,
+      zoomControl: false,
+      scrollWheelZoom: false,
+      worldCopyJump: true
+    });
+
+    const tileAttribution = '&copy; <a href="https://www.esri.com/" target="_blank" rel="noopener noreferrer">Esri</a>, HERE, Garmin, OpenStreetMap contributors';
+    const lightTiles = L.layerGroup([
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 16,
+        attribution: tileAttribution
+      }),
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 16,
+        pane: 'overlayPane'
+      })
+    ]);
+    const darkTiles = L.layerGroup([
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 16,
+        attribution: tileAttribution
+      }),
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 16,
+        pane: 'overlayPane'
+      })
+    ]);
+
+    let activeTileLayer = null;
+    const syncMapTheme = () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const targetLayer = isDark ? darkTiles : lightTiles;
+      if (activeTileLayer === targetLayer) return;
+      if (activeTileLayer) heroMap.removeLayer(activeTileLayer);
+      targetLayer.addTo(heroMap);
+      activeTileLayer = targetLayer;
+    };
+    syncMapTheme();
+
+    const themeObserver = new MutationObserver(syncMapTheme);
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+    const markerMap = new Map();
+    const bounds = L.latLngBounds(workPins.map((p) => p.coords));
+
+    const mapPills = [...document.querySelectorAll('.hero-map-pill')];
+    const setActivePill = (pinId) => {
+      mapPills.forEach((pill) => {
+        const active = pill.dataset.pinId === pinId;
+        pill.classList.toggle('is-active', active);
+        pill.setAttribute('aria-selected', String(active));
+      });
+    };
+
+    const fitOverview = (animate = true) => {
+      heroMap.closePopup();
+      heroMap.fitBounds(bounds, {
+        padding: [42, 42],
+        maxZoom: 5,
+        animate: animate && !prefersReducedMotion,
+        duration: 0.9
+      });
+      setActivePill('overview');
+    };
+
+    workPins.forEach((pin) => {
+      const icon = L.divIcon({
+        className: 'geo-pin-icon',
+        html: `<div class="geo-pin" style="--pin-color: ${pin.color}"><span class="geo-pin__pulse"></span><span class="geo-pin__dot"></span></div>`,
+        iconSize: [20, 20],
+        iconAnchor: [10, 10],
+        popupAnchor: [0, -12]
+      });
+
+      let actionHtml = '';
+      if (pin.action) {
+        if (pin.action.gallery) {
+          actionHtml = `<button type="button" class="geo-popup__action" data-open-gallery="${pin.action.gallery}">${pin.action.label}</button>`;
+        } else {
+          const extAttrs = pin.action.external ? ' target="_blank" rel="noopener noreferrer"' : '';
+          actionHtml = `<a class="geo-popup__action" href="${pin.action.href}"${extAttrs}>${pin.action.label}</a>`;
+        }
+      }
+
+      const popupHtml = `
+        <div class="geo-popup" style="--pin-color: ${pin.color}">
+          <span class="geo-popup__badge">${pin.location}</span>
+          <h4 class="geo-popup__title">${pin.role}</h4>
+          <p class="geo-popup__meta">${pin.meta}</p>
+          ${actionHtml}
+        </div>
+      `;
+
+      const marker = L.marker(pin.coords, { icon, title: `${pin.location} — ${pin.role}` })
+        .addTo(heroMap)
+        .bindPopup(popupHtml, { maxWidth: 260, closeButton: true });
+
+      marker.on('click', () => {
+        setActivePill(pin.id);
+      });
+
+      markerMap.set(pin.id, { pin, marker });
+    });
+
+    fitOverview(false);
+
+    /* Wire Gallery Trigger Inside Leaflet Popup */
+    heroMapEl.addEventListener('click', (event) => {
+      const galleryBtn = event.target.closest('[data-open-gallery]');
+      if (!galleryBtn) return;
+      const galleryKey = galleryBtn.getAttribute('data-open-gallery');
+      if (galleryKey && typeof openGallery === 'function') {
+        openGallery(galleryKey);
+      }
+    });
+
+    /* Wire Quick-Jump Clay Pills */
+    mapPills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        const pinId = pill.dataset.pinId;
+        if (pinId === 'overview') {
+          fitOverview(true);
+          return;
+        }
+        const entry = markerMap.get(pinId);
+        if (!entry) return;
+        setActivePill(pinId);
+        if (prefersReducedMotion) {
+          heroMap.setView(entry.pin.coords, 9, { animate: false });
+          entry.marker.openPopup();
+        } else {
+          heroMap.flyTo(entry.pin.coords, 9, { duration: 1.05, easeLinearity: 0.25 });
+          heroMap.once('moveend', () => entry.marker.openPopup());
+        }
+      });
+    });
+
+    /* Wire Custom Clay Map Controls (+ / - / Reset) */
+    document.querySelectorAll('.hero-map-ctrl').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const action = btn.dataset.mapAction;
+        if (action === 'zoom-in') heroMap.zoomIn();
+        if (action === 'zoom-out') heroMap.zoomOut();
+        if (action === 'reset') fitOverview(true);
+      });
+    });
+
+    /* Live WGS 84 Coordinates in Header Bar on Cursor Move */
+    const formatDMS = (val, posHem, negHem) => {
+      const hem = val >= 0 ? posHem : negHem;
+      const abs = Math.abs(val);
+      const deg = Math.floor(abs);
+      const min = Math.floor((abs - deg) * 60);
+      return `${String(deg).padStart(2, '0')}° ${String(min).padStart(2, '0')}′ ${hem}`;
+    };
+
+    if (heroMapCoords) {
+      heroMap.on('mousemove', (e) => {
+        heroMapCoords.textContent = `${formatDMS(e.latlng.lat, 'N', 'S')} · ${formatDMS(e.latlng.lng, 'E', 'W')}`;
+      });
+      heroMap.on('mouseout', () => {
+        heroMapCoords.textContent = 'WGS 84 · EPSG:4326';
+      });
+    }
+
+    window.addEventListener('load', () => {
+      heroMap.invalidateSize();
+    });
+    } catch (err) {
+      console.warn('[HeroWorkMap] Initialization error:', err);
+    }
+  }
+
+  /* 5. GSAP + ScrollTrigger Motion Choreography */
+  if (hasGSAP && hasScrollTrigger && !prefersReducedMotion) {
+    document.documentElement.classList.add('has-gsap');
+    const gsap = window.gsap;
+
+    /* Hero Entry Timeline */
+    const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    heroTl
+      .from('.hero-kicker', { y: 18, opacity: 0, duration: 0.55 }, 0.08)
+      .from('#hero-title', { y: 26, opacity: 0, duration: 0.7 }, 0.16)
+      .from('.hero-narrative .hero-lead', { y: 20, opacity: 0, duration: 0.65 }, 0.28)
+      .from('.hero-actions .hero-button', { y: 18, opacity: 0, scale: 0.96, duration: 0.55, stagger: 0.1, clearProps: 'transform' }, 0.36)
+      .from('.hero-transition-showcase', { y: 36, opacity: 0, scale: 0.97, duration: 0.85, clearProps: 'transform' }, 0.42);
+
+    /* Subtle Hero Showcase Parallax on Scroll */
+    if (heroFrame) {
+      gsap.to('.hero-transition-showcase', {
+        y: -26,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#home',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
+    }
+
+    /* Section Intros Smooth Entrance */
+    gsap.utils.toArray('.section-intro').forEach((intro) => {
+      gsap.from(intro.children, {
+        y: 24,
+        opacity: 0,
+        duration: 0.65,
+        stagger: 0.08,
+        ease: 'power3.out',
+        clearProps: 'transform',
+        scrollTrigger: {
+          trigger: intro,
+          start: 'top 86%',
+          once: true
+        }
+      });
+    });
+
+    /* 01 / About Me — Expertise Pills & Portrait Deck Choreography */
+    const expertisePills = document.querySelectorAll('.about__expertise .expertise-tags li');
+    if (expertisePills.length) {
+      window.ScrollTrigger.create({
+        trigger: '.about__expertise',
+        start: 'top 92%',
+        once: true,
+        onEnter: () => {
+          gsap.fromTo(
+            expertisePills,
+            { y: 16, scale: 0.95 },
+            {
+              y: 0,
+              scale: 1,
+              duration: 0.45,
+              stagger: 0.055,
+              ease: 'power2.out',
+              clearProps: 'transform'
+            }
+          );
+        }
+      });
+    }
+
+    const aboutPortrait = document.querySelector('.about__portrait');
+    if (aboutPortrait) {
+      gsap.from(aboutPortrait, {
+        y: 34,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        clearProps: 'transform',
+        scrollTrigger: {
+          trigger: aboutPortrait,
+          start: 'top 84%',
+          once: true
+        }
+      });
+    }
+
+    /* 02 / Experience — Scrubbed Timeline Rail & Staggered Cards */
+    const railFill = document.querySelector('.experience-timeline-rail__fill');
+    if (railFill) {
+      gsap.fromTo(
+        railFill,
+        { scaleY: 0 },
+        {
+          scaleY: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.experience-list',
+            start: 'top 76%',
+            end: 'bottom 70%',
+            scrub: true
+          }
+        }
+      );
+    }
+
+    gsap.utils.toArray('.experience-item').forEach((item) => {
+      gsap.from(item, {
+        y: 28,
+        opacity: 0,
+        duration: 0.65,
+        ease: 'power3.out',
+        clearProps: 'transform',
+        scrollTrigger: {
+          trigger: item,
+          start: 'top 86%',
+          once: true
+        }
+      });
+    });
+
+    /* 03 / Selected Work — Editorial Clay Showcase Cards */
+    gsap.utils.toArray('.project-card').forEach((card) => {
+      gsap.from(card, {
+        y: 36,
+        opacity: 0,
+        duration: 0.75,
+        ease: 'power3.out',
+        clearProps: 'transform',
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 86%',
+          once: true
+        }
+      });
+    });
+
+    /* 04 / Interactive WebGIS Spotlight Card & Metrics */
+    const webgisCard = document.querySelector('.webgis-spotlight');
+    if (webgisCard) {
+      gsap.from(webgisCard, {
+        y: 34,
+        opacity: 0,
+        duration: 0.78,
+        ease: 'power3.out',
+        clearProps: 'transform',
+        scrollTrigger: {
+          trigger: webgisCard,
+          start: 'top 85%',
+          once: true
+        }
+      });
+
+      const webgisMetrics = document.querySelectorAll('.webgis-metric');
+      if (webgisMetrics.length) {
+        window.ScrollTrigger.create({
+          trigger: '.webgis-metrics',
+          start: 'top 94%',
+          once: true,
+          onEnter: () => {
+            gsap.fromTo(
+              webgisMetrics,
+              { y: 16, scale: 0.94 },
+              {
+                y: 0,
+                scale: 1,
+                duration: 0.48,
+                stagger: 0.08,
+                ease: 'power2.out',
+                clearProps: 'transform'
+              }
+            );
+          }
+        });
+      }
+    }
+
+    /* 05 / Maps Archive Deck Reveal */
+    const mapsViewer = document.querySelector('.maps-carousel__viewer');
+    if (mapsViewer) {
+      gsap.from(mapsViewer, {
+        y: 32,
+        opacity: 0,
+        duration: 0.75,
+        ease: 'power3.out',
+        clearProps: 'transform',
+        scrollTrigger: {
+          trigger: mapsViewer,
+          start: 'top 86%',
+          once: true
+        }
+      });
+    }
+
+    /* 06 / Publications 3-Column Bento Reveal */
+    const pubCards = document.querySelectorAll('.publication-card');
+    if (pubCards.length) {
+      gsap.from(pubCards, {
+        y: 30,
+        opacity: 0,
+        duration: 0.65,
+        stagger: 0.1,
+        ease: 'power3.out',
+        clearProps: 'transform',
+        scrollTrigger: {
+          trigger: '.publications-grid',
+          start: 'top 85%',
+          once: true
+        }
+      });
+    }
+
+    /* 07 / Contact Studio Card & Scenic Footer Parallax */
+    const contactCard = document.querySelector('.contact-studio-card');
+    if (contactCard) {
+      gsap.from(contactCard, {
+        y: 32,
+        opacity: 0,
+        duration: 0.75,
+        ease: 'power3.out',
+        clearProps: 'transform',
+        scrollTrigger: {
+          trigger: contactCard,
+          start: 'top 86%',
+          once: true
+        }
+      });
+    }
+
+    const footerStudioCard = document.querySelector('.footer-studio-card');
+    if (footerStudioCard) {
+      gsap.from(footerStudioCard, {
+        y: 28,
+        opacity: 0,
+        duration: 0.72,
+        ease: 'power3.out',
+        clearProps: 'transform',
+        scrollTrigger: {
+          trigger: footerStudioCard,
+          start: 'top 88%',
+          once: true
+        }
+      });
+    }
+
+    const eagle = document.querySelector('.wildlife-eagle');
+    if (eagle) {
+      gsap.fromTo(
+        eagle,
+        { x: 34, y: 22, rotation: 3 },
+        {
+          x: -24,
+          y: -18,
+          rotation: -2.5,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.site-footer--fisheye',
+            start: 'top bottom',
+            end: 'bottom bottom',
+            scrub: 1.2
+          }
+        }
+      );
+    }
+
+    const landscapeImg = document.querySelector('.footer-planet-img');
+    if (landscapeImg) {
+      gsap.fromTo(
+        landscapeImg,
+        { y: 24 },
+        {
+          y: 0,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.footer-planet-stage',
+            start: 'top bottom',
+            end: 'bottom bottom',
+            scrub: 1
+          }
+        }
+      );
+    }
+
+    window.addEventListener('load', () => {
+      window.ScrollTrigger.refresh();
+    });
+  }
+
+  /* 6. Interactive Project Archive Explorer (Powered by window.ProjectDatabase) */
+  const archiveToggle = document.querySelector('.archive-drawer__toggle');
+  const archiveToggleLabel = document.querySelector('.archive-drawer__toggle-label');
+  const archivePanel = document.getElementById('archive-panel');
+  const archiveFilters = document.querySelector('.archive-filters');
+  const archiveGrid = document.getElementById('archive-grid');
+
+  if (archiveToggle && archivePanel && archiveFilters && archiveGrid && window.ProjectDatabase) {
+    const allProjects = window.ProjectDatabase.getAll();
+    const filterGroups = [
+      { id: 'all', label: `All (${allProjects.length})`, match: () => true },
+      {
+        id: 'marine',
+        label: 'Marine & Hydrography',
+        match: (p) => (p.category || []).some((c) => /hydro|marine|coastal/i.test(c))
+      },
+      {
+        id: 'gis-land',
+        label: 'GIS & Land',
+        match: (p) => (p.category || []).some((c) => /land|infrastructure|gis/i.test(c))
+      },
+      {
+        id: 'remote-sensing',
+        label: 'Remote Sensing',
+        match: (p) => (p.category || []).some((c) => /remote sensing|satellite|environment/i.test(c))
+      },
+      {
+        id: 'webgis-community',
+        label: 'WebGIS & Research',
+        match: (p) => (p.category || []).some((c) => /webgis|research|community/i.test(c))
+      }
+    ];
+
+    let activeFilter = 'all';
+
+    const escapeHtml = (str) =>
+      String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+
+    const renderArchiveCards = () => {
+      const group = filterGroups.find((g) => g.id === activeFilter) || filterGroups[0];
+      const filtered = allProjects.filter(group.match);
+
+      archiveGrid.innerHTML = filtered
+        .map((project) => {
+          const periodLabel = escapeHtml(project.period || project.year || '');
+          const locationLabel = escapeHtml(project.location || '');
+          const roleLine = [project.role, project.organization].filter(Boolean).map(escapeHtml).join(' · ');
+          const toolsMarkup = (project.tools || [])
+            .slice(0, 4)
+            .map((tool) => `<span>${escapeHtml(tool)}</span>`)
+            .join('');
+          const linksMarkup = (project.externalLinks || [])
+            .map((link) => {
+              const isExternal = /^https?:\/\//i.test(link.url);
+              const attrs = isExternal ? ' target="_blank" rel="noopener noreferrer"' : '';
+              return `<a class="archive-card__link" href="${escapeHtml(link.url)}"${attrs}>${escapeHtml(link.label)} <span aria-hidden="true">↗</span></a>`;
+            })
+            .join('');
+
+          return `
+            <article class="archive-card">
+              <div class="archive-card__top">
+                <span class="archive-card__period">${periodLabel}</span>
+                ${locationLabel ? `<span class="archive-card__location">${locationLabel}</span>` : ''}
+              </div>
+              <h4 class="archive-card__title">${escapeHtml(project.title)}</h4>
+              ${roleLine ? `<p class="archive-card__role">${roleLine}</p>` : ''}
+              <p class="archive-card__desc">${escapeHtml(project.shortDescription)}</p>
+              ${toolsMarkup ? `<div class="archive-card__tools">${toolsMarkup}</div>` : ''}
+              ${linksMarkup ? `<div class="archive-card__links">${linksMarkup}</div>` : ''}
+            </article>
+          `;
+        })
+        .join('');
+
+      if (hasGSAP && !prefersReducedMotion) {
+        window.gsap.from(archiveGrid.querySelectorAll('.archive-card'), {
+          y: 18,
+          opacity: 0,
+          duration: 0.42,
+          stagger: 0.05,
+          ease: 'power2.out',
+          clearProps: 'transform'
+        });
+      }
+
+      if (hasScrollTrigger) {
+        window.ScrollTrigger.refresh();
+      }
+    };
+
+    const renderFilters = () => {
+      archiveFilters.innerHTML = filterGroups
+        .map(
+          (g) => `
+            <button
+              class="archive-filter-btn${g.id === activeFilter ? ' is-active' : ''}"
+              type="button"
+              role="tab"
+              aria-selected="${g.id === activeFilter}"
+              data-filter="${g.id}"
+            >${escapeHtml(g.label)}</button>
+          `
+        )
+        .join('');
+    };
+
+    archiveFilters.addEventListener('click', (event) => {
+      const btn = event.target.closest('.archive-filter-btn');
+      if (!btn) return;
+      activeFilter = btn.dataset.filter || 'all';
+      renderFilters();
+      renderArchiveCards();
+    });
+
+    archiveToggle.addEventListener('click', () => {
+      const isExpanded = archiveToggle.getAttribute('aria-expanded') === 'true';
+      const next = !isExpanded;
+      archiveToggle.setAttribute('aria-expanded', String(next));
+      archivePanel.hidden = !next;
+      if (archiveToggleLabel) {
+        archiveToggleLabel.textContent = next ? 'Tutup Arsip' : 'Buka Arsip Lengkap';
+      }
+      if (next) {
+        renderFilters();
+        renderArchiveCards();
+      } else if (hasScrollTrigger) {
+        window.ScrollTrigger.refresh();
+      }
+    });
+  }
+})();

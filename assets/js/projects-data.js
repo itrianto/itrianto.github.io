@@ -24,7 +24,7 @@
       "slug": "znt-bulungan",
       "title": "Land Value Zoning — Bulungan",
       "year": "2026",
-      "period": "Aug 2023 – Present",
+      "period": "Sep 2026 – Present",
       "location": "Kabupaten Bulungan, Kalimantan Utara",
       "category": [
         "Land Valuation",
@@ -168,17 +168,17 @@
       "id": "proj-measuring-current",
       "slug": "measuring-current-batam",
       "title": "Offshore Hydrodynamic & Current Measurement Survey",
-      "year": "2026",
-      "period": "Feb 2023",
+      "year": "2025",
+      "period": "Feb 2025",
       "location": "Batam, Indonesia",
       "category": [
         "Hydrography",
         "Marine Survey",
         "Hydrodynamic Data"
       ],
-      "projectType": "Freelance Offshore Survey",
-      "role": "Hydrology Surveyor (Freelance)",
-      "organization": null,
+      "projectType": "Offshore Survey",
+      "role": "Hydrology Surveyor",
+      "organization": "CV. Tizen Construction",
       "shortDescription": "Offshore environmental field surveys measuring sea currents using ADCP and Current Meter instruments with rigorous QA and hydrodynamic data validation.",
       "overview": "Survei lapangan lepas pantai menggunakan Acoustic Doppler Current Profiler (ADCP) dan Current Meter di perairan Batam dalam kondisi laut dinamis, disertai prosedur quality assurance (QA) dan validasi data hidrodinamika untuk mendukung kajian risiko lingkungan perairan.",
       "myContribution": [
@@ -225,7 +225,7 @@
       "title": "Coral Reef Conservation & Coastal Ecosystem Mapping",
       "year": "2024",
       "period": "Feb 2024 – Jun 2024",
-      "location": "Jakarta, Indonesia",
+      "location": "Barrang Lompo, Makassar, Sulawesi Selatan",
       "category": [
         "Marine Conservation",
         "Environmental GIS",

@@ -8,9 +8,9 @@ Premium personal GIS portfolio for **Irvan Trianto**. It demonstrates GIS, spati
 
 ## Current state
 
-- Stack: static HTML, CSS, vanilla JavaScript, Leaflet, GeoJSON; suitable for GitHub Pages.
+- Stack: static HTML, CSS, vanilla JavaScript, Leaflet, GeoJSON, plus CDN GSAP + ScrollTrigger + Lenis smooth motion; suitable for GitHub Pages.
 - Home page: `index.html`; shared styles/scripts: `assets/css/style.css`, `assets/js/script.js`.
-- Centralized Project Database: `data/projects.json` and client library `assets/js/projects-data.js` (`window.ProjectDatabase`) supporting 9 validated projects across 22 metadata fields.
+- Centralized Project Database: `data/projects.json` and client library `assets/js/projects-data.js` (`window.ProjectDatabase`) supporting 9 validated projects across 22 metadata fields, now also powering the expandable Complete Project Archive drawer on the homepage.
 - Active research project: Religious Tourism Connectivity WebGIS at `projects/wisatareligi/webgis/webgis-wisata-religi-semarang.html`.
 - The WebGIS consumes `assets/data/koordinat-pariwisata.geojson`, `nodes.geojson`, `edges.geojson`, `rute.geojson`, and `wisata-religi-atribut.csv`.
 - Available assets integrated: hero image, profile image, Religious Tourism gallery (22 images), Karangkates gallery (5 images), CV, and three publications.
